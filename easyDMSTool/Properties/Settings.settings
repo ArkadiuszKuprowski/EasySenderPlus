@@ -1,0 +1,48 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="easyDMSTool.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="easyDMSTool_Converter_ConverterService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://deis379:8080/webPDF/Converter</Value>
+    </Setting>
+    <Setting Name="easyDMSTool_Toolbox_ToolboxService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://deis379:8080/webPDF/Toolbox</Value>
+    </Setting>
+    <Setting Name="isCheckedServerTest_rbtn" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="isCheckedServerProd_rbtn" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="isCheckedServerOther_rbtn" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="serverUrl" Type="System.String" Scope="User">
+      <Value Profile="(Default)">deis335</Value>
+    </Setting>
+    <Setting Name="serverUrlOther" Type="System.String" Scope="User">
+      <Value Profile="(Default)">other server url</Value>
+    </Setting>
+    <Setting Name="userID" Type="System.String" Scope="User">
+      <Value Profile="(Default)">import</Value>
+    </Setting>
+    <Setting Name="userPassword" Type="System.String" Scope="User">
+      <Value Profile="(Default)">import</Value>
+    </Setting>
+    <Setting Name="userIDDefault" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">import</Value>
+    </Setting>
+    <Setting Name="userPasswordDefault" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">import</Value>
+    </Setting>
+    <Setting Name="isCheckedUseDefaultUser_rbtn" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="isCheckedUseProvidedUser_rbtn" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="isEnabledUseProvidedUser_txtbox" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

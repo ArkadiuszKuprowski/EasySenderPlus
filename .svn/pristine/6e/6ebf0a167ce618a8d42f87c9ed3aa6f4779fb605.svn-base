@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<configuration>
+	<configSections>
+		<sectionGroup name="applicationSettings" type="System.Configuration.ApplicationSettingsGroup, System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+			<section name="easyDMSTool.Properties.Settings" type="System.Configuration.ClientSettingsSection, System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" requirePermission="false"/>
+		</sectionGroup>
+		<sectionGroup name="userSettings" type="System.Configuration.UserSettingsGroup, System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+			<section name="easyDMSTool.Properties.Settings" type="System.Configuration.ClientSettingsSection, System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" allowExeDefinition="MachineToLocalUser" requirePermission="false"/>
+		</sectionGroup>
+	</configSections>
+	<system.serviceModel>
+		<bindings>
+   <basicHttpBinding>
+    <binding name="DOCUMENTS" />
+   </basicHttpBinding>
+  </bindings>
+		<client>
+   <endpoint address="http://localhost:11001" binding="basicHttpBinding"
+    bindingConfiguration="DOCUMENTS" contract="Doc4SOAP.DOCUMENTSPortType"
+    name="DOCUMENTS" />
+  </client>
+	</system.serviceModel>
+	<applicationSettings>
+		<easyDMSTool.Properties.Settings>
+   <setting name="easyDMSTool_Converter_ConverterService" serializeAs="String">
+    <value>http://deis379:8080/webPDF/Converter</value>
+   </setting>
+   <setting name="easyDMSTool_Toolbox_ToolboxService" serializeAs="String">
+    <value>http://deis379:8080/webPDF/Toolbox</value>
+   </setting>
+   <setting name="userIDDefault" serializeAs="String">
+    <value>import</value>
+   </setting>
+   <setting name="userPasswordDefault" serializeAs="String">
+    <value>import</value>
+   </setting>
+  </easyDMSTool.Properties.Settings>
+	</applicationSettings>
+	<userSettings>
+		<easyDMSTool.Properties.Settings>
+   <setting name="isCheckedServerTest_rbtn" serializeAs="String">
+    <value>False</value>
+   </setting>
+   <setting name="isCheckedServerProd_rbtn" serializeAs="String">
+    <value>False</value>
+   </setting>
+   <setting name="isCheckedServerOther_rbtn" serializeAs="String">
+    <value>False</value>
+   </setting>
+   <setting name="serverUrl" serializeAs="String">
+    <value>deis335</value>
+   </setting>
+   <setting name="serverUrlOther" serializeAs="String">
+    <value>other server url</value>
+   </setting>
+   <setting name="userID" serializeAs="String">
+    <value>import</value>
+   </setting>
+   <setting name="userPassword" serializeAs="String">
+    <value>import</value>
+   </setting>
+   <setting name="isCheckedUseDefaultUser_rbtn" serializeAs="String">
+    <value>False</value>
+   </setting>
+   <setting name="isCheckedUseProvidedUser_rbtn" serializeAs="String">
+    <value>False</value>
+   </setting>
+   <setting name="isEnabledUseProvidedUser_txtbox" serializeAs="String">
+    <value>False</value>
+   </setting>
+  </easyDMSTool.Properties.Settings>
+	</userSettings>
+	<startup/></configuration>

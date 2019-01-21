@@ -1,0 +1,384 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<customUI xmlns="http://schemas.microsoft.com/office/2009/07/customui" onLoad="Ribbon_Load">
+  <ribbon>
+    <tabs>
+      <tab id="sendToEasy" label="Easy Sender">
+        <group id="sendToEasyDMS" label="Send To EasyDMS" centerVertically="true" autoScale="true">
+
+          <splitButton id="splitButtonAustria" tag="AT" size="large" getVisible="isVisible" showLabel="true">
+            <button id="splitButtonAustria_btn" label="Austria" getImage="getCustomImage"/>
+            <menu id="menuAustria">
+              <button id="btnABOMasterData_Austria"   label="ABO Master Data"   tag="ABO Master Data;AT;Austria" onAction="onButtonClicked"/>
+              <button id="btnCommunication_Austria"   label="ABO Communication" tag="ABO Communication;AT;Austria" onAction="onButtonClicked"/>
+              <button id="btnNewApplication_Austria"  label="New Application"   tag="New Application;AT;Austria" onAction="onButtonClicked"/>
+              <button id="btnOrder_Austria"           label="Order"             tag="Order;AT;Austria" onAction="onButtonClicked"/>
+              <button id="btnRenewal_Austria"         label="Renewal"           tag="Renewal;AT;Austria" onAction="onButtonClicked"/>
+              <button id="btnResignation_Austria"     label="Resignation"       tag="Resignation;AT;Austria" onAction="onButtonClicked"/>
+              <button id="btnReturn_Austria"          label="Return"            tag="Return;AT;Austria" onAction="onButtonClicked"/>
+              <button id="btnTransactionList_Austria" label="Transaction List"  tag="Transaction List;AT;Austria" onAction="onButtonClicked"/>
+            </menu>
+          </splitButton>
+          <splitButton id="splitButtonBelgium" tag="BE" size="large" getVisible="isVisible" showLabel="true">
+            <button id="splitButtonBelgium_btn" label="Belgium" getImage="getCustomImage"/>
+            <menu id="menuBelgium">
+              <button id="btnABOMasterData_Belgium" label="ABO Master Data" tag="ABO Master Data;BE;Belgium" onAction="onButtonClicked"/>
+              <button id="btnCommunication_Belgium" label="ABO Communication" tag="ABO Communication;BE;Belgium" onAction="onButtonClicked"/>
+              <button id="btnNewApplication_Belgium" label="New Application" tag="New Application;BE;Belgium" onAction="onButtonClicked"/>
+              <button id="btnOrder_Belgium" label="Order" tag="Order;BE;Belgium" onAction="onButtonClicked"/>
+              <button id="btnRenewal_Belgium" label="Renewal" tag="Renewal;BE;Belgium" onAction="onButtonClicked"/>
+              <button id="btnResignation_Belgium" label="Resignation" tag="Resignation;BE;Belgium" onAction="onButtonClicked"/>
+              <button id="btnReturn_Belgium" label="Return" tag="Return;BE;Belgium" onAction="onButtonClicked"/>
+              <button id="btnTransactionList_Belgium" label="Transaction List" tag="Transaction List;BE;Belgium" onAction="onButtonClicked"/>
+            </menu>
+          </splitButton>
+          <splitButton id="splitButtonBulgaria" tag="BG" size="large" getVisible="isVisible" showLabel="true">
+            <button id="splitButtonBulgaria_btn" label="Bulgaria" getImage="getCustomImage"/>
+            <menu id="menuBulgaria">
+              <button id="btnABOMasterData_Bulgaria" label="ABO Master Data" tag="ABO Master Data;BG;Bulgaria" onAction="onButtonClicked"/>
+              <button id="btnCommunication_Bulgaria" label="ABO Communication" tag="ABO Communication;BG;Bulgaria" onAction="onButtonClicked"/>
+              <button id="btnNewApplication_Bulgaria" label="New Application" tag="New Application;BG;Bulgaria" onAction="onButtonClicked"/>
+              <button id="btnOrder_Bulgaria" label="Order" tag="Order;BG;Bulgaria" onAction="onButtonClicked"/>
+              <button id="btnRenewal_Bulgaria" label="Renewal" tag="Renewal;BG;Bulgaria" onAction="onButtonClicked"/>
+              <button id="btnResignation_Bulgaria" label="Resignation" tag="Resignation;BG;Bulgaria" onAction="onButtonClicked"/>
+              <button id="btnReturn_Bulgaria" label="Return" tag="Return;BG;Bulgaria" onAction="onButtonClicked"/>
+              <button id="btnTransactionList_Bulgaria" label="Transaction List" tag="Transaction List;BG;Bulgaria" onAction="onButtonClicked"/>
+            </menu>
+          </splitButton>
+          <splitButton id="splitButtonSwitzerland" tag="CH" size="large" getVisible="isVisible" showLabel="true">
+            <button id="splitButtonSwitzerland_btn" label="Switzerland" getImage="getCustomImage"/>
+            <menu id="menuSwitzerland">
+              <button id="btnABOMasterData_Switzerland" label="ABO Master Data" tag="ABO Master Data;CH;Switzerland" onAction="onButtonClicked"/>
+              <button id="btnCommunication_Switzerland" label="ABO Communication" tag="ABO Communication;CH;Switzerland" onAction="onButtonClicked"/>
+              <button id="btnNewApplication_Switzerland" label="New Application" tag="New Application;CH;Switzerland" onAction="onButtonClicked"/>
+              <button id="btnOrder_Switzerland" label="Order" tag="Order;CH;Switzerland" onAction="onButtonClicked"/>
+              <button id="btnRenewal_Switzerland" label="Renewal" tag="Renewal;CH;Switzerland" onAction="onButtonClicked"/>
+              <button id="btnResignation_Switzerland" label="Resignation" tag="Resignation;CH;Switzerland" onAction="onButtonClicked"/>
+              <button id="btnReturn_Switzerland" label="Return" tag="Return;CH;Switzerland" onAction="onButtonClicked"/>
+              <button id="btnTransactionList_Switzerland" label="Transaction List" tag="Transaction List;CH;Switzerland" onAction="onButtonClicked"/>
+            </menu>
+          </splitButton>
+          <splitButton id="splitButtonCzechRepublic" tag="CZ" size="large" getVisible="isVisible" showLabel="true">
+            <button id="splitButtonCzechRepublic_btn" label="CzechRepublic" getImage="getCustomImage"/>
+            <menu id="menuCzechRepublic">
+              <button id="btnABOMasterData_CzechRepublic" label="ABO Master Data" tag="ABO Master Data;CZ;CzechRepublic" onAction="onButtonClicked"/>
+              <button id="btnCommunication_CzechRepublic" label="ABO Communication" tag="ABO Communication;CZ;CzechRepublic" onAction="onButtonClicked"/>
+              <button id="btnNewApplication_CzechRepublic" label="New Application" tag="New Application;CZ;CzechRepublic" onAction="onButtonClicked"/>
+              <button id="btnOrder_CzechRepublic" label="Order" tag="Order;CZ;CzechRepublic" onAction="onButtonClicked"/>
+              <button id="btnRenewal_CzechRepublic" label="Renewal" tag="Renewal;CZ;CzechRepublic" onAction="onButtonClicked"/>
+              <button id="btnResignation_CzechRepublic" label="Resignation" tag="Resignation;CZ;CzechRepublic" onAction="onButtonClicked"/>
+              <button id="btnReturn_CzechRepublic" label="Return" tag="Return;CZ;CzechRepublic" onAction="onButtonClicked"/>
+              <button id="btnTransactionList_CzechRepublic" label="Transaction List" tag="Transaction List;CZ;CzechRepublic" onAction="onButtonClicked"/>
+            </menu>
+          </splitButton>
+          <splitButton id="splitButtonGermany" tag="DE" size="large" getVisible="isVisible" showLabel="true">
+            <button id="splitButtonGermany_btn" label="Germany" getImage="getCustomImage"/>
+            <menu id="menuGermany">
+              <button id="btnABOMasterData_Germany" label="ABO Master Data" tag="ABO Master Data;DE;Germany" onAction="onButtonClicked"/>
+              <button id="btnCommunication_Germany" label="ABO Communication" tag="ABO Communication;DE;Germany" onAction="onButtonClicked"/>
+              <button id="btnNewApplication_Germany" label="New Application" tag="New Application;DE;Germany" onAction="onButtonClicked"/>
+              <button id="btnOrder_Germany" label="Order" tag="Order;DE;Germany" onAction="onButtonClicked"/>
+              <button id="btnRenewal_Germany" label="Renewal" tag="Renewal;DE;Germany" onAction="onButtonClicked"/>
+              <button id="btnResignation_Germany" label="Resignation" tag="Resignation;DE;Germany" onAction="onButtonClicked"/>
+              <button id="btnReturn_Germany" label="Return" tag="Return;DE;Germany" onAction="onButtonClicked"/>
+              <button id="btnTransactionList_Germany" label="Transaction List" tag="Transaction List;DE;Germany" onAction="onButtonClicked"/>
+            </menu>
+          </splitButton>
+          <splitButton id="splitButtonDenmark" tag="DK" size="large" getVisible="isVisible" showLabel="true">
+            <button id="splitButtonDenmark_btn" label="Denmark" getImage="getCustomImage"/>
+            <menu id="menuDenmark">
+              <button id="btnABOMasterData_Denmark" label="ABO Master Data" tag="ABO Master Data;DK;Denmark" onAction="onButtonClicked"/>
+              <button id="btnCommunication_Denmark" label="ABO Communication" tag="ABO Communication;DK;Denmark" onAction="onButtonClicked"/>
+              <button id="btnNewApplication_Denmark" label="New Application" tag="New Application;DK;Denmark" onAction="onButtonClicked"/>
+              <button id="btnOrder_Denmark" label="Order" tag="Order;DK;Denmark" onAction="onButtonClicked"/>
+              <button id="btnRenewal_Denmark" label="Renewal" tag="Renewal;DK;Denmark" onAction="onButtonClicked"/>
+              <button id="btnResignation_Denmark" label="Resignation" tag="Resignation;DK;Denmark" onAction="onButtonClicked"/>
+              <button id="btnReturn_Denmark" label="Return" tag="Return;DK;Denmark" onAction="onButtonClicked"/>
+              <button id="btnTransactionList_Denmark" label="Transaction List" tag="Transaction List;DK;Denmark" onAction="onButtonClicked"/>
+            </menu>
+          </splitButton>
+          <splitButton id="splitButtonEstonia" tag="EE" size="large" getVisible="isVisible" showLabel="true">
+            <button id="splitButtonEstonia_btn" label="Estonia" getImage="getCustomImage"/>
+            <menu id="menuEstonia">
+              <button id="btnABOMasterData_Estonia" label="ABO Master Data" tag="ABO Master Data;EE;Estonia" onAction="onButtonClicked"/>
+              <button id="btnCommunication_Estonia" label="ABO Communication" tag="ABO Communication;EE;Estonia" onAction="onButtonClicked"/>
+              <button id="btnNewApplication_Estonia" label="New Application" tag="New Application;EE;Estonia" onAction="onButtonClicked"/>
+              <button id="btnOrder_Estonia" label="Order" tag="Order;EE;Estonia" onAction="onButtonClicked"/>
+              <button id="btnRenewal_Estonia" label="Renewal" tag="Renewal;EE;Estonia" onAction="onButtonClicked"/>
+              <button id="btnResignation_Estonia" label="Resignation" tag="Resignation;EE;Estonia" onAction="onButtonClicked"/>
+              <button id="btnReturn_Estonia" label="Return" tag="Return;EE;Estonia" onAction="onButtonClicked"/>
+              <button id="btnTransactionList_Estonia" label="Transaction List" tag="Transaction List;EE;Estonia" onAction="onButtonClicked"/>
+            </menu>
+          </splitButton>
+          <splitButton id="splitButtonSpain" tag="ES" size="large" getVisible="isVisible" showLabel="true">
+            <button id="splitButtonSpain_btn" label="Spain" getImage="getCustomImage"/>
+            <menu id="menuSpain">
+              <button id="btnABOMasterData_Spain" label="ABO Master Data" tag="ABO Master Data;ES;Spain" onAction="onButtonClicked"/>
+              <button id="btnCommunication_Spain" label="ABO Communication" tag="ABO Communication;ES;Spain" onAction="onButtonClicked"/>
+              <button id="btnNewApplication_Spain" label="New Application" tag="New Application;ES;Spain" onAction="onButtonClicked"/>
+              <button id="btnOrder_Spain" label="Order" tag="Order;ES;Spain" onAction="onButtonClicked"/>
+              <button id="btnRenewal_Spain" label="Renewal" tag="Renewal;ES;Spain" onAction="onButtonClicked"/>
+              <button id="btnResignation_Spain" label="Resignation" tag="Resignation;ES;Spain" onAction="onButtonClicked"/>
+              <button id="btnReturn_Spain" label="Return" tag="Return;ES;Spain" onAction="onButtonClicked"/>
+              <button id="btnTransactionList_Spain" label="Transaction List" tag="Transaction List;ES;Spain" onAction="onButtonClicked"/>
+            </menu>
+          </splitButton>
+          <splitButton id="splitButtonFinland" tag="FI" size="large" getVisible="isVisible" showLabel="true">
+            <button id="splitButtonFinland_btn" label="Finland" getImage="getCustomImage"/>
+            <menu id="menuFinland">
+              <button id="btnABOMasterData_Finland" label="ABO Master Data" tag="ABO Master Data;FI;Finland" onAction="onButtonClicked"/>
+              <button id="btnCommunication_Finland" label="ABO Communication" tag="ABO Communication;FI;Finland" onAction="onButtonClicked"/>
+              <button id="btnNewApplication_Finland" label="New Application" tag="New Application;FI;Finland" onAction="onButtonClicked"/>
+              <button id="btnOrder_Finland" label="Order" tag="Order;FI;Finland" onAction="onButtonClicked"/>
+              <button id="btnRenewal_Finland" label="Renewal" tag="Renewal;FI;Finland" onAction="onButtonClicked"/>
+              <button id="btnResignation_Finland" label="Resignation" tag="Resignation;FI;Finland" onAction="onButtonClicked"/>
+              <button id="btnReturn_Finland" label="Return" tag="Return;FI;Finland" onAction="onButtonClicked"/>
+              <button id="btnTransactionList_Finland" label="Transaction List" tag="Transaction List;FI;Finland" onAction="onButtonClicked"/>
+            </menu>
+          </splitButton>
+          <splitButton id="splitButtonFrance" tag="FR" size="large" getVisible="isVisible" showLabel="true">
+            <button id="splitButtonFrance_btn" label="France" getImage="getCustomImage"/>
+            <menu id="menuFrance">
+              <button id="btnABOMasterData_France" label="ABO Master Data" tag="ABO Master Data;FR;France" onAction="onButtonClicked"/>
+              <button id="btnCommunication_France" label="ABO Communication" tag="ABO Communication;FR;France" onAction="onButtonClicked"/>
+              <button id="btnNewApplication_France" label="New Application" tag="New Application;FR;France" onAction="onButtonClicked"/>
+              <button id="btnOrder_France" label="Order" tag="Order;FR;France" onAction="onButtonClicked"/>
+              <button id="btnRenewal_France" label="Renewal" tag="Renewal;FR;France" onAction="onButtonClicked"/>
+              <button id="btnResignation_France" label="Resignation" tag="Resignation;FR;France" onAction="onButtonClicked"/>
+              <button id="btnReturn_France" label="Return" tag="Return;FR;France" onAction="onButtonClicked"/>
+              <button id="btnTransactionList_France" label="Transaction List" tag="Transaction List;FR;France" onAction="onButtonClicked"/>
+            </menu>
+          </splitButton>
+          <splitButton id="splitButtonGreece" tag="GR" size="large" getVisible="isVisible" showLabel="true">
+            <button id="splitButtonGreece_btn" label="Greece" getImage="getCustomImage"/>
+            <menu id="menuGreece">
+              <button id="btnABOMasterData_Greece" label="ABO Master Data" tag="ABO Master Data;GR;Greece" onAction="onButtonClicked"/>
+              <button id="btnCommunication_Greece" label="ABO Communication" tag="ABO Communication;GR;Greece" onAction="onButtonClicked"/>
+              <button id="btnNewApplication_Greece" label="New Application" tag="New Application;GR;Greece" onAction="onButtonClicked"/>
+              <button id="btnOrder_Greece" label="Order" tag="Order;GR;Greece" onAction="onButtonClicked"/>
+              <button id="btnRenewal_Greece" label="Renewal" tag="Renewal;GR;Greece" onAction="onButtonClicked"/>
+              <button id="btnResignation_Greece" label="Resignation" tag="Resignation;GR;Greece" onAction="onButtonClicked"/>
+              <button id="btnReturn_Greece" label="Return" tag="Return;GR;Greece" onAction="onButtonClicked"/>
+              <button id="btnTransactionList_Greece" label="Transaction List" tag="Transaction List;GR;Greece" onAction="onButtonClicked"/>
+            </menu>
+          </splitButton>
+          <splitButton id="splitButtonCroatia" tag="HR" size="large" getVisible="isVisible" showLabel="true">
+            <button id="splitButtonCroatia_btn" label="Croatia" getImage="getCustomImage"/>
+            <menu id="menuCroatia">
+              <button id="btnABOMasterData_Croatia" label="ABO Master Data" tag="ABO Master Data;HR;Croatia" onAction="onButtonClicked"/>
+              <button id="btnCommunication_Croatia" label="ABO Communication" tag="ABO Communication;HR;Croatia" onAction="onButtonClicked"/>
+              <button id="btnNewApplication_Croatia" label="New Application" tag="New Application;HR;Croatia" onAction="onButtonClicked"/>
+              <button id="btnOrder_Croatia" label="Order" tag="Order;HR;Croatia" onAction="onButtonClicked"/>
+              <button id="btnRenewal_Croatia" label="Renewal" tag="Renewal;HR;Croatia" onAction="onButtonClicked"/>
+              <button id="btnResignation_Croatia" label="Resignation" tag="Resignation;HR;Croatia" onAction="onButtonClicked"/>
+              <button id="btnReturn_Croatia" label="Return" tag="Return;HR;Croatia" onAction="onButtonClicked"/>
+              <button id="btnTransactionList_Croatia" label="Transaction List" tag="Transaction List;HR;Croatia" onAction="onButtonClicked"/>
+            </menu>
+          </splitButton>
+          <splitButton id="splitButtonHungary" tag="HU" size="large" getVisible="isVisible" showLabel="true">
+            <button id="splitButtonHungary_btn" label="Hungary" getImage="getCustomImage"/>
+            <menu id="menuHungary">
+              <button id="btnABOMasterData_Hungary" label="ABO Master Data" tag="ABO Master Data;HU;Hungary" onAction="onButtonClicked"/>
+              <button id="btnCommunication_Hungary" label="ABO Communication" tag="ABO Communication;HU;Hungary" onAction="onButtonClicked"/>
+              <button id="btnNewApplication_Hungary" label="New Application" tag="New Application;HU;Hungary" onAction="onButtonClicked"/>
+              <button id="btnOrder_Hungary" label="Order" tag="Order;HU;Hungary" onAction="onButtonClicked"/>
+              <button id="btnRenewal_Hungary" label="Renewal" tag="Renewal;HU;Hungary" onAction="onButtonClicked"/>
+              <button id="btnResignation_Hungary" label="Resignation" tag="Resignation;HU;Hungary" onAction="onButtonClicked"/>
+              <button id="btnReturn_Hungary" label="Return" tag="Return;HU;Hungary" onAction="onButtonClicked"/>
+              <button id="btnTransactionList_Hungary" label="Transaction List" tag="Transaction List;HU;Hungary" onAction="onButtonClicked"/>
+            </menu>
+          </splitButton>
+          <splitButton id="splitButtonItaly" tag="IT" size="large" getVisible="isVisible" showLabel="true">
+            <button id="splitButtonItaly_btn" label="Italy" getImage="getCustomImage"/>
+            <menu id="menuItaly">
+              <button id="btnABOMasterData_Italy" label="ABO Master Data" tag="ABO Master Data;IT;Italy" onAction="onButtonClicked"/>
+              <button id="btnCommunication_Italy" label="ABO Communication" tag="ABO Communication;IT;Italy" onAction="onButtonClicked"/>
+              <button id="btnNewApplication_Italy" label="New Application" tag="New Application;IT;Italy" onAction="onButtonClicked"/>
+              <button id="btnOrder_Italy" label="Order" tag="Order;IT;Italy" onAction="onButtonClicked"/>
+              <button id="btnRenewal_Italy" label="Renewal" tag="Renewal;IT;Italy" onAction="onButtonClicked"/>
+              <button id="btnResignation_Italy" label="Resignation" tag="Resignation;IT;Italy" onAction="onButtonClicked"/>
+              <button id="btnReturn_Italy" label="Return" tag="Return;IT;Italy" onAction="onButtonClicked"/>
+              <button id="btnTransactionList_Italy" label="Transaction List" tag="Transaction List;IT;Italy" onAction="onButtonClicked"/>
+            </menu>
+          </splitButton>
+          <splitButton id="splitButtonKazachstan" tag="KZ" size="large" getVisible="isVisible" showLabel="true">
+            <button id="splitButtonKazachstan_btn" label="Kazachstan" getImage="getCustomImage"/>
+            <menu id="menuKazachstan">
+              <button id="btnABOMasterData_Kazachstan" label="ABO Master Data" tag="ABO Master Data;KZ;Kazachstan" onAction="onButtonClicked"/>
+              <button id="btnCommunication_Kazachstan" label="ABO Communication" tag="ABO Communication;KZ;Kazachstan" onAction="onButtonClicked"/>
+              <button id="btnNewApplication_Kazachstan" label="New Application" tag="New Application;KZ;Kazachstan" onAction="onButtonClicked"/>
+              <button id="btnOrder_Kazachstan" label="Order" tag="Order;KZ;Kazachstan" onAction="onButtonClicked"/>
+              <button id="btnRenewal_Kazachstan" label="Renewal" tag="Renewal;KZ;Kazachstan" onAction="onButtonClicked"/>
+              <button id="btnResignation_Kazachstan" label="Resignation" tag="Resignation;KZ;Kazachstan" onAction="onButtonClicked"/>
+              <button id="btnReturn_Kazachstan" label="Return" tag="Return;KZ;Kazachstan" onAction="onButtonClicked"/>
+              <button id="btnTransactionList_Kazachstan" label="Transaction List" tag="Transaction List;KZ;Kazachstan" onAction="onButtonClicked"/>
+            </menu>
+          </splitButton>
+          <splitButton id="splitButtonLithuania" tag="LT" size="large" getVisible="isVisible" showLabel="true">
+            <button id="splitButtonLithuania_btn" label="Lithuania" getImage="getCustomImage"/>
+            <menu id="menuLithuania">
+              <button id="btnABOMasterData_Lithuania" label="ABO Master Data" tag="ABO Master Data;LT;Lithuania" onAction="onButtonClicked"/>
+              <button id="btnCommunication_Lithuania" label="ABO Communication" tag="ABO Communication;LT;Lithuania" onAction="onButtonClicked"/>
+              <button id="btnNewApplication_Lithuania" label="New Application" tag="New Application;LT;Lithuania" onAction="onButtonClicked"/>
+              <button id="btnOrder_Lithuania" label="Order" tag="Order;LT;Lithuania" onAction="onButtonClicked"/>
+              <button id="btnRenewal_Lithuania" label="Renewal" tag="Renewal;LT;Lithuania" onAction="onButtonClicked"/>
+              <button id="btnResignation_Lithuania" label="Resignation" tag="Resignation;LT;Lithuania" onAction="onButtonClicked"/>
+              <button id="btnReturn_Lithuania" label="Return" tag="Return;LT;Lithuania" onAction="onButtonClicked"/>
+              <button id="btnTransactionList_Lithuania" label="Transaction List" tag="Transaction List;LT;Lithuania" onAction="onButtonClicked"/>
+            </menu>
+          </splitButton>
+          <splitButton id="splitButtonLatvia" tag="LV" size="large" getVisible="isVisible" showLabel="true">
+            <button id="splitButtonLatvia_btn" label="Latvia" getImage="getCustomImage"/>
+            <menu id="menuLatvia">
+              <button id="btnABOMasterData_Latvia" label="ABO Master Data" tag="ABO Master Data;LV;Latvia" onAction="onButtonClicked"/>
+              <button id="btnCommunication_Latvia" label="ABO Communication" tag="ABO Communication;LV;Latvia" onAction="onButtonClicked"/>
+              <button id="btnNewApplication_Latvia" label="New Application" tag="New Application;LV;Latvia" onAction="onButtonClicked"/>
+              <button id="btnOrder_Latvia" label="Order" tag="Order;LV;Latvia" onAction="onButtonClicked"/>
+              <button id="btnRenewal_Latvia" label="Renewal" tag="Renewal;LV;Latvia" onAction="onButtonClicked"/>
+              <button id="btnResignation_Latvia" label="Resignation" tag="Resignation;LV;Latvia" onAction="onButtonClicked"/>
+              <button id="btnReturn_Latvia" label="Return" tag="Return;LV;Latvia" onAction="onButtonClicked"/>
+              <button id="btnTransactionList_Latvia" label="Transaction List" tag="Transaction List;LV;Latvia" onAction="onButtonClicked"/>
+            </menu>
+          </splitButton>
+          <splitButton id="splitButtonNetherlands" tag="NL" size="large" getVisible="isVisible" showLabel="true">
+            <button id="splitButtonNetherlands_btn" label="Netherlands" getImage="getCustomImage"/>
+            <menu id="menuNetherlands">
+              <button id="btnABOMasterData_Netherlands" label="ABO Master Data" tag="ABO Master Data;NL;Netherlands" onAction="onButtonClicked"/>
+              <button id="btnCommunication_Netherlands" label="ABO Communication" tag="ABO Communication;NL;Netherlands" onAction="onButtonClicked"/>
+              <button id="btnNewApplication_Netherlands" label="New Application" tag="New Application;NL;Netherlands" onAction="onButtonClicked"/>
+              <button id="btnOrder_Netherlands" label="Order" tag="Order;NL;Netherlands" onAction="onButtonClicked"/>
+              <button id="btnRenewal_Netherlands" label="Renewal" tag="Renewal;NL;Netherlands" onAction="onButtonClicked"/>
+              <button id="btnResignation_Netherlands" label="Resignation" tag="Resignation;NL;Netherlands" onAction="onButtonClicked"/>
+              <button id="btnReturn_Netherlands" label="Return" tag="Return;NL;Netherlands" onAction="onButtonClicked"/>
+              <button id="btnTransactionList_Netherlands" label="Transaction List" tag="Transaction List;NL;Netherlands" onAction="onButtonClicked"/>
+            </menu>
+          </splitButton>
+          <splitButton id="splitButtonNorway" tag="NO" size="large" getVisible="isVisible" showLabel="true">
+            <button id="splitButtonNorway_btn" label="Norway" getImage="getCustomImage"/>
+            <menu id="menuNorway">
+              <button id="btnABOMasterData_Norway" label="ABO Master Data" tag="ABO Master Data;NO;Norway" onAction="onButtonClicked"/>
+              <button id="btnCommunication_Norway" label="ABO Communication" tag="ABO Communication;NO;Norway" onAction="onButtonClicked"/>
+              <button id="btnNewApplication_Norway" label="New Application" tag="New Application;NO;Norway" onAction="onButtonClicked"/>
+              <button id="btnOrder_Norway" label="Order" tag="Order;NO;Norway" onAction="onButtonClicked"/>
+              <button id="btnRenewal_Norway" label="Renewal" tag="Renewal;NO;Norway" onAction="onButtonClicked"/>
+              <button id="btnResignation_Norway" label="Resignation" tag="Resignation;NO;Norway" onAction="onButtonClicked"/>
+              <button id="btnReturn_Norway" label="Return" tag="Return;NO;Norway" onAction="onButtonClicked"/>
+              <button id="btnTransactionList_Norway" label="Transaction List" tag="Transaction List;NO;Norway" onAction="onButtonClicked"/>
+            </menu>
+          </splitButton>
+          <splitButton id="splitButtonPoland" tag="PL" size="large" getVisible="isVisible" showLabel="true">
+            <button id="splitButtonPoland_btn" label="Poland" getImage="getCustomImage"/>
+            <menu id="menuPoland">
+              <button id="btnABOMasterData_Poland" label="ABO Master Data" tag="ABO Master Data;PL;Poland" onAction="onButtonClicked"/>
+              <button id="btnCommunication_Poland" label="ABO Communication" tag="ABO Communication;PL;Poland" onAction="onButtonClicked"/>
+              <button id="btnNewApplication_Poland" label="New Application" tag="New Application;PL;Poland" onAction="onButtonClicked"/>
+              <button id="btnOrder_Poland" label="Order" tag="Order;PL;Poland" onAction="onButtonClicked"/>
+              <button id="btnRenewal_Poland" label="Renewal" tag="Renewal;PL;Poland" onAction="onButtonClicked"/>
+              <button id="btnResignation_Poland" label="Resignation" tag="Resignation;PL;Poland" onAction="onButtonClicked"/>
+              <button id="btnReturn_Poland" label="Return" tag="Return;PL;Poland" onAction="onButtonClicked"/>
+              <button id="btnTransactionList_Poland" label="Transaction List" tag="Transaction List;PL;Poland" onAction="onButtonClicked"/>
+            </menu>
+          </splitButton>
+          <splitButton id="splitButtonPortugal" tag="PT" size="large" getVisible="isVisible" showLabel="true">
+            <button id="splitButtonPortugal_btn" label="Portugal" getImage="getCustomImage"/>
+            <menu id="menuPortugal">
+              <button id="btnABOMasterData_Portugal" label="ABO Master Data" tag="ABO Master Data;PT;Portugal" onAction="onButtonClicked"/>
+              <button id="btnCommunication_Portugal" label="ABO Communication" tag="ABO Communication;PT;Portugal" onAction="onButtonClicked"/>
+              <button id="btnNewApplication_Portugal" label="New Application" tag="New Application;PT;Portugal" onAction="onButtonClicked"/>
+              <button id="btnOrder_Portugal" label="Order" tag="Order;PT;Portugal" onAction="onButtonClicked"/>
+              <button id="btnRenewal_Portugal" label="Renewal" tag="Renewal;PT;Portugal" onAction="onButtonClicked"/>
+              <button id="btnResignation_Portugal" label="Resignation" tag="Resignation;PT;Portugal" onAction="onButtonClicked"/>
+              <button id="btnReturn_Portugal" label="Return" tag="Return;PT;Portugal" onAction="onButtonClicked"/>
+              <button id="btnTransactionList_Portugal" label="Transaction List" tag="Transaction List;PT;Portugal" onAction="onButtonClicked"/>
+            </menu>
+          </splitButton>
+          <splitButton id="splitButtonRomania" tag="RO" size="large" getVisible="isVisible" showLabel="true">
+            <button id="splitButtonRomania_btn" label="Romania" getImage="getCustomImage"/>
+            <menu id="menuRomania">
+              <button id="btnABOMasterData_Romania" label="ABO Master Data" tag="ABO Master Data;RO;Romania" onAction="onButtonClicked"/>
+              <button id="btnCommunication_Romania" label="ABO Communication" tag="ABO Communication;RO;Romania" onAction="onButtonClicked"/>
+              <button id="btnNewApplication_Romania" label="New Application" tag="New Application;RO;Romania" onAction="onButtonClicked"/>
+              <button id="btnOrder_Romania" label="Order" tag="Order;RO;Romania" onAction="onButtonClicked"/>
+              <button id="btnRenewal_Romania" label="Renewal" tag="Renewal;RO;Romania" onAction="onButtonClicked"/>
+              <button id="btnResignation_Romania" label="Resignation" tag="Resignation;RO;Romania" onAction="onButtonClicked"/>
+              <button id="btnReturn_Romania" label="Return" tag="Return;RO;Romania" onAction="onButtonClicked"/>
+              <button id="btnTransactionList_Romania" label="Transaction List" tag="Transaction List;RO;Romania" onAction="onButtonClicked"/>
+            </menu>
+          </splitButton>
+          <splitButton id="splitButtonRussia" tag="RU" size="large" getVisible="isVisible" showLabel="true">
+            <button id="splitButtonRussia_btn" label="Russia" getImage="getCustomImage"/>
+            <menu id="menuRussia">
+              <button id="btnABOMasterData_Russia" label="ABO Master Data" tag="ABO Master Data;RU;Russia" onAction="onButtonClicked"/>
+              <button id="btnCommunication_Russia" label="ABO Communication" tag="ABO Communication;RU;Russia" onAction="onButtonClicked"/>
+              <button id="btnNewApplication_Russia" label="New Application" tag="New Application;RU;Russia" onAction="onButtonClicked"/>
+              <button id="btnOrder_Russia" label="Order" tag="Order;RU;Russia" onAction="onButtonClicked"/>
+              <button id="btnRenewal_Russia" label="Renewal" tag="Renewal;RU;Russia" onAction="onButtonClicked"/>
+              <button id="btnResignation_Russia" label="Resignation" tag="Resignation;RU;Russia" onAction="onButtonClicked"/>
+              <button id="btnReturn_Russia" label="Return" tag="Return;RU;Russia" onAction="onButtonClicked"/>
+              <button id="btnTransactionList_Russia" label="Transaction List" tag="Transaction List;RU;Russia" onAction="onButtonClicked"/>
+            </menu>
+          </splitButton>
+          <splitButton id="splitButtonSweden" tag="SE" size="large" getVisible="isVisible" showLabel="true">
+            <button id="splitButtonSweden_btn" label="Sweden" getImage="getCustomImage"/>
+            <menu id="menuSweden">
+              <button id="btnABOMasterData_Sweden" label="ABO Master Data" tag="ABO Master Data;SE;Sweden" onAction="onButtonClicked"/>
+              <button id="btnCommunication_Sweden" label="ABO Communication" tag="ABO Communication;SE;Sweden" onAction="onButtonClicked"/>
+              <button id="btnNewApplication_Sweden" label="New Application" tag="New Application;SE;Sweden" onAction="onButtonClicked"/>
+              <button id="btnOrder_Sweden" label="Order" tag="Order;SE;Sweden" onAction="onButtonClicked"/>
+              <button id="btnRenewal_Sweden" label="Renewal" tag="Renewal;SE;Sweden" onAction="onButtonClicked"/>
+              <button id="btnResignation_Sweden" label="Resignation" tag="Resignation;SE;Sweden" onAction="onButtonClicked"/>
+              <button id="btnReturn_Sweden" label="Return" tag="Return;SE;Sweden" onAction="onButtonClicked"/>
+              <button id="btnTransactionList_Sweden" label="Transaction List" tag="Transaction List;SE;Sweden" onAction="onButtonClicked"/>
+            </menu>
+          </splitButton>
+          <splitButton id="splitButtonSlovakia" tag="SK" size="large" getVisible="isVisible" showLabel="true">
+            <button id="splitButtonSlovakia_btn" label="Slovakia" getImage="getCustomImage"/>
+            <menu id="menuSlovakia">
+              <button id="btnABOMasterData_Slovakia" label="ABO Master Data" tag="ABO Master Data;SK;Slovakia" onAction="onButtonClicked"/>
+              <button id="btnCommunication_Slovakia" label="ABO Communication" tag="ABO Communication;SK;Slovakia" onAction="onButtonClicked"/>
+              <button id="btnNewApplication_Slovakia" label="New Application" tag="New Application;SK;Slovakia" onAction="onButtonClicked"/>
+              <button id="btnOrder_Slovakia" label="Order" tag="Order;SK;Slovakia" onAction="onButtonClicked"/>
+              <button id="btnRenewal_Slovakia" label="Renewal" tag="Renewal;SK;Slovakia" onAction="onButtonClicked"/>
+              <button id="btnResignation_Slovakia" label="Resignation" tag="Resignation;SK;Slovakia" onAction="onButtonClicked"/>
+              <button id="btnReturn_Slovakia" label="Return" tag="Return;SK;Slovakia" onAction="onButtonClicked"/>
+              <button id="btnTransactionList_Slovakia" label="Transaction List" tag="Transaction List;SK;Slovakia" onAction="onButtonClicked"/>
+            </menu>
+          </splitButton>
+          <splitButton id="splitButtonSlovenia" tag="SI" size="large" getVisible="isVisible" showLabel="true">
+            <button id="splitButtonSlovenia_btn" label="Slovenia" getImage="getCustomImage"/>
+            <menu id="menuSlovenia">
+              <button id="btnABOMasterData_Slovenia" label="ABO Master Data" tag="ABO Master Data;SI;Slovenia" onAction="onButtonClicked"/>
+              <button id="btnCommunication_Slovenia" label="ABO Communication" tag="ABO Communication;SI;Slovenia" onAction="onButtonClicked"/>
+              <button id="btnNewApplication_Slovenia" label="New Application" tag="New Application;SI;Slovenia" onAction="onButtonClicked"/>
+              <button id="btnOrder_Slovenia" label="Order" tag="Order;SI;Slovenia" onAction="onButtonClicked"/>
+              <button id="btnRenewal_Slovenia" label="Renewal" tag="Renewal;SI;Slovenia" onAction="onButtonClicked"/>
+              <button id="btnResignation_Slovenia" label="Resignation" tag="Resignation;SI;Slovenia" onAction="onButtonClicked"/>
+              <button id="btnReturn_Slovenia" label="Return" tag="Return;SI;Slovenia" onAction="onButtonClicked"/>
+              <button id="btnTransactionList_Slovenia" label="Transaction List" tag="Transaction List;SI;Slovenia" onAction="onButtonClicked"/>
+            </menu>
+          </splitButton>
+          <splitButton id="splitButtonUnitedKingdom" tag="UK" size="large" getVisible="isVisible" showLabel="true">
+            <button id="splitButtonUnitedKingdom_btn" label="UnitedKingdom" getImage="getCustomImage"/>
+            <menu id="menuUnitedKingdom">
+              <button id="btnABOMasterData_UnitedKingdom" label="ABO Master Data" tag="ABO Master Data;UK;UnitedKingdom" onAction="onButtonClicked"/>
+              <button id="btnCommunication_UnitedKingdom" label="ABO Communication" tag="ABO Communication;UK;UnitedKingdom" onAction="onButtonClicked"/>
+              <button id="btnNewApplication_UnitedKingdom" label="New Application" tag="New Application;UK;UnitedKingdom" onAction="onButtonClicked"/>
+              <button id="btnOrder_UnitedKingdom" label="Order" tag="Order;UK;UnitedKingdom" onAction="onButtonClicked"/>
+              <button id="btnRenewal_UnitedKingdom" label="Renewal" tag="Renewal;UK;UnitedKingdom" onAction="onButtonClicked"/>
+              <button id="btnResignation_UnitedKingdom" label="Resignation" tag="Resignation;UK;UnitedKingdom" onAction="onButtonClicked"/>
+              <button id="btnReturn_UnitedKingdom" label="Return" tag="Return;UK;UnitedKingdom" onAction="onButtonClicked"/>
+              <button id="btnTransactionList_UnitedKingdom" label="Transaction List" tag="Transaction List;UK;UnitedKingdom" onAction="onButtonClicked"/>
+            </menu>
+          </splitButton>
+
+
+
+
+
+        </group>
+          <group id="test1" label="settings">
+          <button id="currentServer_btn" label="get current status: " onAction="getCurrentStatus"/>
+        </group>
+      </tab>
+    </tabs>
+  </ribbon>
+</customUI>

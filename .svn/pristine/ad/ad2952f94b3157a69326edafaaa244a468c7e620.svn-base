@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://converter.webpdf.net/" name="ConverterService" targetNamespace="http://converter.webpdf.net/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="http://deis379:8080/webPDF/Converter?xsd=1" namespace="http://converter.webpdf.net/" />
+    </xsd:schema>
+  </types>
+  <message name="convertDocumentSimple">
+    <part name="parameters" element="tns:convertDocumentSimple" />
+  </message>
+  <message name="convertDocumentSimpleResponse">
+    <part name="parameters" element="tns:convertDocumentSimpleResponse" />
+  </message>
+  <message name="ConverterException">
+    <part name="fault" element="tns:ConverterException" />
+  </message>
+  <message name="convertDocument">
+    <part name="parameters" element="tns:convertDocument" />
+  </message>
+  <message name="convertDocumentResponse">
+    <part name="parameters" element="tns:convertDocumentResponse" />
+  </message>
+  <message name="convertDocumentURL">
+    <part name="parameters" element="tns:convertDocumentURL" />
+  </message>
+  <message name="convertDocumentURLResponse">
+    <part name="parameters" element="tns:convertDocumentURLResponse" />
+  </message>
+  <portType name="Converter">
+    <operation name="convertDocumentSimple">
+      <input message="tns:convertDocumentSimple" />
+      <output message="tns:convertDocumentSimpleResponse" />
+      <fault name="ConverterException" message="tns:ConverterException" />
+    </operation>
+    <operation name="convertDocument">
+      <input message="tns:convertDocument" />
+      <output message="tns:convertDocumentResponse" />
+      <fault name="ConverterException" message="tns:ConverterException" />
+    </operation>
+    <operation name="convertDocumentURL">
+      <input message="tns:convertDocumentURL" />
+      <output message="tns:convertDocumentURLResponse" />
+      <fault name="ConverterException" message="tns:ConverterException" />
+    </operation>
+  </portType>
+  <binding name="ConverterPortBinding" type="tns:Converter">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="convertDocumentSimple">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="ConverterException">
+        <soap:fault use="literal" name="ConverterException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="convertDocument">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="ConverterException">
+        <soap:fault use="literal" name="ConverterException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="convertDocumentURL">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="ConverterException">
+        <soap:fault use="literal" name="ConverterException" namespace="" />
+      </fault>
+    </operation>
+  </binding>
+  <service name="ConverterService">
+    <port name="ConverterPort" binding="tns:ConverterPortBinding">
+      <soap:address location="http://deis379:8080/webPDF/Converter" />
+    </port>
+  </service>
+</definitions>

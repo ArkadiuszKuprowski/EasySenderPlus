@@ -1,0 +1,456 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Runtime.InteropServices;
+using System.Text;
+using Office = Microsoft.Office.Core;
+using System.DirectoryServices.AccountManagement;
+using System.Windows.Forms;
+using System.ComponentModel;
+using System.Security.Principal;
+using Microsoft.Office.Interop.Outlook;
+using Microsoft.Exchange.WebServices.Data;
+using System.Diagnostics;
+//using Microsoft.Exchange.WebServices.Data;
+// TODO:  Follow these steps to enable the Ribbon (XML) item:
+
+// 1: Copy the following code block into the ThisAddin, ThisWorkbook, or ThisDocument class.
+
+//  protected override Microsoft.Office.Core.IRibbonExtensibility CreateRibbonExtensibilityObject()
+//  {
+//      return new ribbonEasyDMS();
+//  }
+
+// 2. Create callback methods in the "Ribbon Callbacks" region of this class to handle user
+//    actions, such as clicking a button. Note: if you have exported this Ribbon from the Ribbon designer,
+//    move your code from the event handlers to the callback methods and modify the code to work with the
+//    Ribbon extensibility (RibbonX) programming model.
+
+// 3. Assign attributes to the control tags in the Ribbon XML file to identify the appropriate callback methods in your code.  
+
+// For more information, see the Ribbon XML documentation in the Visual Studio Tools for Office Help.
+
+
+namespace easyDMSTool
+{
+    [ComVisible(true)]
+    public class ribbonEasyDMS : Office.IRibbonExtensibility
+    {
+        private Office.IRibbonUI ribbon;
+
+        public ribbonEasyDMS()
+        {
+        }
+
+        #region IRibbonExtensibility Members
+
+        public string GetCustomUI(string ribbonID)
+        {           
+            return GetResourceText("easyDMSTool.ribbonEasyDMS.xml");
+        }
+
+        #endregion
+
+        #region Ribbon Callbacks
+
+        public void Ribbon_Load(Office.IRibbonUI ribbonUI)
+        {           
+            this.ribbon = ribbonUI;
+            initializeMembers();
+        }
+        public System.Drawing.Bitmap getCustomImage(Office.IRibbonControl control)
+        {
+            String resourceName = control.Id.TrimEnd('n', 't', 'b') + "Image";
+            return (System.Drawing.Bitmap)Properties.Resources.ResourceManager.GetObject(resourceName);
+        }
+        public void getCurrentStatus(Office.IRibbonControl control)
+        {
+            System.Windows.Forms.MessageBox.Show("Server: " + ribbonEasyDMS.serverUrl + "\nUser ID: " + ribbonEasyDMS.userID);
+        }
+        //public void getCurrentStatus(Office.IRibbonControl control)
+        //{
+        //    System.Windows.Forms.MessageBox.Show("Server: " + ribbonEasyDMS.serverUrl + "\nUser ID: " + ribbonEasyDMS.userID);
+        //    UrlValidator validator = new UrlValidator();
+        //    Microsoft.Exchange.WebServices.Data.ExchangeService _service = new Microsoft.Exchange.WebServices.Data.ExchangeService();//Microsoft.Exchange.WebServices.Data.ExchangeVersion.Exchange2013_SP1);
+        //    System.Security.SecureString pass = new System.Security.SecureString();
+        //    foreach (char i in "Jo4nn491")
+        //    {
+        //        pass.AppendChar(i);
+        //    }
+        //    string email = "plubbart@amway.com".ToString();
+        //    _service.Credentials = new System.Net.NetworkCredential(email, pass);
+        //    _service.AutodiscoverUrl(email, validator.ValidateUrl);
+        //    System.Windows.Forms.MessageBox.Show(_service.Url.ToString());
+
+        //    //try
+        //    //{
+        //    //    string msg = "";
+        //    //    FolderView view = new FolderView(100);
+        //    //    view.PropertySet = new PropertySet(BasePropertySet.IdOnly);
+        //    //    view.PropertySet.Add(FolderSchema.DisplayName);
+        //    //    view.Traversal = FolderTraversal.Deep;
+        //    //    Mailbox mailbox = new Mailbox("antrag@Amway.com");
+        //    //    FindFoldersResults results = _service.FindFolders(new FolderId(WellKnownFolderName.Root, mailbox), view);
+        //    //    foreach(Microsoft.Exchange.WebServices.Data.Folder f in results)
+        //    //    {
+        //    //        msg += f.DisplayName + "\n";
+        //    //        if(f.DisplayName.Contains("CHANGE Antrag") || f.DisplayName.Contains("ALT"))
+        //    //        {
+        //    //            f.Load();
+        //    //            f.DisplayName = "ALT2";
+        //    //            f.Update();
+        //    //        }
+        //    //    }
+        //    //    System.Windows.Forms.MessageBox.Show(msg);
+        //    //}
+        //    //catch (System.Exception ex)
+        //    //{
+        //    //    // Write error message to the console window.
+        //    //    Console.WriteLine("Error: " + ex.Message);
+        //    //    Console.ReadLine();
+        //    //}
+        //    Microsoft.Office.Interop.Outlook.Application app = Globals.ThisAddIn.Application;
+        //    if(app.ActiveExplorer().Selection.Count >0)
+        //    {
+        //        MailItem item = (MailItem)app.ActiveExplorer().Selection[1];
+        //        //string title = item.Subject;
+        //        string search = "subject:" + item.Subject;
+        //        //List<SearchFilter> searchColl = new List<SearchFilter>();
+        //        //searchColl.Add(new SearchFilter.ContainsSubstring(ItemSchema.Subject, item.Subject));
+        //        SearchFilter filter = new SearchFilter.ContainsSubstring(ItemSchema.Subject, item.Subject);
+        //        Mailbox mailbox = new Mailbox("antrag@Amway.com");
+        //        FindItemsResults<Item> results = _service.FindItems(new FolderId(WellKnownFolderName.Root, mailbox), filter,new ItemView(3));
+        //        foreach(Item i in results)
+        //        {
+        //            i.Load();
+        //            i.Subject = i.Subject + " // SUCCESS!!";
+        //            i.Update(ConflictResolutionMode.AlwaysOverwrite);
+        //        }
+        //    }
+
+        //}      
+
+
+        public Boolean isVisible(Office.IRibbonControl control)
+        {
+            
+            for( int i = 0; i < currentUserGroupList.Count(); ++ i )
+            {
+                if( groupAD_hash.Contains(currentUserGroupList[i]) && currentUserGroupList[i].Contains(control.Tag))
+                {
+                    currentUserGroupList.Remove(currentUserGroupList[i]);
+                    return true;
+                }               
+            }
+            return false;
+        }
+        public void onButtonClicked(Office.IRibbonControl control)
+        {
+            string[] tags = control.Tag.Split(';');
+            ExtractEmail(tags[2],tags[0],tags[1],control.Id);
+        }
+
+        #endregion
+
+        #region Helpers
+
+        public void initializeMembers()
+        {
+            if (!System.IO.Directory.Exists(@"C:\Users\Public\pdfWork"))
+                System.IO.Directory.CreateDirectory(@"C:\Users\Public\pdfWork");
+            //file = new System.IO.StreamWriter(@"C:\Users\Public\pdfWork\logFile2.txt", false);
+            //file.AutoFlush = true;
+            //myTraceLog = new System.IO.FileStream(@"C:\Users\Public\pdfWork\logFile.txt", System.IO.FileMode.OpenOrCreate);
+            //TextWriterTraceListener myListener = new TextWriterTraceListener(myTraceLog);
+            //Trace.Listeners.Add(myListener);
+
+            easyDMSTool.Properties.Settings.Default.userID = UserPrincipal.Current.ToString();
+            currentUserGroupList = new List<string>();
+            mapAD = mappingAD.Deserialize();
+            groupAD = new List<string>();
+            for (int i = 0; i < mapAD.Count; ++i)
+            {
+                groupAD.Add(mapAD[i].groupAD);
+            }
+            groupAD_hash = new HashSet<string>(groupAD);
+            PrincipalSearchResult<Principal> currentUserGroups = UserPrincipal.Current.GetGroups();
+            foreach (Principal group in currentUserGroups)
+            {                  
+                    currentUserGroupList.Add(group.ToString());
+            }
+            currentUserGroupList.Sort();
+        }
+
+        private void ExtractEmail(string country, string docType, string countryCode, string emailType)
+        {
+            
+            Microsoft.Office.Interop.Outlook.Application app = Globals.ThisAddIn.Application;
+            if (app.ActiveExplorer().Selection.Count > 0)
+            {
+
+                foreach( Microsoft.Office.Interop.Outlook.MailItem selected in app.ActiveExplorer().Selection)
+                {
+                    string emailFolder = GetOutputFolder(country, docType, selected);
+                    
+                    ExtractEmailBody(selected, emailFolder);
+                    if( selected.Attachments.Count > 0 )
+                    {
+                        List<string> att = new List<string>();
+                        for(int i = 1 ; i <= selected.Attachments.Count; ++i)
+                        {   
+                            att.Add(selected.Attachments[i].FileName);
+                        }
+                        
+                        SelectAttachments selectedAttachments = new SelectAttachments(att);
+                        if (selectedAttachments.ShowDialog() == DialogResult.OK)
+                        {
+                            ExtractEmailAttachments(selected, emailFolder, selectedAttachments.selectedAttachments);                                                       
+                            ConvertFiles(emailFolder, country, docType, countryCode, selected,selectedAttachments.selectedAttachments, "email: "+selected.SenderEmailAddress+" : name: "+selected.SenderName);
+                        }
+                    }
+                    else
+                    {
+                        ConvertFiles(emailFolder, country, docType, countryCode, selected);
+                    }                    
+                }                          
+            }           
+        }
+        private void detectDuplicateAttachments(MailItem objMail)
+        {
+            Attachments atts = objMail.Attachments;
+            int counter = atts.Count;
+            for(int i = 1; i < counter; i++)
+            {
+                string pSave = System.IO.Path.Combine("C:\\Users\\Public\\pdfWork\\", i+"_" +objMail.Attachments[i].FileName);
+                atts[i].SaveAsFile(pSave);
+                atts.Add(pSave);
+                System.IO.File.Delete(pSave);
+            }
+            for(int i = 1; i < counter; i++)
+            {
+                atts[1].Delete();
+            }
+        }
+        private void detectDuplicateAttachments(MailItem objMail,List<string> names)
+        {
+            Attachments atts = objMail.Attachments;
+            int counter = atts.Count;
+            for (int i = 1; i < counter; i++)
+            {
+                //for(int j = i+1; j < counter; j++)
+                //{
+                if(names.Contains(atts[i].DisplayName))
+                {
+                    string pSave = System.IO.Path.Combine("C:\\Users\\Public\\pdfWork\\", i + "_" + objMail.Attachments[i].FileName);
+                    atts[i].SaveAsFile(pSave);
+                    atts.Add(pSave);
+                    System.IO.File.Delete(pSave);
+                }
+                //}
+            }
+            for (int i = 1; i < counter; i++)
+            {
+                atts[1].Delete();
+            }
+        }
+        private bool ExtractEmailBody(Microsoft.Office.Interop.Outlook.MailItem objMail, string folder)
+        {
+            try
+            {
+                string s = objMail.Body;
+                System.IO.Directory.CreateDirectory(folder);
+                objMail.SaveAs(System.IO.Path.Combine(folder, "Message_Body.doc"), OlSaveAsType.olDoc);
+                return true;
+            }
+            catch (System.Exception)
+            {
+                return false;
+            }
+        }
+        private bool ExtractEmailAttachments(Microsoft.Office.Interop.Outlook.MailItem objMail, string folder, List<string> attachments)
+        {
+            if (objMail.Attachments.Count > 0)
+            {
+                int counter = objMail.Attachments.Count;
+                for (int j = 1; j <= counter; j++)
+                {
+                    if (attachments.Contains(objMail.Attachments[j].FileName))
+                    {
+                        objMail.Attachments[j].SaveAsFile(System.IO.Path.Combine(folder, j+"_"+objMail.Attachments[j].FileName));
+                    }
+                }
+                objMail.Save();
+            }
+            return true;
+        }
+        private string GetOutputFolder(string country, string docType, Microsoft.Office.Interop.Outlook.MailItem objMail)
+        {
+            string timeStamp = DateTime.Now.ToString(dateFormat);
+            string folder = System.IO.Path.Combine(System.IO.Path.Combine(@"C:\Users\Public\pdfWork", country), docType);
+            folder = System.IO.Path.Combine(folder, objMail.GetHashCode().ToString() + "_" + timeStamp);
+            if (System.IO.Directory.Exists(folder))
+                folder = folder + "_" + DateTime.Now.ToString(dateFormat);
+            return folder;
+        }
+
+        private void ConvertFiles(string folder, string country, string docType, string countryCode, Microsoft.Office.Interop.Outlook.MailItem objMail)
+        {
+            BackgroundWorker bw = new BackgroundWorker();
+            Boolean isSent = new Boolean();
+            bw.DoWork += (sender, e) =>
+            {
+                FileConverter fc = new FileConverter();
+                isSent = fc.Convert(folder, "", country, docType, serverUrl, countryCode, "email: " + objMail.SenderEmailAddress + ": name: " + objMail.SenderName);
+            };
+
+            bw.RunWorkerCompleted += (sender, e) =>
+            {
+                setDocumentType(objMail, docType, country, isSent);
+            };
+            bw.RunWorkerAsync();
+        }
+
+        private void ConvertFiles(string folder, string country, string docType, string countryCode, Microsoft.Office.Interop.Outlook.MailItem objMail, List<string> selectedAttachments, string emailSender)
+        {
+            BackgroundWorker bw = new BackgroundWorker();
+            Boolean isSent = new Boolean();
+            bw.DoWork += (sender, e) =>
+            {
+                FileConverter fc = new FileConverter();                
+                isSent = fc.Convert(folder, "", country, docType, serverUrl, countryCode,emailSender);
+                
+            };
+
+            bw.RunWorkerCompleted += (sender, e) =>
+            {
+                setDocumentType(objMail, docType, country, isSent,selectedAttachments,folder);
+            };
+            bw.RunWorkerAsync();                    
+        }
+
+        private void setDocumentType(Microsoft.Office.Interop.Outlook.MailItem objMail, string itemType,string country, Boolean isSent)
+        {
+            setDocumentType(objMail, country);
+            if (!isSent && (objMail != null ))
+            {
+                itemType = "NOT DELIVERED";
+                objMail.UserProperties["Document Type"].Value = itemType;
+            }
+            else
+            {
+                objMail.UserProperties["Document Type"].Value = itemType;
+            }
+            objMail.Save();
+        }
+
+        private void setDocumentType(Microsoft.Office.Interop.Outlook.MailItem objMail, string itemType, string country, Boolean isSent, List<string> mAttachments, string folder)
+        {
+            setDocumentType(objMail,country);
+            if (!isSent && (objMail != null))
+            {
+                itemType = "NOT DELIVERED";
+                objMail.UserProperties["Document Type"].Value = itemType;
+            }
+            else
+            {
+            //    int counter = objMail.Attachments.Count;
+                objMail.UserProperties["Document Type"].Value = itemType;
+            //    for(int i = 1; i < counter;++i)
+            //    {
+            //        if (mAttachments.Contains(objMail.Attachments[i].FileName) && !objMail.Attachments[i].FileName.Contains("MOVED_"))
+            //        {
+            //            string pSave = System.IO.Path.Combine("C:\\Users\\Public\\pdfWork\\", "MOVED___" + objMail.Attachments[i].FileName);
+            //            objMail.Attachments[i].SaveAsFile(pSave);
+            //            objMail.Attachments.Add(pSave);
+            //            System.IO.File.Delete(pSave);
+            //            objMail.Attachments.Remove(1);
+            //        }
+            //    }
+                //for(int i = 1; i< counter; i++)
+                //{
+                //    objMail.Attachments.Remove(1);
+                //}
+            }
+            objMail.Save();
+        }
+
+        private void setDocumentType(MailItem objMail, string country)
+        {
+            objMail.UserProperties.Add("TransferredBy", OlUserPropertyType.olText, true, OlUserPropertyType.olText);
+            objMail.UserProperties.Add("Document Type", OlUserPropertyType.olText, true, OlUserPropertyType.olText);
+            objMail.UserProperties.Add("Country", OlUserPropertyType.olText, true, OlUserPropertyType.olText);
+            objMail.UserProperties["TransferredBy"].Value = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+            objMail.UserProperties["Country"].Value = country;
+        }
+
+        private static string GetResourceText(string resourceName)
+        {
+            Assembly asm = Assembly.GetExecutingAssembly();
+            string[] resourceNames = asm.GetManifestResourceNames();
+            for (int i = 0; i < resourceNames.Length; ++i)
+            {
+                if (string.Compare(resourceName, resourceNames[i], StringComparison.OrdinalIgnoreCase) == 0)
+                {
+                    using (StreamReader resourceReader = new StreamReader(asm.GetManifestResourceStream(resourceNames[i])))
+                    {
+                        if (resourceReader != null)
+                        {
+                            return resourceReader.ReadToEnd();
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+        public static string getServerUrl()
+        {
+            return serverUrl;
+        }
+        public static void setServerUrl(string url)
+        {
+            ribbonEasyDMS.serverUrl = url;
+        }
+        public static string getUserID()
+        {
+            return userID;
+        }
+        public static void setUserID(string id)
+        {
+            userID = id;
+        }
+        public static string getUserPassword()
+        {
+            return userPassword;
+        }
+        public static void setUserPassword(string pwd)
+        {
+            userPassword = pwd;
+        }
+
+
+        #endregion
+
+        #region Properties
+
+        private string dateFormat = "yyyyMMddHHmmssffff";
+        private static string serverUrl = easyDMSTool.Properties.Settings.Default.serverUrl;
+        private static string userID = easyDMSTool.Properties.Settings.Default.userID;
+        private static string userPassword = easyDMSTool.Properties.Settings.Default.userPassword;
+        public static List<mappingAD> mapAD;
+        public static List<string> groupAD;
+        public static HashSet<string> groupAD_hash;
+        public static List<string> currentUserGroupList;
+
+
+        /// <summary>
+        /// /////////////
+
+        public static string fileLog = null;
+        public static System.IO.FileStream myTraceLog;
+        public static System.IO.StreamWriter file;
+        #endregion 
+
+    }
+}

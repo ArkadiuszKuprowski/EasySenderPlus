@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://toolbox.webpdf.net/" name="ToolboxService" targetNamespace="http://toolbox.webpdf.net/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="http://deis379:8080/webPDF/Toolbox?xsd=1" namespace="http://toolbox.webpdf.net/" />
+    </xsd:schema>
+  </types>
+  <message name="processDocumentURL">
+    <part name="parameters" element="tns:processDocumentURL" />
+  </message>
+  <message name="processDocumentURLResponse">
+    <part name="parameters" element="tns:processDocumentURLResponse" />
+  </message>
+  <message name="ToolboxException">
+    <part name="fault" element="tns:ToolboxException" />
+  </message>
+  <message name="processDocument">
+    <part name="parameters" element="tns:processDocument" />
+  </message>
+  <message name="processDocumentResponse">
+    <part name="parameters" element="tns:processDocumentResponse" />
+  </message>
+  <message name="processDocumentSimple">
+    <part name="parameters" element="tns:processDocumentSimple" />
+  </message>
+  <message name="processDocumentSimpleResponse">
+    <part name="parameters" element="tns:processDocumentSimpleResponse" />
+  </message>
+  <portType name="Toolbox">
+    <operation name="processDocumentURL">
+      <input message="tns:processDocumentURL" />
+      <output message="tns:processDocumentURLResponse" />
+      <fault name="ToolboxException" message="tns:ToolboxException" />
+    </operation>
+    <operation name="processDocument">
+      <input message="tns:processDocument" />
+      <output message="tns:processDocumentResponse" />
+      <fault name="ToolboxException" message="tns:ToolboxException" />
+    </operation>
+    <operation name="processDocumentSimple">
+      <input message="tns:processDocumentSimple" />
+      <output message="tns:processDocumentSimpleResponse" />
+      <fault name="ToolboxException" message="tns:ToolboxException" />
+    </operation>
+  </portType>
+  <binding name="ToolboxPortBinding" type="tns:Toolbox">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="processDocumentURL">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="ToolboxException">
+        <soap:fault use="literal" name="ToolboxException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="processDocument">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="ToolboxException">
+        <soap:fault use="literal" name="ToolboxException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="processDocumentSimple">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="ToolboxException">
+        <soap:fault use="literal" name="ToolboxException" namespace="" />
+      </fault>
+    </operation>
+  </binding>
+  <service name="ToolboxService">
+    <port name="ToolboxPort" binding="tns:ToolboxPortBinding">
+      <soap:address location="http://deis379:8080/webPDF/Toolbox" />
+    </port>
+  </service>
+</definitions>

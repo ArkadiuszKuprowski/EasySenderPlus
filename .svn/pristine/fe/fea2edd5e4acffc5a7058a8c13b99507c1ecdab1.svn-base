@@ -1,0 +1,1906 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WSDL:definitions xmlns:DIME="http://schemas.xmlsoap.org/ws/2002/04/dime/wsdl/" xmlns:SOAP="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://xml.otris.de/ws/DOCUMENTS-4.0.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:DOCUMENTS="http://xml.otris.de/ws/DOCUMENTS.xsd" xmlns:MIME="http://schemas.xmlsoap.org/wsdl/mime/" xmlns="http://schemas.xmlsoap.org/wsdl/" name="DOCUMENTS" targetNamespace="http://xml.otris.de/ws/DOCUMENTS-4.0.wsdl" xmlns:WSDL="http://schemas.xmlsoap.org/wsdl/">
+  <WSDL:types>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://xml.otris.de/ws/DOCUMENTS.xsd">
+      <xsd:import schemaLocation="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <xsd:simpleType name="SessionID">
+        <xsd:restriction base="xsd:string">
+          <xsd:pattern value="[0-9]+" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:complexType name="Fault">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="code" type="xsd:int" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="info" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="DocumentBinary">
+        <xsd:simpleContent>
+          <xsd:extension base="xsd:base64Binary">
+            <xsd:attribute name="href" type="xsd:anyURI" use="optional" />
+          </xsd:extension>
+        </xsd:simpleContent>
+      </xsd:complexType>
+      <xsd:complexType name="StringList">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="string" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="FileStatus">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="fileId" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="idWorkflowStep" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="status" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="FileStatusList">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="fileStatus" type="DOCUMENTS:FileStatus" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="WorkflowStepAction">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="idAction" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="controlType" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="label" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="WorkflowStepActionList">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="workflowStepAction" type="DOCUMENTS:WorkflowStepAction" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="MonitorEntry">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="status" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="executive" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="entryDate" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="responseDate" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="fileOk" type="xsd:boolean" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="task" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="comment" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="MonitorEntryList">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="monitorEntry" type="DOCUMENTS:MonitorEntry" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="WorkflowStep">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="idWorkflowStep" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="status" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="locksFile" type="xsd:boolean" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="hasAgent" type="xsd:boolean" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="wasRedirected" type="xsd:boolean" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="groupFlag" type="xsd:boolean" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="user" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="entryDate" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="finishDate" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="fileOk" type="xsd:boolean" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="task" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="comment" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="redirectionDescription" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="WorkflowStepList">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="workflowStep" type="DOCUMENTS:WorkflowStep" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="User">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="idUser" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="nameUser" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="UserList">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="user" type="DOCUMENTS:User" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="Alias">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="idAlias" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="nameAlias" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="AliasList">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="alias" type="DOCUMENTS:Alias" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="WorkflowPattern">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="idWorkflowPattern" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="nameWorkflowPattern" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="WorkflowPatternList">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="workflowPattern" type="DOCUMENTS:WorkflowPattern" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="FieldData">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="name" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="value" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="FieldDataList">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="field" type="DOCUMENTS:FieldData" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="DocInfo">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="id" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="name" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="size" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="comment" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="DocInfoList">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="document" type="DOCUMENTS:DocInfo" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="HitData">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="column" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="reserved" type="xsd:int" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="HitList">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="rows" type="xsd:int" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="columns" type="xsd:int" />
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="hit" type="DOCUMENTS:HitData" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="DocUploadData">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="name" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="register" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="data" nillable="true" type="xsd:base64Binary" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="DocUploadList">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="document" type="DOCUMENTS:DocUploadData" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="FileTypeShortDescr">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="id" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="name" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="FieldDescription">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="name" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="id" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="fieldlabel" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="initialvalue" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="type" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="enum" nillable="true" type="DOCUMENTS:StringList" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="FieldDescriptionList">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="field" type="DOCUMENTS:FieldDescription" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="RegisterDescription">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="name" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="id" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="RegisterDescriptionList">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="docregister" type="DOCUMENTS:RegisterDescription" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="SourceArchive">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="nameSrc" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="idSrc" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="keySrc" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="SourceArchiveList">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="arcSrc" type="DOCUMENTS:SourceArchive" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="FileTypeArchiveInfo">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="nameDest" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="idDest" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="keyDest" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="arcSrcs" nillable="true" type="DOCUMENTS:SourceArchiveList" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="WorkflowIdent">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="version" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="id" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="FileTypeWorkflowInfo">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="StdForwarding" type="DOCUMENTS:RegisterDescription" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="Workflow" type="DOCUMENTS:WorkflowIdent" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="FileInfo">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="idFile" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="hasError" type="xsd:boolean" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="fieldvalues" type="DOCUMENTS:FieldDataList" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="documents" type="DOCUMENTS:DocInfoList" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="filetypeId" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="filetypeName" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="filetypeLabel" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="FileInfoList">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="file" type="DOCUMENTS:FileInfo" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="FileTypeDescription">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="name" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="id" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="fields" nillable="true" type="DOCUMENTS:FieldDescriptionList" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="docregisters" nillable="true" type="DOCUMENTS:RegisterDescriptionList" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="archiveinfo" nillable="true" type="DOCUMENTS:FileTypeArchiveInfo" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="workflowinfo" nillable="true" type="DOCUMENTS:FileTypeWorkflowInfo" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="FileTypeDescription2">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="name" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="label" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="id" nillable="true" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="fields" nillable="true" type="DOCUMENTS:FieldDescriptionList" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="docregisters" nillable="true" type="DOCUMENTS:RegisterDescriptionList" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="archiveinfo" nillable="true" type="DOCUMENTS:FileTypeArchiveInfo" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="workflowinfo" nillable="true" type="DOCUMENTS:FileTypeWorkflowInfo" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="FolderFile">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="id" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="values" type="DOCUMENTS:StringList" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="FolderFileList">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="file" type="DOCUMENTS:FolderFile" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="FolderDescription">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="id" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="label" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="hasSubFolders" type="xsd:boolean" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="subFolders" nillable="true" type="DOCUMENTS:FolderDescriptionList" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="FolderDescriptionList">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="folder" type="DOCUMENTS:FolderDescription" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="FolderDescription2">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="id" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="name" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="folderType" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="label" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="labelML" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="hasSubFolders" type="xsd:boolean" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="subFolders" nillable="true" type="DOCUMENTS:FolderDescription2List" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="FolderDescription2List">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="folder" type="DOCUMENTS:FolderDescription2" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArchiveStatus">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="fileId" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="messages" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArchiveStatusList">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="status" type="DOCUMENTS:ArchiveStatus" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="DeleteStatus">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="id" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="deleted" type="xsd:boolean" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="messages" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="DeleteStatusList">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="status" type="DOCUMENTS:DeleteStatus" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="WorkflowAction">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="id" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="label" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="WorkflowActionList">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="action" type="DOCUMENTS:WorkflowAction" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="FilingPlan">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="name" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="label" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="description" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="FilingPlanList">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="filingPlans" type="DOCUMENTS:FilingPlan" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="sessionID" type="DOCUMENTS:SessionID" />
+      <xsd:element name="login">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="user" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="principal" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="passwd" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="code" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="locale" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="loginResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="session" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="trustedLogin">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="user" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="principal" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="passwd" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="asUser" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="code" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="locale" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="trustedLoginResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="session" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="logout">
+        <xsd:complexType>
+          <xsd:sequence />
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="logoutResponse">
+        <xsd:complexType>
+          <xsd:sequence />
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="testSession">
+        <xsd:complexType>
+          <xsd:sequence />
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="testSessionResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="valid" type="xsd:boolean" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getInbox">
+        <xsd:complexType>
+          <xsd:sequence />
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getInboxResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="idFolder" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="fileStatuses" type="DOCUMENTS:FileStatusList" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getSentFolder">
+        <xsd:complexType>
+          <xsd:sequence />
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getSentFolderResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="idFolder" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="fileStatuses" type="DOCUMENTS:FileStatusList" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getTasks">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="fileId" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getTasksResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="tasks" type="DOCUMENTS:StringList" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getMonitor">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="fileId" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getMonitorResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="monitorEntries" type="DOCUMENTS:MonitorEntryList" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getWorkflowSteps">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="fileId" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getWorkflowStepsResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="workflowSteps" type="DOCUMENTS:WorkflowStepList" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getWorkflowPattern">
+        <xsd:complexType>
+          <xsd:sequence />
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getWorkflowPatternResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="workflowPattern" type="DOCUMENTS:WorkflowPatternList" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="startWorkflow">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="fileId" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="idWorkflowPattern" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="startWorkflowResponse">
+        <xsd:complexType>
+          <xsd:sequence />
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="cancelWorkflow">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="fileId" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="cancelWorkflowResponse">
+        <xsd:complexType>
+          <xsd:sequence />
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getAutoText">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="fileId" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="autoTextNames" type="DOCUMENTS:StringList" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getAutoTextResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="autoTextValues" type="DOCUMENTS:StringList" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getProperty">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="fileId" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="propertyNames" type="DOCUMENTS:StringList" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getPropertyResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="propertyValues" type="DOCUMENTS:StringList" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getFileInfo">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="fileId" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="allFields" type="xsd:boolean" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="allAttributes" type="xsd:boolean" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="wishedFieldNames" type="DOCUMENTS:StringList" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getFileInfoResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="fieldvalues" type="DOCUMENTS:FieldDataList" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="documents" type="DOCUMENTS:DocInfoList" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="filetypeId" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="filetypeName" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="filetypeLabel" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getFilesInfo">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="fileIds" type="DOCUMENTS:StringList" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="allFields" type="xsd:boolean" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="allAttributes" type="xsd:boolean" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="wishedFieldNames" type="DOCUMENTS:StringList" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="failOnAllErrors" type="xsd:boolean" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getFilesInfoResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="unbounded" name="file" type="DOCUMENTS:FileInfo" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="report">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="filetypes" type="DOCUMENTS:StringList" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="archives" type="DOCUMENTS:StringList" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="columns" type="DOCUMENTS:StringList" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="filter" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="sort" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="reportResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="report" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="report2">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="filetypes" type="DOCUMENTS:StringList" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="archives" type="DOCUMENTS:StringList" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="columns" type="DOCUMENTS:StringList" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="filter" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="sort" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="report2Respose">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="hitlist" type="DOCUMENTS:HitList" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="report3">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="filetypes" type="DOCUMENTS:StringList" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="archives" type="DOCUMENTS:StringList" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="columns" type="DOCUMENTS:StringList" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="filter" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="sort" type="xsd:string" />
+            <xsd:element minOccurs="0" maxOccurs="1" name="hitlistname" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="report3Respose">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="hitlist" type="DOCUMENTS:HitList" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getDocument">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="fileId" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="docId" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getDocumentResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="name" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="size" type="xsd:int" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="mime" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="data" nillable="true" type="xsd:base64Binary" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="editFile">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="1" name="fileId" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="0" maxOccurs="1" name="fileType" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="0" maxOccurs="1" name="keyField" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="0" maxOccurs="1" name="keyValue" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="fields" type="DOCUMENTS:FieldDataList" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="addDocs" type="DOCUMENTS:DocUploadList" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="editFileResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="newId" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="createFile">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="fileType" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="fields" type="DOCUMENTS:FieldDataList" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="addDocs" type="DOCUMENTS:DocUploadList" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="createFileResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="fileId" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="createFile2">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="fileType" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="directEAS" type="xsd:boolean" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="fields" type="DOCUMENTS:FieldDataList" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="addDocs" type="DOCUMENTS:DocUploadList" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="createFile2Response">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="fileId" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getFileTypes">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="ignoreRight" type="xsd:boolean" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getFileTypesResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="unbounded" name="filetype" type="DOCUMENTS:FileTypeShortDescr" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="describeFileType">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="1" name="name" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="0" maxOccurs="1" name="id" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="categories" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="describeFileTypeResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="description" type="DOCUMENTS:FileTypeDescription" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="describeFileType2">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="1" name="name" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="0" maxOccurs="1" name="id" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="categories" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="describeFileType2Response">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="description" type="DOCUMENTS:FileTypeDescription2" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="browseFolder">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="1" name="folderName" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="0" maxOccurs="1" name="folderId" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="0" maxOccurs="1" name="folderType" nillable="true" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="startindex" type="xsd:int" />
+            <xsd:element minOccurs="0" maxOccurs="1" name="count" nillable="true" type="xsd:int" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="preview" type="xsd:boolean" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="browseFolderResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="headline" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="fieldNames" type="DOCUMENTS:StringList" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="files" type="DOCUMENTS:FolderFileList" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="previousIndex" type="xsd:int" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="nextIndex" type="xsd:int" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getFolderStructure">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="folderType" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getFolderStructureResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="baseFolder" type="DOCUMENTS:FolderDescription" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="runScript">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="fileId" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="name" type="xsd:string" />
+            <xsd:element minOccurs="0" maxOccurs="1" name="paramList" nillable="true" type="DOCUMENTS:StringList" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="runScriptResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="returnStatus" type="xsd:int" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="errorMsg" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="returnValue" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="userInfo">
+        <xsd:complexType>
+          <xsd:sequence />
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="userInfoResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="name" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="archiveFiles">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="fileIds" type="DOCUMENTS:StringList" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="deleteOnSuccess" type="xsd:boolean" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="archiveFilesResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="statusList" type="DOCUMENTS:ArchiveStatusList" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="deleteFiles">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="fileIds" type="DOCUMENTS:StringList" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="deleteFilesResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="statusList" type="DOCUMENTS:DeleteStatusList" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="deleteDocuments">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="fileId" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="docIds" type="DOCUMENTS:StringList" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="deleteDocumentsResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="statusList" type="DOCUMENTS:DeleteStatusList" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="listPossibleActions">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="fileId" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="listPossibleActionsResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="actions" type="DOCUMENTS:WorkflowActionList" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="triggerAction">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="fileId" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="actionId" type="xsd:string" />
+            <xsd:element minOccurs="0" maxOccurs="1" name="comment" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="triggerActionResponse">
+        <xsd:complexType>
+          <xsd:sequence />
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="followUp">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="fileId" type="xsd:string" />
+            <xsd:element minOccurs="0" maxOccurs="1" name="timeAbsolute" nillable="true" type="xsd:dateTime" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="isUTC" type="xsd:boolean" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="comment" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="followUpResponse">
+        <xsd:complexType>
+          <xsd:sequence />
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="sendFileAdHoc">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="fileId" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="receivers" type="DOCUMENTS:StringList" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="sendMode" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="task" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="backWhenFinished" type="xsd:boolean" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="sendFileAdHocResponse">
+        <xsd:complexType>
+          <xsd:sequence />
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getFileId">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="key" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getFileIdResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="fileId" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="listPublicFolders">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="typeOption" type="xsd:int" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="sortOption" type="xsd:int" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="listPublicFoldersResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="folders" type="DOCUMENTS:FolderDescription2List" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getFilingPlans">
+        <xsd:complexType>
+          <xsd:sequence />
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getFilingPlansResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="filingPlans" type="DOCUMENTS:FilingPlanList" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getFilingPlanXML">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="name" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getFilingPlanXMLResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="filingPlanXml" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </WSDL:types>
+  <WSDL:message name="login">
+    <WSDL:part name="parameters" element="DOCUMENTS:login" />
+  </WSDL:message>
+  <WSDL:message name="loginResponse">
+    <WSDL:part name="parameters" element="DOCUMENTS:loginResponse" />
+  </WSDL:message>
+  <WSDL:message name="trustedLogin">
+    <WSDL:part name="parameters" element="DOCUMENTS:trustedLogin" />
+  </WSDL:message>
+  <WSDL:message name="trustedLoginResponse">
+    <WSDL:part name="parameters" element="DOCUMENTS:trustedLoginResponse" />
+  </WSDL:message>
+  <WSDL:message name="logout">
+    <WSDL:part name="parameters" element="DOCUMENTS:logout" />
+  </WSDL:message>
+  <WSDL:message name="logoutResponse">
+    <WSDL:part name="parameters" element="DOCUMENTS:logoutResponse" />
+  </WSDL:message>
+  <WSDL:message name="testSession">
+    <WSDL:part name="parameters" element="DOCUMENTS:testSession" />
+  </WSDL:message>
+  <WSDL:message name="testSessionResponse">
+    <WSDL:part name="parameters" element="DOCUMENTS:testSessionResponse" />
+  </WSDL:message>
+  <WSDL:message name="getInbox">
+    <WSDL:part name="parameters" element="DOCUMENTS:getInbox" />
+  </WSDL:message>
+  <WSDL:message name="getInboxResponse">
+    <WSDL:part name="parameters" element="DOCUMENTS:getInboxResponse" />
+  </WSDL:message>
+  <WSDL:message name="getSentFolder">
+    <WSDL:part name="parameters" element="DOCUMENTS:getSentFolder" />
+  </WSDL:message>
+  <WSDL:message name="getSentFolderResponse">
+    <WSDL:part name="parameters" element="DOCUMENTS:getSentFolderResponse" />
+  </WSDL:message>
+  <WSDL:message name="getTasks">
+    <WSDL:part name="parameters" element="DOCUMENTS:getTasks" />
+  </WSDL:message>
+  <WSDL:message name="getTasksResponse">
+    <WSDL:part name="parameters" element="DOCUMENTS:getTasksResponse" />
+  </WSDL:message>
+  <WSDL:message name="getMonitor">
+    <WSDL:part name="parameters" element="DOCUMENTS:getMonitor" />
+  </WSDL:message>
+  <WSDL:message name="getMonitorResponse">
+    <WSDL:part name="parameters" element="DOCUMENTS:getMonitorResponse" />
+  </WSDL:message>
+  <WSDL:message name="getWorkflowSteps">
+    <WSDL:part name="parameters" element="DOCUMENTS:getWorkflowSteps" />
+  </WSDL:message>
+  <WSDL:message name="getWorkflowStepsResponse">
+    <WSDL:part name="parameters" element="DOCUMENTS:getWorkflowStepsResponse" />
+  </WSDL:message>
+  <WSDL:message name="getWorkflowPattern">
+    <WSDL:part name="parameters" element="DOCUMENTS:getWorkflowPattern" />
+  </WSDL:message>
+  <WSDL:message name="getWorkflowPatternResponse">
+    <WSDL:part name="parameters" element="DOCUMENTS:getWorkflowPatternResponse" />
+  </WSDL:message>
+  <WSDL:message name="startWorkflow">
+    <WSDL:part name="parameters" element="DOCUMENTS:startWorkflow" />
+  </WSDL:message>
+  <WSDL:message name="startWorkflowResponse">
+    <WSDL:part name="parameters" element="DOCUMENTS:startWorkflowResponse" />
+  </WSDL:message>
+  <WSDL:message name="cancelWorkflow">
+    <WSDL:part name="parameters" element="DOCUMENTS:cancelWorkflow" />
+  </WSDL:message>
+  <WSDL:message name="cancelWorkflowResponse">
+    <WSDL:part name="parameters" element="DOCUMENTS:cancelWorkflowResponse" />
+  </WSDL:message>
+  <WSDL:message name="getAutoText">
+    <WSDL:part name="parameters" element="DOCUMENTS:getAutoText" />
+  </WSDL:message>
+  <WSDL:message name="getAutoTextResponse">
+    <WSDL:part name="parameters" element="DOCUMENTS:getAutoTextResponse" />
+  </WSDL:message>
+  <WSDL:message name="getProperty">
+    <WSDL:part name="parameters" element="DOCUMENTS:getProperty" />
+  </WSDL:message>
+  <WSDL:message name="getPropertyResponse">
+    <WSDL:part name="parameters" element="DOCUMENTS:getPropertyResponse" />
+  </WSDL:message>
+  <WSDL:message name="getFileInfo">
+    <WSDL:part name="parameters" element="DOCUMENTS:getFileInfo" />
+  </WSDL:message>
+  <WSDL:message name="getFileInfoResponse">
+    <WSDL:part name="parameters" element="DOCUMENTS:getFileInfoResponse" />
+  </WSDL:message>
+  <WSDL:message name="getFilesInfo">
+    <WSDL:part name="parameters" element="DOCUMENTS:getFilesInfo" />
+  </WSDL:message>
+  <WSDL:message name="getFilesInfoResponse">
+    <WSDL:part name="parameters" element="DOCUMENTS:getFilesInfoResponse" />
+  </WSDL:message>
+  <WSDL:message name="report">
+    <WSDL:part name="parameters" element="DOCUMENTS:report" />
+  </WSDL:message>
+  <WSDL:message name="reportResponse">
+    <WSDL:part name="parameters" element="DOCUMENTS:reportResponse" />
+  </WSDL:message>
+  <WSDL:message name="report2">
+    <WSDL:part name="parameters" element="DOCUMENTS:report2" />
+  </WSDL:message>
+  <WSDL:message name="report2Respose">
+    <WSDL:part name="parameters" element="DOCUMENTS:report2Respose" />
+  </WSDL:message>
+  <WSDL:message name="report3">
+    <WSDL:part name="parameters" element="DOCUMENTS:report3" />
+  </WSDL:message>
+  <WSDL:message name="report3Respose">
+    <WSDL:part name="parameters" element="DOCUMENTS:report3Respose" />
+  </WSDL:message>
+  <WSDL:message name="getDocument">
+    <WSDL:part name="parameters" element="DOCUMENTS:getDocument" />
+  </WSDL:message>
+  <WSDL:message name="getDocumentResponse">
+    <WSDL:part name="parameters" element="DOCUMENTS:getDocumentResponse" />
+  </WSDL:message>
+  <WSDL:message name="editFile">
+    <WSDL:part name="parameters" element="DOCUMENTS:editFile" />
+  </WSDL:message>
+  <WSDL:message name="editFileResponse">
+    <WSDL:part name="parameters" element="DOCUMENTS:editFileResponse" />
+  </WSDL:message>
+  <WSDL:message name="createFile">
+    <WSDL:part name="parameters" element="DOCUMENTS:createFile" />
+  </WSDL:message>
+  <WSDL:message name="createFileResponse">
+    <WSDL:part name="parameters" element="DOCUMENTS:createFileResponse" />
+  </WSDL:message>
+  <WSDL:message name="createFile2">
+    <WSDL:part name="parameters" element="DOCUMENTS:createFile2" />
+  </WSDL:message>
+  <WSDL:message name="createFile2Response">
+    <WSDL:part name="parameters" element="DOCUMENTS:createFile2Response" />
+  </WSDL:message>
+  <WSDL:message name="getFileTypes">
+    <WSDL:part name="parameters" element="DOCUMENTS:getFileTypes" />
+  </WSDL:message>
+  <WSDL:message name="getFileTypesResponse">
+    <WSDL:part name="parameters" element="DOCUMENTS:getFileTypesResponse" />
+  </WSDL:message>
+  <WSDL:message name="describeFileType">
+    <WSDL:part name="parameters" element="DOCUMENTS:describeFileType" />
+  </WSDL:message>
+  <WSDL:message name="describeFileTypeResponse">
+    <WSDL:part name="parameters" element="DOCUMENTS:describeFileTypeResponse" />
+  </WSDL:message>
+  <WSDL:message name="describeFileType2">
+    <WSDL:part name="parameters" element="DOCUMENTS:describeFileType2" />
+  </WSDL:message>
+  <WSDL:message name="describeFileType2Response">
+    <WSDL:part name="parameters" element="DOCUMENTS:describeFileType2Response" />
+  </WSDL:message>
+  <WSDL:message name="browseFolder">
+    <WSDL:part name="parameters" element="DOCUMENTS:browseFolder" />
+  </WSDL:message>
+  <WSDL:message name="browseFolderResponse">
+    <WSDL:part name="parameters" element="DOCUMENTS:browseFolderResponse" />
+  </WSDL:message>
+  <WSDL:message name="getFolderStructure">
+    <WSDL:part name="parameters" element="DOCUMENTS:getFolderStructure" />
+  </WSDL:message>
+  <WSDL:message name="getFolderStructureResponse">
+    <WSDL:part name="parameters" element="DOCUMENTS:getFolderStructureResponse" />
+  </WSDL:message>
+  <WSDL:message name="runScript">
+    <WSDL:part name="parameters" element="DOCUMENTS:runScript" />
+  </WSDL:message>
+  <WSDL:message name="runScriptResponse">
+    <WSDL:part name="parameters" element="DOCUMENTS:runScriptResponse" />
+  </WSDL:message>
+  <WSDL:message name="userInfo">
+    <WSDL:part name="parameters" element="DOCUMENTS:userInfo" />
+  </WSDL:message>
+  <WSDL:message name="userInfoResponse">
+    <WSDL:part name="parameters" element="DOCUMENTS:userInfoResponse" />
+  </WSDL:message>
+  <WSDL:message name="archiveFiles">
+    <WSDL:part name="parameters" element="DOCUMENTS:archiveFiles" />
+  </WSDL:message>
+  <WSDL:message name="archiveFilesResponse">
+    <WSDL:part name="parameters" element="DOCUMENTS:archiveFilesResponse" />
+  </WSDL:message>
+  <WSDL:message name="deleteFiles">
+    <WSDL:part name="parameters" element="DOCUMENTS:deleteFiles" />
+  </WSDL:message>
+  <WSDL:message name="deleteFilesResponse">
+    <WSDL:part name="parameters" element="DOCUMENTS:deleteFilesResponse" />
+  </WSDL:message>
+  <WSDL:message name="deleteDocuments">
+    <WSDL:part name="parameters" element="DOCUMENTS:deleteDocuments" />
+  </WSDL:message>
+  <WSDL:message name="deleteDocumentsResponse">
+    <WSDL:part name="parameters" element="DOCUMENTS:deleteDocumentsResponse" />
+  </WSDL:message>
+  <WSDL:message name="listPossibleActions">
+    <WSDL:part name="parameters" element="DOCUMENTS:listPossibleActions" />
+  </WSDL:message>
+  <WSDL:message name="listPossibleActionsResponse">
+    <WSDL:part name="parameters" element="DOCUMENTS:listPossibleActionsResponse" />
+  </WSDL:message>
+  <WSDL:message name="triggerAction">
+    <WSDL:part name="parameters" element="DOCUMENTS:triggerAction" />
+  </WSDL:message>
+  <WSDL:message name="triggerActionResponse">
+    <WSDL:part name="parameters" element="DOCUMENTS:triggerActionResponse" />
+  </WSDL:message>
+  <WSDL:message name="followUp">
+    <WSDL:part name="parameters" element="DOCUMENTS:followUp" />
+  </WSDL:message>
+  <WSDL:message name="followUpResponse">
+    <WSDL:part name="parameters" element="DOCUMENTS:followUpResponse" />
+  </WSDL:message>
+  <WSDL:message name="sendFileAdHoc">
+    <WSDL:part name="parameters" element="DOCUMENTS:sendFileAdHoc" />
+  </WSDL:message>
+  <WSDL:message name="sendFileAdHocResponse">
+    <WSDL:part name="parameters" element="DOCUMENTS:sendFileAdHocResponse" />
+  </WSDL:message>
+  <WSDL:message name="getFileId">
+    <WSDL:part name="parameters" element="DOCUMENTS:getFileId" />
+  </WSDL:message>
+  <WSDL:message name="getFileIdResponse">
+    <WSDL:part name="parameters" element="DOCUMENTS:getFileIdResponse" />
+  </WSDL:message>
+  <WSDL:message name="listPublicFolders">
+    <WSDL:part name="parameters" element="DOCUMENTS:listPublicFolders" />
+  </WSDL:message>
+  <WSDL:message name="listPublicFoldersResponse">
+    <WSDL:part name="parameters" element="DOCUMENTS:listPublicFoldersResponse" />
+  </WSDL:message>
+  <WSDL:message name="getFilingPlans">
+    <WSDL:part name="parameters" element="DOCUMENTS:getFilingPlans" />
+  </WSDL:message>
+  <WSDL:message name="getFilingPlansResponse">
+    <WSDL:part name="parameters" element="DOCUMENTS:getFilingPlansResponse" />
+  </WSDL:message>
+  <WSDL:message name="getFilingPlanXML">
+    <WSDL:part name="parameters" element="DOCUMENTS:getFilingPlanXML" />
+  </WSDL:message>
+  <WSDL:message name="getFilingPlanXMLResponse">
+    <WSDL:part name="parameters" element="DOCUMENTS:getFilingPlanXMLResponse" />
+  </WSDL:message>
+  <WSDL:message name="DOCUMENTSHeader">
+    <WSDL:part name="sessionID" element="DOCUMENTS:sessionID" />
+  </WSDL:message>
+  <WSDL:portType name="DOCUMENTSPortType">
+    <WSDL:operation name="login">
+      <documentation>Service definition of function DOCUMENTS__login</documentation>
+      <WSDL:input message="tns:login" />
+      <WSDL:output message="tns:loginResponse" />
+    </WSDL:operation>
+    <WSDL:operation name="trustedLogin">
+      <documentation>Service definition of function DOCUMENTS__trustedLogin</documentation>
+      <WSDL:input message="tns:trustedLogin" />
+      <WSDL:output message="tns:trustedLoginResponse" />
+    </WSDL:operation>
+    <WSDL:operation name="logout">
+      <documentation>Service definition of function DOCUMENTS__logout</documentation>
+      <WSDL:input message="tns:logout" />
+      <WSDL:output message="tns:logoutResponse" />
+    </WSDL:operation>
+    <WSDL:operation name="testSession">
+      <documentation>Service definition of function DOCUMENTS__testSession</documentation>
+      <WSDL:input message="tns:testSession" />
+      <WSDL:output message="tns:testSessionResponse" />
+    </WSDL:operation>
+    <WSDL:operation name="getInbox">
+      <documentation>Service definition of function DOCUMENTS__getInbox</documentation>
+      <WSDL:input message="tns:getInbox" />
+      <WSDL:output message="tns:getInboxResponse" />
+    </WSDL:operation>
+    <WSDL:operation name="getSentFolder">
+      <documentation>Service definition of function DOCUMENTS__getSentFolder</documentation>
+      <WSDL:input message="tns:getSentFolder" />
+      <WSDL:output message="tns:getSentFolderResponse" />
+    </WSDL:operation>
+    <WSDL:operation name="getTasks">
+      <documentation>Service definition of function DOCUMENTS__getTasks</documentation>
+      <WSDL:input message="tns:getTasks" />
+      <WSDL:output message="tns:getTasksResponse" />
+    </WSDL:operation>
+    <WSDL:operation name="getMonitor">
+      <documentation>Service definition of function DOCUMENTS__getMonitor</documentation>
+      <WSDL:input message="tns:getMonitor" />
+      <WSDL:output message="tns:getMonitorResponse" />
+    </WSDL:operation>
+    <WSDL:operation name="getWorkflowSteps">
+      <documentation>Service definition of function DOCUMENTS__getWorkflowSteps</documentation>
+      <WSDL:input message="tns:getWorkflowSteps" />
+      <WSDL:output message="tns:getWorkflowStepsResponse" />
+    </WSDL:operation>
+    <WSDL:operation name="getWorkflowPattern">
+      <documentation>Service definition of function DOCUMENTS__getWorkflowPattern</documentation>
+      <WSDL:input message="tns:getWorkflowPattern" />
+      <WSDL:output message="tns:getWorkflowPatternResponse" />
+    </WSDL:operation>
+    <WSDL:operation name="startWorkflow">
+      <documentation>Service definition of function DOCUMENTS__startWorkflow</documentation>
+      <WSDL:input message="tns:startWorkflow" />
+      <WSDL:output message="tns:startWorkflowResponse" />
+    </WSDL:operation>
+    <WSDL:operation name="cancelWorkflow">
+      <documentation>Service definition of function DOCUMENTS__cancelWorkflow</documentation>
+      <WSDL:input message="tns:cancelWorkflow" />
+      <WSDL:output message="tns:cancelWorkflowResponse" />
+    </WSDL:operation>
+    <WSDL:operation name="getAutoText">
+      <documentation>Service definition of function DOCUMENTS__getAutoText</documentation>
+      <WSDL:input message="tns:getAutoText" />
+      <WSDL:output message="tns:getAutoTextResponse" />
+    </WSDL:operation>
+    <WSDL:operation name="getProperty">
+      <documentation>Service definition of function DOCUMENTS__getProperty</documentation>
+      <WSDL:input message="tns:getProperty" />
+      <WSDL:output message="tns:getPropertyResponse" />
+    </WSDL:operation>
+    <WSDL:operation name="getFileInfo">
+      <documentation>Service definition of function DOCUMENTS__getFileInfo</documentation>
+      <WSDL:input message="tns:getFileInfo" />
+      <WSDL:output message="tns:getFileInfoResponse" />
+    </WSDL:operation>
+    <WSDL:operation name="getFilesInfo">
+      <documentation>Service definition of function DOCUMENTS__getFilesInfo</documentation>
+      <WSDL:input message="tns:getFilesInfo" />
+      <WSDL:output message="tns:getFilesInfoResponse" />
+    </WSDL:operation>
+    <WSDL:operation name="report">
+      <documentation>Service definition of function DOCUMENTS__report</documentation>
+      <WSDL:input message="tns:report" />
+      <WSDL:output message="tns:reportResponse" />
+    </WSDL:operation>
+    <WSDL:operation name="report2">
+      <documentation>Service definition of function DOCUMENTS__report2</documentation>
+      <WSDL:input message="tns:report2" />
+      <WSDL:output message="tns:report2Respose" />
+    </WSDL:operation>
+    <WSDL:operation name="report3">
+      <documentation>Service definition of function DOCUMENTS__report3</documentation>
+      <WSDL:input message="tns:report3" />
+      <WSDL:output message="tns:report3Respose" />
+    </WSDL:operation>
+    <WSDL:operation name="getDocument">
+      <documentation>Service definition of function DOCUMENTS__getDocument</documentation>
+      <WSDL:input message="tns:getDocument" />
+      <WSDL:output message="tns:getDocumentResponse" />
+    </WSDL:operation>
+    <WSDL:operation name="editFile">
+      <documentation>Service definition of function DOCUMENTS__editFile</documentation>
+      <WSDL:input message="tns:editFile" />
+      <WSDL:output message="tns:editFileResponse" />
+    </WSDL:operation>
+    <WSDL:operation name="createFile">
+      <documentation>Service definition of function DOCUMENTS__createFile</documentation>
+      <WSDL:input message="tns:createFile" />
+      <WSDL:output message="tns:createFileResponse" />
+    </WSDL:operation>
+    <WSDL:operation name="createFile2">
+      <documentation>Service definition of function DOCUMENTS__createFile2</documentation>
+      <WSDL:input message="tns:createFile2" />
+      <WSDL:output message="tns:createFile2Response" />
+    </WSDL:operation>
+    <WSDL:operation name="getFileTypes">
+      <documentation>Service definition of function DOCUMENTS__getFileTypes</documentation>
+      <WSDL:input message="tns:getFileTypes" />
+      <WSDL:output message="tns:getFileTypesResponse" />
+    </WSDL:operation>
+    <WSDL:operation name="describeFileType">
+      <documentation>Service definition of function DOCUMENTS__describeFileType</documentation>
+      <WSDL:input message="tns:describeFileType" />
+      <WSDL:output message="tns:describeFileTypeResponse" />
+    </WSDL:operation>
+    <WSDL:operation name="describeFileType2">
+      <documentation>Service definition of function DOCUMENTS__describeFileType2</documentation>
+      <WSDL:input message="tns:describeFileType2" />
+      <WSDL:output message="tns:describeFileType2Response" />
+    </WSDL:operation>
+    <WSDL:operation name="browseFolder">
+      <documentation>Service definition of function DOCUMENTS__browseFolder</documentation>
+      <WSDL:input message="tns:browseFolder" />
+      <WSDL:output message="tns:browseFolderResponse" />
+    </WSDL:operation>
+    <WSDL:operation name="getFolderStructure">
+      <documentation>Service definition of function DOCUMENTS__getFolderStructure</documentation>
+      <WSDL:input message="tns:getFolderStructure" />
+      <WSDL:output message="tns:getFolderStructureResponse" />
+    </WSDL:operation>
+    <WSDL:operation name="runScript">
+      <documentation>Service definition of function DOCUMENTS__runScript</documentation>
+      <WSDL:input message="tns:runScript" />
+      <WSDL:output message="tns:runScriptResponse" />
+    </WSDL:operation>
+    <WSDL:operation name="userInfo">
+      <documentation>Service definition of function DOCUMENTS__userInfo</documentation>
+      <WSDL:input message="tns:userInfo" />
+      <WSDL:output message="tns:userInfoResponse" />
+    </WSDL:operation>
+    <WSDL:operation name="archiveFiles">
+      <documentation>Service definition of function DOCUMENTS__archiveFiles</documentation>
+      <WSDL:input message="tns:archiveFiles" />
+      <WSDL:output message="tns:archiveFilesResponse" />
+    </WSDL:operation>
+    <WSDL:operation name="deleteFiles">
+      <documentation>Service definition of function DOCUMENTS__deleteFiles</documentation>
+      <WSDL:input message="tns:deleteFiles" />
+      <WSDL:output message="tns:deleteFilesResponse" />
+    </WSDL:operation>
+    <WSDL:operation name="deleteDocuments">
+      <documentation>Service definition of function DOCUMENTS__deleteDocuments</documentation>
+      <WSDL:input message="tns:deleteDocuments" />
+      <WSDL:output message="tns:deleteDocumentsResponse" />
+    </WSDL:operation>
+    <WSDL:operation name="listPossibleActions">
+      <documentation>Service definition of function DOCUMENTS__listPossibleActions</documentation>
+      <WSDL:input message="tns:listPossibleActions" />
+      <WSDL:output message="tns:listPossibleActionsResponse" />
+    </WSDL:operation>
+    <WSDL:operation name="triggerAction">
+      <documentation>Service definition of function DOCUMENTS__triggerAction</documentation>
+      <WSDL:input message="tns:triggerAction" />
+      <WSDL:output message="tns:triggerActionResponse" />
+    </WSDL:operation>
+    <WSDL:operation name="followUp">
+      <documentation>Service definition of function DOCUMENTS__followUp</documentation>
+      <WSDL:input message="tns:followUp" />
+      <WSDL:output message="tns:followUpResponse" />
+    </WSDL:operation>
+    <WSDL:operation name="sendFileAdHoc">
+      <documentation>Service definition of function DOCUMENTS__sendFileAdHoc</documentation>
+      <WSDL:input message="tns:sendFileAdHoc" />
+      <WSDL:output message="tns:sendFileAdHocResponse" />
+    </WSDL:operation>
+    <WSDL:operation name="getFileId">
+      <documentation>Service definition of function DOCUMENTS__getFileId</documentation>
+      <WSDL:input message="tns:getFileId" />
+      <WSDL:output message="tns:getFileIdResponse" />
+    </WSDL:operation>
+    <WSDL:operation name="listPublicFolders">
+      <documentation>Service definition of function DOCUMENTS__listPublicFolders</documentation>
+      <WSDL:input message="tns:listPublicFolders" />
+      <WSDL:output message="tns:listPublicFoldersResponse" />
+    </WSDL:operation>
+    <WSDL:operation name="getFilingPlans">
+      <documentation>Service definition of function DOCUMENTS__getFilingPlans</documentation>
+      <WSDL:input message="tns:getFilingPlans" />
+      <WSDL:output message="tns:getFilingPlansResponse" />
+    </WSDL:operation>
+    <WSDL:operation name="getFilingPlanXML">
+      <documentation>Service definition of function DOCUMENTS__getFilingPlanXML</documentation>
+      <WSDL:input message="tns:getFilingPlanXML" />
+      <WSDL:output message="tns:getFilingPlanXMLResponse" />
+    </WSDL:operation>
+  </WSDL:portType>
+  <WSDL:binding name="DOCUMENTS" type="tns:DOCUMENTSPortType">
+    <SOAP:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <WSDL:operation name="login">
+      <SOAP:operation soapAction="http://xml.otris.de/ws/DOCUMENTS.wsdl#login" />
+      <WSDL:input>
+        <SOAP:body use="literal" parts="parameters" />
+      </WSDL:input>
+      <WSDL:output>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:output>
+    </WSDL:operation>
+    <WSDL:operation name="trustedLogin">
+      <SOAP:operation soapAction="http://xml.otris.de/ws/DOCUMENTS.wsdl#trustedLogin" />
+      <WSDL:input>
+        <SOAP:body use="literal" parts="parameters" />
+      </WSDL:input>
+      <WSDL:output>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:output>
+    </WSDL:operation>
+    <WSDL:operation name="logout">
+      <SOAP:operation soapAction="http://xml.otris.de/ws/DOCUMENTS.wsdl#logout" />
+      <WSDL:input>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:input>
+      <WSDL:output>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:output>
+    </WSDL:operation>
+    <WSDL:operation name="testSession">
+      <SOAP:operation soapAction="http://xml.otris.de/ws/DOCUMENTS.wsdl#testSession" />
+      <WSDL:input>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:input>
+      <WSDL:output>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:output>
+    </WSDL:operation>
+    <WSDL:operation name="getInbox">
+      <SOAP:operation soapAction="http://xml.otris.de/ws/DOCUMENTS.wsdl#getInbox" />
+      <WSDL:input>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:input>
+      <WSDL:output>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:output>
+    </WSDL:operation>
+    <WSDL:operation name="getSentFolder">
+      <SOAP:operation soapAction="http://xml.otris.de/ws/DOCUMENTS.wsdl#getSentFolder" />
+      <WSDL:input>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:input>
+      <WSDL:output>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:output>
+    </WSDL:operation>
+    <WSDL:operation name="getTasks">
+      <SOAP:operation soapAction="http://xml.otris.de/ws/DOCUMENTS.wsdl#getTasks" />
+      <WSDL:input>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:input>
+      <WSDL:output>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:output>
+    </WSDL:operation>
+    <WSDL:operation name="getMonitor">
+      <SOAP:operation soapAction="http://xml.otris.de/ws/DOCUMENTS.wsdl#getMonitor" />
+      <WSDL:input>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:input>
+      <WSDL:output>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:output>
+    </WSDL:operation>
+    <WSDL:operation name="getWorkflowSteps">
+      <SOAP:operation soapAction="http://xml.otris.de/ws/DOCUMENTS.wsdl#getWorkflowSteps" />
+      <WSDL:input>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:input>
+      <WSDL:output>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:output>
+    </WSDL:operation>
+    <WSDL:operation name="getWorkflowPattern">
+      <SOAP:operation soapAction="http://xml.otris.de/ws/DOCUMENTS.wsdl#getWorkflowPattern" />
+      <WSDL:input>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:input>
+      <WSDL:output>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:output>
+    </WSDL:operation>
+    <WSDL:operation name="startWorkflow">
+      <SOAP:operation soapAction="http://xml.otris.de/ws/DOCUMENTS.wsdl#startWorkflow" />
+      <WSDL:input>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:input>
+      <WSDL:output>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:output>
+    </WSDL:operation>
+    <WSDL:operation name="cancelWorkflow">
+      <SOAP:operation soapAction="http://xml.otris.de/ws/DOCUMENTS.wsdl#cancelWorkflow" />
+      <WSDL:input>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:input>
+      <WSDL:output>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:output>
+    </WSDL:operation>
+    <WSDL:operation name="getAutoText">
+      <SOAP:operation soapAction="http://xml.otris.de/ws/DOCUMENTS.wsdl#getAutoText" />
+      <WSDL:input>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:input>
+      <WSDL:output>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:output>
+    </WSDL:operation>
+    <WSDL:operation name="getProperty">
+      <SOAP:operation soapAction="http://xml.otris.de/ws/DOCUMENTS.wsdl#getProperty" />
+      <WSDL:input>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:input>
+      <WSDL:output>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:output>
+    </WSDL:operation>
+    <WSDL:operation name="getFileInfo">
+      <SOAP:operation soapAction="http://xml.otris.de/ws/DOCUMENTS.wsdl#getFileInfo" />
+      <WSDL:input>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:input>
+      <WSDL:output>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:output>
+    </WSDL:operation>
+    <WSDL:operation name="getFilesInfo">
+      <SOAP:operation soapAction="http://xml.otris.de/ws/DOCUMENTS.wsdl#getFileInfo" />
+      <WSDL:input>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:input>
+      <WSDL:output>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:output>
+    </WSDL:operation>
+    <WSDL:operation name="report">
+      <SOAP:operation soapAction="http://xml.otris.de/ws/DOCUMENTS.wsdl#report" />
+      <WSDL:input>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:input>
+      <WSDL:output>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:output>
+    </WSDL:operation>
+    <WSDL:operation name="report2">
+      <SOAP:operation soapAction="http://xml.otris.de/ws/DOCUMENTS.wsdl#report2" />
+      <WSDL:input>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:input>
+      <WSDL:output>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:output>
+    </WSDL:operation>
+    <WSDL:operation name="report3">
+      <SOAP:operation soapAction="http://xml.otris.de/ws/DOCUMENTS.wsdl#report3" />
+      <WSDL:input>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:input>
+      <WSDL:output>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:output>
+    </WSDL:operation>
+    <WSDL:operation name="getDocument">
+      <SOAP:operation soapAction="http://xml.otris.de/ws/DOCUMENTS.wsdl#getDocument" />
+      <WSDL:input>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:input>
+      <WSDL:output>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:output>
+    </WSDL:operation>
+    <WSDL:operation name="editFile">
+      <SOAP:operation soapAction="http://xml.otris.de/ws/DOCUMENTS.wsdl#editFile" />
+      <WSDL:input>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:input>
+      <WSDL:output>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:output>
+    </WSDL:operation>
+    <WSDL:operation name="createFile">
+      <SOAP:operation soapAction="http://xml.otris.de/ws/DOCUMENTS.wsdl#createFile" />
+      <WSDL:input>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:input>
+      <WSDL:output>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:output>
+    </WSDL:operation>
+    <WSDL:operation name="createFile2">
+      <SOAP:operation soapAction="http://xml.otris.de/ws/DOCUMENTS.wsdl#createFile2" />
+      <WSDL:input>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:input>
+      <WSDL:output>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:output>
+    </WSDL:operation>
+    <WSDL:operation name="getFileTypes">
+      <SOAP:operation soapAction="http://xml.otris.de/ws/DOCUMENTS.wsdl#getFileTypes" />
+      <WSDL:input>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:input>
+      <WSDL:output>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:output>
+    </WSDL:operation>
+    <WSDL:operation name="describeFileType">
+      <SOAP:operation soapAction="http://xml.otris.de/ws/DOCUMENTS.wsdl#describeFileType" />
+      <WSDL:input>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:input>
+      <WSDL:output>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:output>
+    </WSDL:operation>
+    <WSDL:operation name="describeFileType2">
+      <SOAP:operation soapAction="http://xml.otris.de/ws/DOCUMENTS.wsdl#describeFileType2" />
+      <WSDL:input>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:input>
+      <WSDL:output>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:output>
+    </WSDL:operation>
+    <WSDL:operation name="browseFolder">
+      <SOAP:operation soapAction="http://xml.otris.de/ws/DOCUMENTS.wsdl#browseFolder" />
+      <WSDL:input>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:input>
+      <WSDL:output>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:output>
+    </WSDL:operation>
+    <WSDL:operation name="getFolderStructure">
+      <SOAP:operation soapAction="http://xml.otris.de/ws/DOCUMENTS.wsdl#getFolderStructure" />
+      <WSDL:input>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:input>
+      <WSDL:output>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:output>
+    </WSDL:operation>
+    <WSDL:operation name="runScript">
+      <SOAP:operation soapAction="http://xml.otris.de/ws/DOCUMENTS.wsdl#runScript" />
+      <WSDL:input>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:input>
+      <WSDL:output>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:output>
+    </WSDL:operation>
+    <WSDL:operation name="userInfo">
+      <SOAP:operation soapAction="http://xml.otris.de/ws/DOCUMENTS.wsdl#userInfo" />
+      <WSDL:input>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:input>
+      <WSDL:output>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:output>
+    </WSDL:operation>
+    <WSDL:operation name="archiveFiles">
+      <SOAP:operation soapAction="http://xml.otris.de/ws/DOCUMENTS.wsdl#archiveFiles" />
+      <WSDL:input>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:input>
+      <WSDL:output>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:output>
+    </WSDL:operation>
+    <WSDL:operation name="deleteFiles">
+      <SOAP:operation soapAction="http://xml.otris.de/ws/DOCUMENTS.wsdl#deleteFiles" />
+      <WSDL:input>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:input>
+      <WSDL:output>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:output>
+    </WSDL:operation>
+    <WSDL:operation name="deleteDocuments">
+      <SOAP:operation soapAction="http://xml.otris.de/ws/DOCUMENTS.wsdl#deleteDocuments" />
+      <WSDL:input>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:input>
+      <WSDL:output>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:output>
+    </WSDL:operation>
+    <WSDL:operation name="listPossibleActions">
+      <SOAP:operation soapAction="http://xml.otris.de/ws/DOCUMENTS.wsdl#listPossibleActions" />
+      <WSDL:input>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:input>
+      <WSDL:output>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:output>
+    </WSDL:operation>
+    <WSDL:operation name="triggerAction">
+      <SOAP:operation soapAction="http://xml.otris.de/ws/DOCUMENTS.wsdl#triggerAction" />
+      <WSDL:input>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:input>
+      <WSDL:output>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:output>
+    </WSDL:operation>
+    <WSDL:operation name="followUp">
+      <SOAP:operation soapAction="http://xml.otris.de/ws/DOCUMENTS.wsdl#followUp" />
+      <WSDL:input>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:input>
+      <WSDL:output>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:output>
+    </WSDL:operation>
+    <WSDL:operation name="sendFileAdHoc">
+      <SOAP:operation soapAction="http://xml.otris.de/ws/DOCUMENTS.wsdl#sendFileAdHoc" />
+      <WSDL:input>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:input>
+      <WSDL:output>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:output>
+    </WSDL:operation>
+    <WSDL:operation name="getFileId">
+      <SOAP:operation soapAction="http://xml.otris.de/ws/DOCUMENTS.wsdl#getFileId" />
+      <WSDL:input>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:input>
+      <WSDL:output>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:output>
+    </WSDL:operation>
+    <WSDL:operation name="listPublicFolders">
+      <SOAP:operation soapAction="" />
+      <WSDL:input>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:input>
+      <WSDL:output>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:output>
+    </WSDL:operation>
+    <WSDL:operation name="getFilingPlans">
+      <SOAP:operation soapAction="http://xml.otris.de/ws/DOCUMENTS.wsdl#getFilingPlans" />
+      <WSDL:input>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:input>
+      <WSDL:output>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:output>
+    </WSDL:operation>
+    <WSDL:operation name="getFilingPlanXML">
+      <SOAP:operation soapAction="http://xml.otris.de/ws/DOCUMENTS.wsdl#getFilingPlanXML" />
+      <WSDL:input>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:input>
+      <WSDL:output>
+        <SOAP:body use="literal" parts="parameters" />
+        <SOAP:header message="tns:DOCUMENTSHeader" part="sessionID" use="literal" />
+      </WSDL:output>
+    </WSDL:operation>
+  </WSDL:binding>
+  <WSDL:service name="DOCUMENTS">
+    <documentation>gSOAP 2.8.0 generated service definition</documentation>
+    <WSDL:port name="DOCUMENTS" binding="tns:DOCUMENTS">
+      <SOAP:address location="http://localhost:11001" />
+    </WSDL:port>
+  </WSDL:service>
+</WSDL:definitions>

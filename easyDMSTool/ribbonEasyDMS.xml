@@ -1,0 +1,694 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<customUI xmlns="http://schemas.microsoft.com/office/2009/07/customui" onLoad="Ribbon_Load">
+  <ribbon>
+    <tabs>
+      <tab id="sendToEasy" label="Easy Sender">
+        <group id="sendToEasyDMS" label="Send To EasyDMS" centerVertically="true" autoScale="true">
+
+          <splitButton id="splitButtonAustria" tag="AT" size="large" getVisible="isCountryVisible" showLabel="true">
+            <button id="splitButtonAustria_btn" label="Austria" getImage="getCustomImage"/>
+            <menu id="menuAustria">
+              <button id="btnABOMasterData_Austria"   label="ABO Master Data"   tag="ABO Master Data;AT;Austria;Customer_Service"		onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnCommunication_Austria"   label="ABO Communication" tag="ABO Communication;AT;Austria;Customer_Service"	onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnNewApplication_Austria"  label="New Application"   tag="New Application;AT;Austria;Customer_Service"		onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnOrder_Austria"           label="Order"             tag="Order;AT;Austria;Customer_Service"				onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnRenewal_Austria"         label="Renewal"           tag="Renewal;AT;Austria;Customer_Service"				onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnResignation_Austria"     label="Resignation"       tag="Resignation;AT;Austria;Customer_Service"			onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnReturn_Austria"          label="Return"            tag="Return;AT;Austria;Customer_Service"				onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnTransactionList_Austria" label="Transaction List"  tag="Transaction List;AT;Austria;Customer_Service" 	onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <!--finance buttons -->
+              <button id="btnIntercompanyInvoicesCreditNotes_Austria"	label="Intercompany Invoices / Credit Notes"	    tag="Intercompany Invoices / Credit Notes;AT;Austria;Finance"     onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnSuppliersPOInvoices_Austria"			 	      label="Suppliers PO Invoices / Credit Notes" 	    tag="Suppliers PO Invoices / Credit Notes;AT;Austria;Finance" 	onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnSuppliersNonPOInvoices_Austria"		    	label="Suppliers Non PO Invoices / Credit Notes"  tag="Suppliers Non PO Invoices / Credit Notes;AT;Austria;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnEmployeeExpenses_Austria" 			 	        label="Employee Expenses" 					  	          tag="Employee Expenses;AT;Austria;Finance" 				onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnSupplierPOInvoices_Austria" 			 	      label="Supplier PO Invoices" 					            tag="Supplier PO Invoices;AT;Austria;Finance" 					onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnInventoryDocumentation_Austria" 		 	    label="Inventory Documentation" 				          tag="Inventory Documentation;AT;Austria;Finance" 					onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnFixedAssets_Austria" 					          label="Fixed Assets" 						  	              tag="Fixed Assets;AT;Austria;Finance"  							onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnPaymentRequests_Austria" 				        label="Payment Requests" 					                tag="Payment Requests;AT;Austria;Finance"   						onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnEmployeePettyCashDocuments_Austria" 	 	  label="Employee petty cash documents" 			      tag="Employee petty cash documents;AT;Austria;Finance"			onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+            </menu>
+          </splitButton>
+
+          <splitButton id="splitButtonBelgium" tag="BE" size="large" getVisible="isCountryVisible" showLabel="true">
+            <button id="splitButtonBelgium_btn" label="Belgium" getImage="getCustomImage"/>
+            <menu id="menuBelgium">
+              <button id="btnABOMasterData_Belgium"   label="ABO Master Data" 	tag="ABO Master Data;BE;Belgium;Customer_Service" 	onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnCommunication_Belgium"   label="ABO Communication" tag="ABO Communication;BE;Belgium;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnNewApplication_Belgium"  label="New Application"   tag="New Application;BE;Belgium;Customer_Service" 	onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnOrder_Belgium" 		  	  label="Order" 				    tag="Order;BE;Belgium;Customer_Service" 			      onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnRenewal_Belgium" 		    label="Renewal" 			    tag="Renewal;BE;Belgium;Customer_Service" 			onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnResignation_Belgium" 	  label="Resignation" 		  tag="Resignation;BE;Belgium;Customer_Service" 		onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnReturn_Belgium" 		  	  label="Return" 				    tag="Return;BE;Belgium;Customer_Service" 			onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnTransactionList_Belgium" label="Transaction List"  tag="Transaction List;BE;Belgium;Customer_Service"  onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <!--finance buttons -->
+              <button id="btnSuppliersPOInvoices_Belgium"     		label="Suppliers PO Invoices / Credit Notes"		tag="Suppliers PO Invoices / Credit Notes;BE;Belgium;Finance" 	   onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnSuppliersNonPOInvoices_Belgium" 		  	label="Suppliers Non PO Invoices / Credit Notes"  	tag="Suppliers Non PO Invoices / Credit Notes;BE;Belgium;Finance"  onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnEmployeeExpenses_Belgium" 				label="Employee Expenses" 							tag="Employee Expenses;BE;Belgium;Finance" 						   onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnIntercompanyInvoicesCreditNotes_Belgium" label="Intercompany Invoices / Credit Notes" 		tag="Intercompany Invoices / Credit Notes;BE;Belgium;Finance" 	   onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnSupplierPOInvoices_Belgium" 		 	  	label="Supplier PO Invoices" 						tag="Supplier PO Invoices;BE;Belgium;Finance" 					   onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnInventoryDocumentation_Belgium"	 	  	label="Inventory Documentation" 					tag="Inventory Documentation;BE;Belgium;Finance" 				   onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnFixedAssets_Belgium" 				 	label="Fixed Assets" 								tag="Fixed Assets;BE;Belgium;Finance" 							   onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnPaymentRequests_Belgium"			 	  	label="Payment Requests" 							tag="Payment Requests;BE;Belgium;Finance" 						   onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnEmployeePettyCashDocuments_Belgium" 	  	label="Employee petty cash documents" 				tag="Employee petty cash documents;BE;Belgium;Finance" 			   onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+            </menu>
+          </splitButton>
+
+          <splitButton id="splitButtonBulgaria" tag="BG" size="large" getVisible="isCountryVisible" showLabel="true">
+            <button id="splitButtonBulgaria_btn" label="Bulgaria" getImage="getCustomImage"/>
+            <menu id="menuBulgaria">
+              <button id="btnABOMasterData_Bulgaria" 		label="ABO Master Data"   tag="ABO Master Data;BG;Bulgaria;Customer_Service"   onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnCommunication_Bulgaria" 		label="ABO Communication" tag="ABO Communication;BG;Bulgaria;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnNewApplication_Bulgaria" 	label="New Application"   tag="New Application;BG;Bulgaria;Customer_Service"   onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnOrder_Bulgaria" 				label="Order" 			  tag="Order;BG;Bulgaria;Customer_Service" 			   onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnRenewal_Bulgaria" 			label="Renewal" 		  tag="Renewal;BG;Bulgaria;Customer_Service" 		   onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnResignation_Bulgaria" 		label="Resignation" 	  tag="Resignation;BG;Bulgaria;Customer_Service" 	   onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnReturn_Bulgaria" 			label="Return" 			  tag="Return;BG;Bulgaria;Customer_Service"  		   onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnTransactionList_Bulgaria" 	label="Transaction List"  tag="Transaction List;BG;Bulgaria;Customer_Service"  onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <!--finance buttons -->
+              <button id="btnSuppliersPOInvoices_Bulgaria" 			       label="Suppliers PO Invoices / Credit Notes" 	  tag="Suppliers PO Invoices / Credit Notes;BG;Bulgaria;Finance" 		onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnSuppliersNonPOInvoices_Bulgaria"  		     label="Suppliers Non PO Invoices / Credit Notes" tag="Suppliers Non PO Invoices / Credit Notes;BG;Bulgaria;Finance" 	onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnEmployeeExpenses_Bulgaria" 				       label="Employee Expenses" 						  tag="Employee Expenses;BG;Bulgaria;Finance" 			 		onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnIntercompanyInvoicesCreditNotes_Bulgaria" label="Intercompany Invoices / Credit Notes" 	  tag="Intercompany Invoices / Credit Notes;BG;Bulgaria;Finance" 		onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnSupplierPOInvoices_Bulgaria" 			       label="Supplier PO Invoices"  					  tag="Supplier PO Invoices;BG;Bulgaria;Finance" 				 		onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnInventoryDocumentation_Bulgaria" 		     label="Inventory Documentation" 				  tag="Inventory Documentation;BG;Bulgaria;Finance" 			 		onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnFixedAssets_Bulgaria" 					           label="Fixed Assets" 							  tag="Fixed Assets;BG;Bulgaria;Finance" 						 		onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnPaymentRequests_Bulgaria" 				         label="Payment Requests" 						  tag="Payment Requests;BG;Bulgaria;Finance" 							onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnEmployeePettyCashDocuments_Bulgaria" 	   label="Employee petty cash documents" 			  tag="Employee petty cash documents;BG;Bulgaria;Finance" 		 		onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+
+            </menu>
+          </splitButton>
+          <splitButton id="splitButtonSwitzerland" tag="CH" size="large" getVisible="isCountryVisible" showLabel="true">
+            <button id="splitButtonSwitzerland_btn" label="Switzerland" getImage="getCustomImage"/>
+            <menu id="menuSwitzerland">
+              <button id="btnABOMasterData_Switzerland"   label="ABO Master Data"   tag="ABO Master Data;CH;Switzerland;Customer_Service"   onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnCommunication_Switzerland"   label="ABO Communication" tag="ABO Communication;CH;Switzerland;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnNewApplication_Switzerland"  label="New Application"   tag="New Application;CH;Switzerland;Customer_Service"   onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnOrder_Switzerland" 			    label="Order" 			      tag="Order;CH;Switzerland;Customer_Service" 			  onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnRenewal_Switzerland" 		    label="Renewal" 		      tag="Renewal;CH;Switzerland;Customer_Service" 		  onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnResignation_Switzerland" 	  label="Resignation" 	    tag="Resignation;CH;Switzerland;Customer_Service" 	  onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnReturn_Switzerland" 			    label="Return" 			      tag="Return;CH;Switzerland;Customer_Service" 			  onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnTransactionList_Switzerland" label="Transaction List"  tag="Transaction List;CH;Switzerland;Customer_Service"  onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <!--finance buttons -->
+              <button id="btnSuppliersPOInvoices_Switzerland" 			label="Suppliers PO Invoices / Credit Notes" 	 tag="Suppliers PO Invoices / Credit Notes;CH;Switzerland;Finance" 		onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnSuppliersNonPOInvoices_Switzerland" 			label="Suppliers Non PO Invoices / Credit Notes" tag="Suppliers Non PO Invoices / Credit Notes;CH;Switzerland;Finance"  onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnEmployeeExpenses_Switzerland" 				label="Employee Expenses" 						 tag="Employee Expenses;CH;Switzerland;Finance" 						onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnIntercompanyInvoicesCreditNotes_Switzerland" label="Intercompany Invoices / Credit Notes" 	 tag="Intercompany Invoices / Credit Notes;CH;Switzerland;Finance" 		onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnSupplierPOInvoices_Switzerland" 				label="Supplier PO Invoices" 					 tag="Supplier PO Invoices;CH;Switzerland;Finance" 						onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnInventoryDocumentation_Switzerland" 			label="Inventory Documentation" 				 tag="Inventory Documentation;CH;Switzerland;Finance" 					onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnFixedAssets_Switzerland" 					label="Fixed Assets" 							 tag="Fixed Assets;CH;Switzerland;Finance" 								onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnPaymentRequests_Switzerland" 				label="Payment Requests" 						 tag="Payment Requests;CH;Switzerland;Finance" 							onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnEmployeePettyCashDocuments_Switzerland"		label="Employee petty cash documents" 			 tag="Employee petty cash documents;CH;Switzerland;Finance" 			onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+            </menu>
+          </splitButton>
+          <splitButton id="splitButtonCzechRepublic" tag="CZ" size="large" getVisible="isCountryVisible" showLabel="true">
+            <button id="splitButtonCzechRepublic_btn" label="CzechRepublic" getImage="getCustomImage"/>
+            <menu id="menuCzechRepublic">
+              <button id="btnABOMasterData_CzechRepublic" 	label="ABO Master Data"   tag="ABO Master Data;CZ;CzechRepublic;Customer_Service" 	onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnCommunication_CzechRepublic" 	label="ABO Communication" tag="ABO Communication;CZ;CzechRepublic;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnNewApplication_CzechRepublic" 	label="New Application"   tag="New Application;CZ;CzechRepublic;Customer_Service" 	onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnOrder_CzechRepublic" 			label="Order" 			  tag="Order;CZ;CzechRepublic;Customer_Service" 			onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnRenewal_CzechRepublic" 			label="Renewal" 		  tag="Renewal;CZ;CzechRepublic;Customer_Service" 			onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnResignation_CzechRepublic" 		label="Resignation" 	  tag="Resignation;CZ;CzechRepublic;Customer_Service" 		onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnReturn_CzechRepublic" 			label="Return" 			  tag="Return;CZ;CzechRepublic;Customer_Service" 			onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnTransactionList_CzechRepublic" 	label="Transaction List"  tag="Transaction List;CZ;CzechRepublic;Customer_Service" 	onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <!--finance buttons -->
+              <button id="btnSuppliersPOInvoices_CzechRepublic" 				label="Suppliers PO Invoices / Credit Notes" 		tag="Suppliers PO Invoices / Credit Notes;CZ;CzechRepublic;Finance" 	onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnSuppliersNonPOInvoices_CzechRepublic" 			label="Suppliers Non PO Invoices / Credit Notes" 	tag="Suppliers Non PO Invoices / Credit Notes;CZ;CzechRepublic;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnEmployeeExpenses_CzechRepublic" 					label="Employee Expenses" 							tag="Employee Expenses;CZ;CzechRepublic;Finance" 						onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnIntercompanyInvoicesCreditNotes_CzechRepublic" 	label="Intercompany Invoices / Credit Notes" 		tag="Intercompany Invoices / Credit Notes;CZ;CzechRepublic;Finance" 	onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnSupplierPOInvoices_CzechRepublic" 				label="Supplier PO Invoices" 						tag="Supplier PO Invoices;CZ;CzechRepublic;Finance" 					onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnInventoryDocumentation_CzechRepublic" 			label="Inventory Documentation" 					tag="Inventory Documentation;CZ;CzechRepublic;Finance" 					onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnFixedAssets_CzechRepublic" 						label="Fixed Assets" 								tag="Fixed Assets;CZ;CzechRepublic;Finance" 							onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnPaymentRequests_CzechRepublic" 					label="Payment Requests" 							tag="Payment Requests;CZ;CzechRepublic;Finance" 						onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnEmployeePettyCashDocuments_CzechRepublic" 		label="Employee petty cash documents" 				tag="Employee petty cash documents;CZ;CzechRepublic;Finance" 			onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+
+            </menu>
+          </splitButton>
+          <splitButton id="splitButtonGermany" tag="DE" size="large" getVisible="isCountryVisible" showLabel="true">
+            <button id="splitButtonGermany_btn" label="Germany" getImage="getCustomImage"/>
+            <menu id="menuGermany">
+              <button id="btnABOMasterData_Germany" 	label="ABO Master Data" 	tag="ABO Master Data;DE;Germany;Customer_Service" 	onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnCommunication_Germany" 	label="ABO Communication" 	tag="ABO Communication;DE;Germany;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnNewApplication_Germany" 	label="New Application" 	tag="New Application;DE;Germany;Customer_Service" 	onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnOrder_Germany" 			label="Order" 				tag="Order;DE;Germany;Customer_Service" 			onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnRenewal_Germany" 		label="Renewal" 			tag="Renewal;DE;Germany;Customer_Service" 			onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnResignation_Germany" 	label="Resignation" 		tag="Resignation;DE;Germany;Customer_Service" 		onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnReturn_Germany" 			label="Return" 				tag="Return;DE;Germany;Customer_Service" 			onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnTransactionList_Germany" label="Transaction List" 	tag="Transaction List;DE;Germany;Customer_Service" 	onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <!--finance buttons -->
+              <button id="btnSuppliersPOInvoices_Germany" 			label="Suppliers PO Invoices / Credit Notes" 		tag="Suppliers PO Invoices / Credit Notes;DE;Germany;Finance" 		onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnSuppliersNonPOInvoices_Germany" 			label="Suppliers Non PO Invoices / Credit Notes" 	tag="Suppliers Non PO Invoices / Credit Notes;DE;Germany;Finance" 	onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnEmployeeExpenses_Germany" 				label="Employee Expenses" 							tag="Employee Expenses;DE;Germany;Finance" 							onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnIntercompanyInvoicesCreditNotes_Germany" label="Intercompany Invoices / Credit Notes" 		tag="Intercompany Invoices / Credit Notes;DE;Germany;Finance" 		onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnSupplierPOInvoices_Germany" 				label="Supplier PO Invoices" 						tag="Supplier PO Invoices;DE;Germany;Finance" 						onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnInventoryDocumentation_Germany" 			label="Inventory Documentation" 					tag="Inventory Documentation;DE;Germany;Finance" 					onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnFixedAssets_Germany" 					label="Fixed Assets" 								tag="Fixed Assets;DE;Germany;Finance" 								onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnPaymentRequests_Germany" 				label="Payment Requests" 							tag="Payment Requests;DE;Germany;Finance" 							onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnEmployeePettyCashDocuments_Germany" 		label="Employee petty cash documents" 				tag="Employee petty cash documents;DE;Germany;Finance" 				onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+            </menu>
+          </splitButton>
+          <splitButton id="splitButtonDenmark" tag="DK" size="large" getVisible="isCountryVisible" showLabel="true">
+            <button id="splitButtonDenmark_btn" label="Denmark" getImage="getCustomImage"/>
+            <menu id="menuDenmark">
+              <button id="btnABOMasterData_Denmark" 	label="ABO Master Data" 	tag="ABO Master Data;DK;Denmark;Customer_Service" 	onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnCommunication_Denmark" 	label="ABO Communication" 	tag="ABO Communication;DK;Denmark;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnNewApplication_Denmark" 	label="New Application" 	tag="New Application;DK;Denmark;Customer_Service" 	onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnOrder_Denmark" 			label="Order" 				tag="Order;DK;Denmark;Customer_Service" 			onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnRenewal_Denmark" 		label="Renewal" 			tag="Renewal;DK;Denmark;Customer_Service" 			onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnResignation_Denmark" 	label="Resignation" 		tag="Resignation;DK;Denmark;Customer_Service" 		onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnReturn_Denmark" 			label="Return" 				tag="Return;DK;Denmark;Customer_Service" 			onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnTransactionList_Denmark" label="Transaction List" 	tag="Transaction List;DK;Denmark;Customer_Service" 	onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <!--finance buttons -->
+              <button id="btnSuppliersPOInvoices_Denmark" 			label="Suppliers PO Invoices / Credit Notes" 		tag="Suppliers PO Invoices / Credit Notes;DK;Denmark;Finance" 		onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnSuppliersNonPOInvoices_Denmark" 			label="Suppliers Non PO Invoices / Credit Notes" 	tag="Suppliers Non PO Invoices / Credit Notes;DK;Denmark;Finance" 	onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnEmployeeExpenses_Denmark" 				label="Employee Expenses" 							tag="Employee Expenses;DK;Denmark;Finance" 							onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnIntercompanyInvoicesCreditNotes_Denmark" label="Intercompany Invoices / Credit Notes"  		tag="Intercompany Invoices / Credit Notes;DK;Denmark;Finance" 		onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnSupplierPOInvoices_Denmark" 				label="Supplier PO Invoices" 						tag="Supplier PO Invoices;DK;Denmark;Finance" 						onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnInventoryDocumentation_Denmark" 			label="Inventory Documentation" 					tag="Inventory Documentation;DK;Denmark;Finance" 					onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnFixedAssets_Denmark" 					label="Fixed Assets" 								tag="Fixed Assets;DK;Denmark;Finance" 								onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnPaymentRequests_Denmark" 				label="Payment Requests" 							tag="Payment Requests;DK;Denmark;Finance"							onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnEmployeePettyCashDocuments_Denmark" 		label="Employee petty cash documents" 				tag="Employee petty cash documents;DK;Denmark;Finance" 				onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+            </menu>
+          </splitButton>
+          <splitButton id="splitButtonEstonia" tag="EE" size="large" getVisible="isCountryVisible" showLabel="true">
+            <button id="splitButtonEstonia_btn" label="Estonia" getImage="getCustomImage"/>
+            <menu id="menuEstonia">
+              <button id="btnABOMasterData_Estonia" 	label="ABO Master Data" 	tag="ABO Master Data;EE;Estonia;Customer_Service" 	onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnCommunication_Estonia" 	label="ABO Communication" 	tag="ABO Communication;EE;Estonia;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnNewApplication_Estonia" 	label="New Application" 	tag="New Application;EE;Estonia;Customer_Service" 	onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnOrder_Estonia" 			label="Order" 				tag="Order;EE;Estonia;Customer_Service" 			onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnRenewal_Estonia" 		label="Renewal" 			tag="Renewal;EE;Estonia;Customer_Service" 			onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnResignation_Estonia" 	label="Resignation" 		tag="Resignation;EE;Estonia;Customer_Service" 		onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnReturn_Estonia" 			label="Return" 				tag="Return;EE;Estonia;Customer_Service" 			onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnTransactionList_Estonia" label="Transaction List" 	tag="Transaction List;EE;Estonia;Customer_Service" 	onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+            </menu>
+          </splitButton>
+          <splitButton id="splitButtonSpain" tag="ES" size="large" getVisible="isCountryVisible" showLabel="true">
+            <button id="splitButtonSpain_btn" label="Spain" getImage="getCustomImage"/>
+            <menu id="menuSpain">
+              <button id="btnABOMasterData_Spain" 	label="ABO Master Data"   tag="ABO Master Data;ES;Spain;Customer_Service" 	onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnCommunication_Spain" 	label="ABO Communication" tag="ABO Communication;ES;Spain;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnNewApplication_Spain" 	label="New Application"   tag="New Application;ES;Spain;Customer_Service" 	onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnOrder_Spain" 			label="Order" 			  tag="Order;ES;Spain;Customer_Service" 			onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnRenewal_Spain" 			label="Renewal" 		  tag="Renewal;ES;Spain;Customer_Service" 			onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnResignation_Spain" 		label="Resignation" 	  tag="Resignation;ES;Spain;Customer_Service" 		onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnReturn_Spain" 			label="Return" 			  tag="Return;ES;Spain;Customer_Service" 			onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnTransactionList_Spain" 	label="Transaction List"  tag="Transaction List;ES;Spain;Customer_Service"  onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <!--finance buttons -->
+              <button id="btnSuppliersPOInvoices_Spain" 			  label="Suppliers PO Invoices / Credit Notes" 		tag="Suppliers PO Invoices / Credit Notes;ES;Spain;Finance" 	onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnSuppliersNonPOInvoices_Spain" 		  label="Suppliers Non PO Invoices / Credit Notes"  tag="Suppliers Non PO Invoices / Credit Notes;ES;Spain;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnEmployeeExpenses_Spain" 				  label="Employee Expenses" 						tag="Employee Expenses;ES;Spain;Finance" 						onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnIntercompanyInvoicesCreditNotes_Spain" label="Intercompany Invoices / Credit Notes" 		tag="Intercompany Invoices / Credit Notes;ES;Spain;Finance" 	onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnSupplierPOInvoices_Spain"   		 	  label="Supplier PO Invoices" 						tag="Supplier PO Invoices;ES;Spain;Finance" 					onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnInventoryDocumentation_Spain" 	      label="Inventory Documentation" 					tag="Inventory Documentation;ES;Spain;Finance" 					onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnFixedAssets_Spain" 				 	  label="Fixed Assets" 								tag="Fixed Assets;ES;Spain;Finance" 							onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnPaymentRequests_Spain" 			 	  label="Payment Requests" 							tag="Payment Requests;ES;Spain;Finance" 						onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnEmployeePettyCashDocuments_Spain"  	  label="Employee petty cash documents" 			tag="Employee petty cash documents;ES;Spain;Finance"			onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+            </menu>
+          </splitButton>
+          <splitButton id="splitButtonFinland" tag="FI" size="large" getVisible="isCountryVisible" showLabel="true">
+            <button id="splitButtonFinland_btn" label="Finland" getImage="getCustomImage"/>
+            <menu id="menuFinland">
+              <button id="btnABOMasterData_Finland" 	label="ABO Master Data"   tag="ABO Master Data;FI;Finland;Customer_Service"		onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnCommunication_Finland" 	label="ABO Communication" tag="ABO Communication;FI;Finland;Customer_Service" 	onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnNewApplication_Finland"  label="New Application"   tag="New Application;FI;Finland;Customer_Service" 	onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnOrder_Finland" 			label="Order" 			  tag="Order;FI;Finland;Customer_Service" 				onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnRenewal_Finland" 		label="Renewal" 	 	  tag="Renewal;FI;Finland;Customer_Service" 			onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnResignation_Finland" 	label="Resignation" 	  tag="Resignation;FI;Finland;Customer_Service" 		onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnReturn_Finland" 			label="Return" 			  tag="Return;FI;Finland;Customer_Service" 			 	onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnTransactionList_Finland" label="Transaction List"  tag="Transaction List;FI;Finland;Customer_Service" 	onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <!--finance buttons -->
+              <button id="btnSuppliersPOInvoices_Finland" 			label="Suppliers PO Invoices / Credit Notes" 	 tag="Suppliers PO Invoices / Credit Notes;FI;Finland;Finance" 		onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnSuppliersNonPOInvoices_Finland" 			label="Suppliers Non PO Invoices / Credit Notes" tag="Suppliers Non PO Invoices / Credit Notes;FI;Finland;Finance"  onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnEmployeeExpenses_Finland" 				label="Employee Expenses" 						 tag="Employee Expenses;FI;Finland;Finance" 						onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnIntercompanyInvoicesCreditNotes_Finland" label="Intercompany Invoices / Credit Notes" 	 tag="Intercompany Invoices / Credit Notes;FI;Finland;Finance" 		onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnSupplierPOInvoices_Finland" 				label="Supplier PO Invoices" 					 tag="Supplier PO Invoices;FI;Finland;Finance" 						onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnInventoryDocumentation_Finland" 			label="Inventory Documentation"					 tag="Inventory Documentation;FI;Finland;Finance" 					onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnFixedAssets_Finland" 					label="Fixed Assets" 							 tag="Fixed Assets;FI;Finland;Finance" 								onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnPaymentRequests_Finland" 				label="Payment Requests" 						 tag="Payment Requests;FI;Finland;Finance" 							onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnEmployeePettyCashDocuments_Finland" 		label="Employee petty cash documents" 			 tag="Employee petty cash documents;FI;Finland;Finance" 			onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+            </menu>
+          </splitButton>
+          <splitButton id="splitButtonFrance" tag="FR" size="large" getVisible="isCountryVisible" showLabel="true">
+            <button id="splitButtonFrance_btn" label="France" getImage="getCustomImage"/>
+            <menu id="menuFrance">
+              <button id="btnABOMasterData_France" label="ABO Master Data" tag="ABO Master Data;FR;France;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnCommunication_France" label="ABO Communication" tag="ABO Communication;FR;France;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnNewApplication_France" label="New Application" tag="New Application;FR;France;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnOrder_France" label="Order" tag="Order;FR;France;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnRenewal_France" label="Renewal" tag="Renewal;FR;France;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnResignation_France" label="Resignation" tag="Resignation;FR;France;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnReturn_France" label="Return" tag="Return;FR;France;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnTransactionList_France" label="Transaction List" tag="Transaction List;FR;France;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <!--finance buttons -->
+              <button id="btnSuppliersPOInvoices_France" label="Suppliers PO Invoices / Credit Notes" tag="Suppliers PO Invoices / Credit Notes;FR;France;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnSuppliersNonPOInvoices_France" label="Suppliers Non PO Invoices / Credit Notes" tag="Suppliers Non PO Invoices / Credit Notes;FR;France;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnEmployeeExpenses_France" label="Employee Expenses" tag="Employee Expenses;FR;France;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnIntercompanyInvoicesCreditNotes_France" label="Intercompany Invoices / Credit Notes" tag="Intercompany Invoices / Credit Notes;FR;France;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnSupplierPOInvoices_France" label="Supplier PO Invoices" tag="Supplier PO Invoices;FR;France;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnInventoryDocumentation_France" label="Inventory Documentation" tag="Inventory Documentation;FR;France;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnFixedAssets_France" label="Fixed Assets" tag="Fixed Assets;FR;France;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnPaymentRequests_France" label="Payment Requests" tag="Payment Requests;FR;France;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnEmployeePettyCashDocuments_France" label="Employee petty cash documents" tag="Employee petty cash documents;FR;France;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+            </menu>
+          </splitButton>
+          <splitButton id="splitButtonGreece" tag="GR" size="large" getVisible="isCountryVisible" showLabel="true">
+            <button id="splitButtonGreece_btn" label="Greece" getImage="getCustomImage"/>
+            <menu id="menuGreece">
+              <button id="btnABOMasterData_Greece" label="ABO Master Data" tag="ABO Master Data;GR;Greece;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnCommunication_Greece" label="ABO Communication" tag="ABO Communication;GR;Greece;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnNewApplication_Greece" label="New Application" tag="New Application;GR;Greece;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnOrder_Greece" label="Order" tag="Order;GR;Greece;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnRenewal_Greece" label="Renewal" tag="Renewal;GR;Greece;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnResignation_Greece" label="Resignation" tag="Resignation;GR;Greece;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnReturn_Greece" label="Return" tag="Return;GR;Greece;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnTransactionList_Greece" label="Transaction List" tag="Transaction List;GR;Greece;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              
+              <button id="btnSuppliersPOInvoices_Greece" label="Suppliers PO Invoices / Credit Notes" tag="Suppliers PO Invoices / Credit Notes;GR;Greece;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnSuppliersNonPOInvoices_Greece" label="Suppliers Non PO Invoices / Credit Notes" tag="Suppliers Non PO Invoices / Credit Notes;GR;Greece;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnEmployeeExpenses_Greece" label="Employee Expenses" tag="Employee Expenses;GR;Greece;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnIntercompanyInvoicesCreditNotes_Greece" label="Intercompany Invoices / Credit Notes" tag="Intercompany Invoices / Credit Notes;GR;Greece;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnSupplierPOInvoices_Greece" label="Supplier PO Invoices" tag="Supplier PO Invoices;GR;Greece;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnInventoryDocumentation_Greece" label="Inventory Documentation" tag="Inventory Documentation;GR;Greece;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnFixedAssets_Greece" label="Fixed Assets" tag="Fixed Assets;GR;Greece;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnPaymentRequests_Greece" label="Payment Requests" tag="Payment Requests;GR;Greece;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnEmployeePettyCashDocuments_Greece" label="Employee petty cash documents" tag="Employee petty cash documents;GR;Greece;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+            </menu>
+          </splitButton> 
+          <splitButton id="splitButtonCroatia" tag="HR" size="large" getVisible="isCountryVisible" showLabel="true">
+            <button id="splitButtonCroatia_btn" label="Croatia" getImage="getCustomImage"/>
+            <menu id="menuCroatia">
+              <button id="btnABOMasterData_Croatia" label="ABO Master Data" tag="ABO Master Data;HR;Croatia;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnCommunication_Croatia" label="ABO Communication" tag="ABO Communication;HR;Croatia;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnNewApplication_Croatia" label="New Application" tag="New Application;HR;Croatia;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnOrder_Croatia" label="Order" tag="Order;HR;Croatia;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnRenewal_Croatia" label="Renewal" tag="Renewal;HR;Croatia;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnResignation_Croatia" label="Resignation" tag="Resignation;HR;Croatia;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnReturn_Croatia" label="Return" tag="Return;HR;Croatia;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnTransactionList_Croatia" label="Transaction List" tag="Transaction List;HR;Croatia;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <!--finance buttons -->
+              <button id="btnSuppliersPOInvoices_Croatia" label="Suppliers PO Invoices / Credit Notes" tag="Suppliers PO Invoices / Credit Notes;HR;Croatia;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnSuppliersNonPOInvoices_Croatia" label="Suppliers Non PO Invoices / Credit Notes" tag="Suppliers Non PO Invoices / Credit Notes;HR;Croatia;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnEmployeeExpenses_Croatia" label="Employee Expenses" tag="Employee Expenses;HR;Croatia;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnIntercompanyInvoicesCreditNotes_Croatia" label="Intercompany Invoices / Credit Notes" tag="Intercompany Invoices / Credit Notes;HR;Croatia;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnSupplierPOInvoices_Croatia" label="Supplier PO Invoices" tag="Supplier PO Invoices;HR;Croatia;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnInventoryDocumentation_Croatia" label="Inventory Documentation" tag="Inventory Documentation;HR;Croatia;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnFixedAssets_Croatia" label="Fixed Assets" tag="Fixed Assets;HR;Croatia;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnPaymentRequests_Croatia" label="Payment Requests" tag="Payment Requests;HR;Croatia;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnEmployeePettyCashDocuments_Croatia" label="Employee petty cash documents" tag="Employee petty cash documents;HR;Croatia;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+            </menu>
+          </splitButton>
+          <splitButton id="splitButtonHungary" tag="HU" size="large" getVisible="isCountryVisible" showLabel="true">
+            <button id="splitButtonHungary_btn" label="Hungary" getImage="getCustomImage"/>
+            <menu id="menuHungary">
+              <button id="btnABOMasterData_Hungary" label="ABO Master Data" tag="ABO Master Data;HU;Hungary;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnCommunication_Hungary" label="ABO Communication" tag="ABO Communication;HU;Hungary;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnNewApplication_Hungary" label="New Application" tag="New Application;HU;Hungary;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnOrder_Hungary" label="Order" tag="Order;HU;Hungary;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnRenewal_Hungary" label="Renewal" tag="Renewal;HU;Hungary;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnResignation_Hungary" label="Resignation" tag="Resignation;HU;Hungary;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnReturn_Hungary" label="Return" tag="Return;HU;Hungary;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnTransactionList_Hungary" label="Transaction List" tag="Transaction List;HU;Hungary;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <!--finance buttons -->
+              <button id="btnSuppliersPOInvoices_Hungary" label="Suppliers PO Invoices / Credit Notes" tag="Suppliers PO Invoices / Credit Notes;HU;Hungary;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnSuppliersNonPOInvoices_Hungary" label="Suppliers Non PO Invoices / Credit Notes" tag="Suppliers Non PO Invoices / Credit Notes;HU;Hungary;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnEmployeeExpenses_Hungary" label="Employee Expenses" tag="Employee Expenses;HU;Hungary;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnIntercompanyInvoicesCreditNotes_Hungary" label="Intercompany Invoices / Credit Notes" tag="Intercompany Invoices / Credit Notes;HU;Hungary;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnSupplierPOInvoices_Hungary" label="Supplier PO Invoices" tag="Supplier PO Invoices;HU;Hungary;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnInventoryDocumentation_Hungary" label="Inventory Documentation" tag="Inventory Documentation;HU;Hungary;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnFixedAssets_Hungary" label="Fixed Assets" tag="Fixed Assets;HU;Hungary;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnPaymentRequests_Hungary" label="Payment Requests" tag="Payment Requests;HU;Hungary;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnEmployeePettyCashDocuments_Hungary" label="Employee petty cash documents" tag="Employee petty cash documents;HU;Hungary;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+            </menu>
+          </splitButton>
+          <splitButton id="splitButtonItaly" tag="IT" size="large" getVisible="isCountryVisible" showLabel="true">
+            <button id="splitButtonItaly_btn" label="Italy" getImage="getCustomImage"/>
+            <menu id="menuItaly">
+              <button id="btnABOMasterData_Italy" label="ABO Master Data" tag="ABO Master Data;IT;Italy;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnCommunication_Italy" label="ABO Communication" tag="ABO Communication;IT;Italy;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnNewApplication_Italy" label="New Application" tag="New Application;IT;Italy;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnOrder_Italy" label="Order" tag="Order;IT;Italy;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnRenewal_Italy" label="Renewal" tag="Renewal;IT;Italy;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnResignation_Italy" label="Resignation" tag="Resignation;IT;Italy;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnReturn_Italy" label="Return" tag="Return;IT;Italy;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnTransactionList_Italy" label="Transaction List" tag="Transaction List;IT;Italy;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <!--finance buttons -->
+              <button id="btnSuppliersPOInvoices_Italy" label="Suppliers PO Invoices / Credit Notes" tag="Suppliers PO Invoices / Credit Notes;IT;Italy;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnSuppliersNonPOInvoices_Italy" label="Suppliers Non PO Invoices / Credit Notes" tag="Suppliers Non PO Invoices / Credit Notes;IT;Italy;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnEmployeeExpenses_Italy" label="Employee Expenses" tag="Employee Expenses;IT;Italy;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnIntercompanyInvoicesCreditNotes_Italy" label="Intercompany Invoices / Credit Notes" tag="Intercompany Invoices / Credit Notes;IT;Italy;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnSupplierPOInvoices_Italy" label="Supplier PO Invoices" tag="Supplier PO Invoices;IT;Italy;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnInventoryDocumentation_Italy" label="Inventory Documentation" tag="Inventory Documentation;IT;Italy;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnFixedAssets_Italy" label="Fixed Assets" tag="Fixed Assets;IT;Italy;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnPaymentRequests_Italy" label="Payment Requests" tag="Payment Requests;IT;Italy;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnEmployeePettyCashDocuments_Italy" label="Employee petty cash documents" tag="Employee petty cash documents;IT;Italy;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+            </menu>
+          </splitButton>
+          <splitButton id="splitButtonKazachstan" tag="KZ" size="large" getVisible="isCountryVisible" showLabel="true">
+            <button id="splitButtonKazachstan_btn" label="Kazachstan" getImage="getCustomImage"/>
+            <menu id="menuKazachstan">
+              <button id="btnABOMasterData_Kazachstan" label="ABO Master Data" tag="ABO Master Data;KZ;Kazachstan;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnCommunication_Kazachstan" label="ABO Communication" tag="ABO Communication;KZ;Kazachstan;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnNewApplication_Kazachstan" label="New Application" tag="New Application;KZ;Kazachstan;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnOrder_Kazachstan" label="Order" tag="Order;KZ;Kazachstan;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnRenewal_Kazachstan" label="Renewal" tag="Renewal;KZ;Kazachstan;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnResignation_Kazachstan" label="Resignation" tag="Resignation;KZ;Kazachstan;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnReturn_Kazachstan" label="Return" tag="Return;KZ;Kazachstan;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnTransactionList_Kazachstan" label="Transaction List" tag="Transaction List;KZ;Kazachstan;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+            </menu>
+          </splitButton>
+          <splitButton id="splitButtonLithuania" tag="LT" size="large" getVisible="isCountryVisible" showLabel="true">
+            <button id="splitButtonLithuania_btn" label="Lithuania" getImage="getCustomImage"/>
+            <menu id="menuLithuania">
+              <button id="btnABOMasterData_Lithuania" label="ABO Master Data" tag="ABO Master Data;LT;Lithuania;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnCommunication_Lithuania" label="ABO Communication" tag="ABO Communication;LT;Lithuania;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnNewApplication_Lithuania" label="New Application" tag="New Application;LT;Lithuania;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnOrder_Lithuania" label="Order" tag="Order;LT;Lithuania;Customer_Service" onAction="onButtonClicked;Customer_Service" getVisible="isDoctypeVisible"/>
+              <button id="btnRenewal_Lithuania" label="Renewal" tag="Renewal;LT;Lithuania;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnResignation_Lithuania" label="Resignation" tag="Resignation;LT;Lithuania;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnReturn_Lithuania" label="Return" tag="Return;LT;Lithuania;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnTransactionList_Lithuania" label="Transaction List" tag="Transaction List;LT;Lithuania;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+            </menu>
+          </splitButton>
+          <splitButton id="splitButtonLatvia" tag="LV" size="large" getVisible="isCountryVisible" showLabel="true">
+            <button id="splitButtonLatvia_btn" label="Latvia" getImage="getCustomImage"/>
+            <menu id="menuLatvia">
+              <button id="btnABOMasterData_Latvia" label="ABO Master Data" tag="ABO Master Data;LV;Latvia;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnCommunication_Latvia" label="ABO Communication" tag="ABO Communication;LV;Latvia;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnNewApplication_Latvia" label="New Application" tag="New Application;LV;Latvia;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnOrder_Latvia" label="Order" tag="Order;LV;Latvia;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnRenewal_Latvia" label="Renewal" tag="Renewal;LV;Latvia;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnResignation_Latvia" label="Resignation" tag="Resignation;LV;Latvia;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnReturn_Latvia" label="Return" tag="Return;LV;Latvia;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnTransactionList_Latvia" label="Transaction List" tag="Transaction List;LV;Latvia;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+            </menu>
+          </splitButton>
+          <splitButton id="splitButtonNetherlands" tag="NL" size="large" getVisible="isCountryVisible" showLabel="true">
+            <button id="splitButtonNetherlands_btn" label="Netherlands" getImage="getCustomImage"/>
+            <menu id="menuNetherlands">
+              <button id="btnABOMasterData_Netherlands" label="ABO Master Data" tag="ABO Master Data;NL;Netherlands;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnCommunication_Netherlands" label="ABO Communication" tag="ABO Communication;NL;Netherlands;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnNewApplication_Netherlands" label="New Application" tag="New Application;NL;Netherlands;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnOrder_Netherlands" label="Order" tag="Order;NL;Netherlands;Customer_Service" onAction="onButtonClicked;Customer_Service" getVisible="isDoctypeVisible"/>
+              <button id="btnRenewal_Netherlands" label="Renewal" tag="Renewal;NL;Netherlands;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnResignation_Netherlands" label="Resignation" tag="Resignation;NL;Netherlands;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnReturn_Netherlands" label="Return" tag="Return;NL;Netherlands;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnTransactionList_Netherlands" label="Transaction List" tag="Transaction List;NL;Netherlands;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <!--finance buttons -->
+              <button id="btnSuppliersPOInvoices_Netherlands" label="Suppliers PO Invoices / Credit Notes" tag="Suppliers PO Invoices / Credit Notes;NL;Netherlands;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnSuppliersNonPOInvoices_Netherlands" label="Suppliers Non PO Invoices / Credit Notes" tag="Suppliers Non PO Invoices / Credit Notes;NL;Netherlands;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnEmployeeExpenses_Netherlands" label="Employee Expenses" tag="Employee Expenses;NL;Netherlands;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnIntercompanyInvoicesCreditNotes_Netherlands" label="Intercompany Invoices / Credit Notes" tag="Intercompany Invoices / Credit Notes;NL;Netherlands;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnSupplierPOInvoices_Netherlands" label="Supplier PO Invoices" tag="Supplier PO Invoices;NL;Netherlands;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnInventoryDocumentation_Netherlands" label="Inventory Documentation" tag="Inventory Documentation;NL;Netherlands;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnFixedAssets_Netherlands" label="Fixed Assets" tag="Fixed Assets;NL;Netherlands;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnPaymentRequests_Netherlands" label="Payment Requests" tag="Payment Requests;NL;Netherlands;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnEmployeePettyCashDocuments_Netherlands" label="Employee petty cash documents" tag="Employee petty cash documents;NL;Netherlands;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+            </menu>
+          </splitButton>
+          <splitButton id="splitButtonNorway" tag="NO" size="large" getVisible="isCountryVisible" showLabel="true">
+            <button id="splitButtonNorway_btn" label="Norway" getImage="getCustomImage"/>
+            <menu id="menuNorway">
+              <button id="btnABOMasterData_Norway" label="ABO Master Data" tag="ABO Master Data;NO;Norway;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnCommunication_Norway" label="ABO Communication" tag="ABO Communication;NO;Norway;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnNewApplication_Norway" label="New Application" tag="New Application;NO;Norway;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnOrder_Norway" label="Order" tag="Order;NO;Norway;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnRenewal_Norway" label="Renewal" tag="Renewal;NO;Norway;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnResignation_Norway" label="Resignation" tag="Resignation;NO;Norway;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnReturn_Norway" label="Return" tag="Return;NO;Norway;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnTransactionList_Norway" label="Transaction List" tag="Transaction List;NO;Norway;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <!--finance buttons -->
+              <button id="btnSuppliersPOInvoices_Norway" label="Suppliers PO Invoices / Credit Notes" tag="Suppliers PO Invoices / Credit Notes;NO;Norway;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnSuppliersNonPOInvoices_Norway" label="Suppliers Non PO Invoices / Credit Notes" tag="Suppliers Non PO Invoices / Credit Notes;NO;Norway;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnEmployeeExpenses_Norway" label="Employee Expenses" tag="Employee Expenses;NO;Norway;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnIntercompanyInvoicesCreditNotes_Norway" label="Intercompany Invoices / Credit Notes" tag="Intercompany Invoices / Credit Notes;NO;Norway;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnSupplierPOInvoices_Norway" label="Supplier PO Invoices" tag="Supplier PO Invoices;NO;Norway;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnInventoryDocumentation_Norway" label="Inventory Documentation" tag="Inventory Documentation;NO;Norway;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnFixedAssets_Norway" label="Fixed Assets" tag="Fixed Assets;NO;Norway;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnPaymentRequests_Norway" label="Payment Requests" tag="Payment Requests;NO;Norway;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnEmployeePettyCashDocuments_Norway" label="Employee petty cash documents" tag="Employee petty cash documents;NO;Norway;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnCustomDeclarations_Norway" label="Custom Declarations" tag="Custom Declarations;NO;Norway;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+            </menu>
+          </splitButton>
+          <splitButton id="splitButtonPoland" tag="PL" size="large" getVisible="isCountryVisible" showLabel="true">
+            <button id="splitButtonPoland_btn" label="Poland" getImage="getCustomImage"/>
+            <menu id="menuPoland">
+              <button id="btnABOMasterData_Poland" label="ABO Master Data" tag="ABO Master Data;PL;Poland;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnCommunication_Poland" label="ABO Communication" tag="ABO Communication;PL;Poland;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnNewApplication_Poland" label="New Application" tag="New Application;PL;Poland;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnOrder_Poland" label="Order" tag="Order;PL;Poland;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnRenewal_Poland" label="Renewal" tag="Renewal;PL;Poland;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnResignation_Poland" label="Resignation" tag="Resignation;PL;Poland;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnReturn_Poland" label="Return" tag="Return;PL;Poland;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnTransactionList_Poland" label="Transaction List" tag="Transaction List;PL;Poland;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <!--finance buttons -->
+              <button id="btnSuppliersPOInvoices_Poland" label="Suppliers PO Invoices / Credit Notes" tag="Suppliers PO Invoices / Credit Notes;PL;Poland;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnSuppliersNonPOInvoices_Poland" label="Suppliers Non PO Invoices / Credit Notes" tag="Suppliers Non PO Invoices / Credit Notes;PL;Poland;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnEmployeeExpenses_Poland" label="Employee Expenses" tag="Employee Expenses;PL;Poland;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnIntercompanyInvoicesCreditNotes_Poland" label="Intercompany Invoices / Credit Notes" tag="Intercompany Invoices / Credit Notes;PL;Poland;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnSupplierPOInvoices_Poland" label="Supplier PO Invoices" tag="Supplier PO Invoices;PL;Poland;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnInventoryDocumentation_Poland" label="Inventory Documentation" tag="Inventory Documentation;PL;Poland;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnFixedAssets_Poland" label="Fixed Assets" tag="Fixed Assets;PL;Poland;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnPaymentRequests_Poland" label="Payment Requests" tag="Payment Requests;PL;Poland;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnEmployeePettyCashDocuments_Poland" label="Employee petty cash documents" tag="Employee petty cash documents;PL;Poland;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+            </menu>
+          </splitButton>
+          <splitButton id="splitButtonPortugal" tag="PT" size="large" getVisible="isCountryVisible" showLabel="true">
+            <button id="splitButtonPortugal_btn" label="Portugal" getImage="getCustomImage"/>
+            <menu id="menuPortugal">
+              <button id="btnABOMasterData_Portugal" label="ABO Master Data" tag="ABO Master Data;PT;Portugal;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnCommunication_Portugal" label="ABO Communication" tag="ABO Communication;PT;Portugal;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnNewApplication_Portugal" label="New Application" tag="New Application;PT;Portugal;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnOrder_Portugal" label="Order" tag="Order;PT;Portugal;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnRenewal_Portugal" label="Renewal" tag="Renewal;PT;Portugal;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnResignation_Portugal" label="Resignation" tag="Resignation;PT;Portugal;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnReturn_Portugal" label="Return" tag="Return;PT;Portugal;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnTransactionList_Portugal" label="Transaction List" tag="Transaction List;PT;Portugal;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <!--finance buttons -->
+              <button id="btnSuppliersPOInvoices_Portugal" label="Suppliers PO Invoices / Credit Notes" tag="Suppliers PO Invoices / Credit Notes;PT;Portugal;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnSuppliersNonPOInvoices_Portugal" label="Suppliers Non PO Invoices / Credit Notes" tag="Suppliers Non PO Invoices / Credit Notes;PT;Portugal;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnEmployeeExpenses_Portugal" label="Employee Expenses" tag="Employee Expenses;PT;Portugal;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnIntercompanyInvoicesCreditNotes_Portugal" label="Intercompany Invoices / Credit Notes" tag="Intercompany Invoices / Credit Notes;PT;Portugal;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnSupplierPOInvoices_Portugal" label="Supplier PO Invoices" tag="Supplier PO Invoices;PT;Portugal;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnInventoryDocumentation_Portugal" label="Inventory Documentation" tag="Inventory Documentation;PT;Portugal;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnFixedAssets_Portugal" label="Fixed Assets" tag="Fixed Assets;PT;Portugal;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnPaymentRequests_Portugal" label="Payment Requests" tag="Payment Requests;PT;Portugal;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnEmployeePettyCashDocuments_Portugal" label="Employee petty cash documents" tag="Employee petty cash documents;PT;Portugal;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+            </menu>
+          </splitButton>
+          <splitButton id="splitButtonRomania" tag="RO" size="large" getVisible="isCountryVisible" showLabel="true">
+            <button id="splitButtonRomania_btn" label="Romania" getImage="getCustomImage"/>
+            <menu id="menuRomania">
+              <button id="btnABOMasterData_Romania" label="ABO Master Data" tag="ABO Master Data;RO;Romania;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnCommunication_Romania" label="ABO Communication" tag="ABO Communication;RO;Romania;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnNewApplication_Romania" label="New Application" tag="New Application;RO;Romania;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnOrder_Romania" label="Order" tag="Order;RO;Romania;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnRenewal_Romania" label="Renewal" tag="Renewal;RO;Romania;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnResignation_Romania" label="Resignation" tag="Resignation;RO;Romania;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnReturn_Romania" label="Return" tag="Return;RO;Romania;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnTransactionList_Romania" label="Transaction List" tag="Transaction List;RO;Romania;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <!--finance buttons -->
+              <button id="btnSuppliersPOInvoices_Romania" label="Suppliers PO Invoices / Credit Notes" tag="Suppliers PO Invoices / Credit Notes;RO;Romania;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnSuppliersNonPOInvoices_Romania" label="Suppliers Non PO Invoices / Credit Notes" tag="Suppliers Non PO Invoices / Credit Notes;RO;Romania;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnEmployeeExpenses_Romania" label="Employee Expenses" tag="Employee Expenses;RO;Romania;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnIntercompanyInvoicesCreditNotes_Romania" label="Intercompany Invoices / Credit Notes" tag="Intercompany Invoices / Credit Notes;RO;Romania;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnSupplierPOInvoices_Romania" label="Supplier PO Invoices" tag="Supplier PO Invoices;RO;Romania;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnInventoryDocumentation_Romania" label="Inventory Documentation" tag="Inventory Documentation;RO;Romania;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnFixedAssets_Romania" label="Fixed Assets" tag="Fixed Assets;RO;Romania;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnPaymentRequests_Romania" label="Payment Requests" tag="Payment Requests;RO;Romania;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnEmployeePettyCashDocuments_Romania" label="Employee petty cash documents" tag="Employee petty cash documents;RO;Romania;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+
+            </menu>
+          </splitButton>
+          <splitButton id="splitButtonRussia" tag="RU" size="large" getVisible="isCountryVisible" showLabel="true">
+            <button id="splitButtonRussia_btn" label="Russia" getImage="getCustomImage"/>
+            <menu id="menuRussia">
+              <button id="btnABOMasterData_Russia" label="ABO Master Data" tag="ABO Master Data;RU;Russia;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnCommunication_Russia" label="ABO Communication" tag="ABO Communication;RU;Russia;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnNewApplication_Russia" label="New Application" tag="New Application;RU;Russia;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnOrder_Russia" label="Order" tag="Order;RU;Russia;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnRenewal_Russia" label="Renewal" tag="Renewal;RU;Russia;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnResignation_Russia" label="Resignation" tag="Resignation;RU;Russia;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnReturn_Russia" label="Return" tag="Return;RU;Russia;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnTransactionList_Russia" label="Transaction List" tag="Transaction List;RU;Russia;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <!--finance buttons -->
+              <button id="btnSuppliersPOInvoices_Russia" label="Suppliers PO Invoices / Credit Notes" tag="Suppliers PO Invoices / Credit Notes;RU;Russia;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnSuppliersNonPOInvoices_Russia" label="Suppliers Non PO Invoices / Credit Notes" tag="Suppliers Non PO Invoices / Credit Notes;RU;Russia;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnEmployeeExpenses_Russia" label="Employee Expenses" tag="Employee Expenses;RU;Russia;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnIntercompanyInvoicesCreditNotes_Russia" label="Intercompany Invoices / Credit Notes" tag="Intercompany Invoices / Credit Notes;RU;Russia;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnSupplierPOInvoices_Russia" label="Supplier PO Invoices" tag="Supplier PO Invoices;RU;Russia;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnInventoryDocumentation_Russia" label="Inventory Documentation" tag="Inventory Documentation;RU;Russia;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnFixedAssets_Russia" label="Fixed Assets" tag="Fixed Assets;RU;Russia;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnPaymentRequests_Russia" label="Payment Requests" tag="Payment Requests;RU;Russia;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnEmployeePettyCashDocuments_Russia" label="Employee petty cash documents" tag="Employee petty cash documents;RU;Russia;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+            </menu>
+          </splitButton>
+          <splitButton id="splitButtonSweden" tag="SE" size="large" getVisible="isCountryVisible" showLabel="true">
+            <button id="splitButtonSweden_btn" label="Sweden" getImage="getCustomImage"/>
+            <menu id="menuSweden">
+              <button id="btnABOMasterData_Sweden" label="ABO Master Data" tag="ABO Master Data;SE;Sweden;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnCommunication_Sweden" label="ABO Communication" tag="ABO Communication;SE;Sweden;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnNewApplication_Sweden" label="New Application" tag="New Application;SE;Sweden;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnOrder_Sweden" label="Order" tag="Order;SE;Sweden;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnRenewal_Sweden" label="Renewal" tag="Renewal;SE;Sweden;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnResignation_Sweden" label="Resignation" tag="Resignation;SE;Sweden;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnReturn_Sweden" label="Return" tag="Return;SE;Sweden;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnTransactionList_Sweden" label="Transaction List" tag="Transaction List;SE;Sweden;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <!--finance buttons -->
+              <button id="btnSuppliersPOInvoices_Sweden" label="Suppliers PO Invoices / Credit Notes" tag="Suppliers PO Invoices / Credit Notes;SE;Sweden;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnSuppliersNonPOInvoices_Sweden" label="Suppliers Non PO Invoices / Credit Notes" tag="Suppliers Non PO Invoices / Credit Notes;SE;Sweden;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnEmployeeExpenses_Sweden" label="Employee Expenses" tag="Employee Expenses;SE;Sweden;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnIntercompanyInvoicesCreditNotes_Sweden" label="Intercompany Invoices / Credit Notes" tag="Intercompany Invoices / Credit Notes;SE;Sweden;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnSupplierPOInvoices_Sweden" label="Supplier PO Invoices" tag="Supplier PO Invoices;SE;Sweden;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnInventoryDocumentation_Sweden" label="Inventory Documentation" tag="Inventory Documentation;SE;Sweden;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnFixedAssets_Sweden" label="Fixed Assets" tag="Fixed Assets;SE;Sweden;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnPaymentRequests_Sweden" label="Payment Requests" tag="Payment Requests;SE;Sweden;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnEmployee_PettyCashDocuments_Sweden" label="Employee petty cash documents" tag="Employee petty cash documents;SE;Sweden;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+            </menu>
+          </splitButton>
+          <splitButton id="splitButtonSlovakia" tag="SK" size="large" getVisible="isCountryVisible" showLabel="true">
+            <button id="splitButtonSlovakia_btn" label="Slovakia" getImage="getCustomImage"/>
+            <menu id="menuSlovakia">
+              <button id="btnABOMasterData_Slovakia" label="ABO Master Data" tag="ABO Master Data;SK;Slovakia;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnCommunication_Slovakia" label="ABO Communication" tag="ABO Communication;SK;Slovakia;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnNewApplication_Slovakia" label="New Application" tag="New Application;SK;Slovakia;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnOrder_Slovakia" label="Order" tag="Order;SK;Slovakia;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnRenewal_Slovakia" label="Renewal" tag="Renewal;SK;Slovakia;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnResignation_Slovakia" label="Resignation" tag="Resignation;SK;Slovakia;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnReturn_Slovakia" label="Return" tag="Return;SK;Slovakia;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnTransactionList_Slovakia" label="Transaction List" tag="Transaction List;SK;Slovakia;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <!--finance buttons -->
+              <button id="btnSuppliersPOInvoices_Slovakia" label="Suppliers PO Invoices / Credit Notes" tag="Suppliers PO Invoices / Credit Notes;SK;Slovakia;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnSuppliersNonPOInvoices_Slovakia" label="Suppliers Non PO Invoices / Credit Notes" tag="Suppliers Non PO Invoices / Credit Notes;SK;Slovakia;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnEmployeeExpenses_Slovakia" label="Employee Expenses" tag="Employee Expenses;SK;Slovakia;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnIntercompanyInvoicesCreditNotes_Slovakia" label="Intercompany Invoices / Credit Notes" tag="Intercompany Invoices / Credit Notes;SK;Slovakia;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnSupplierPOInvoices_Slovakia" label="Supplier PO Invoices" tag="Supplier PO Invoices;SK;Slovakia;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnInventoryDocumentation_Slovakia" label="Inventory Documentation" tag="Inventory Documentation;SK;Slovakia;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnFixedAssets_Slovakia" label="Fixed Assets" tag="Fixed Assets;SK;Slovakia;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnPaymentRequests_Slovakia" label="Payment Requests" tag="Payment Requests;SK;Slovakia;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnEmployeePettyCashDocuments_Slovakia" label="Employee petty cash documents" tag="Employee petty cash documents;SK;Slovakia;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+            </menu>
+          </splitButton>
+          
+          <splitButton id="splitButtonSlovenia" tag="SI" size="large" getVisible="isCountryVisible" showLabel="true">
+            <button id="splitButtonSlovenia_btn" label="Slovenia" getImage="getCustomImage"/>
+            <menu id="menuSlovenia">
+              <button id="btnABOMasterData_Slovenia"   label="ABO Master Data"   tag="ABO Master Data;SI;Slovenia;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnCommunication_Slovenia"   label="ABO Communication" tag="ABO Communication;SI;Slovenia;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnNewApplication_Slovenia"  label="New Application"   tag="New Application;SI;Slovenia;Customer_Service"  onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnOrder_Slovenia"           label="Order"             tag="Order;SI;Slovenia;Customer_Service"            onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnRenewal_Slovenia"         label="Renewal"           tag="Renewal;SI;Slovenia;Customer_Service"          onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnResignation_Slovenia"     label="Resignation"       tag="Resignation;SI;Slovenia;Customer_Service"      onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnReturn_Slovenia"          label="Return"            tag="Return;SI;Slovenia;Customer_Service"           onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnTransactionList_Slovenia" label="Transaction List"  tag="Transaction List;SI;Slovenia;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+            </menu>
+          </splitButton>
+          
+          <splitButton id="splitButtonUnitedKingdom" tag="UK" size="large" getVisible="isCountryVisible" showLabel="true">
+            <button id="splitButtonUnitedKingdom_btn" label="UnitedKingdom" getImage="getCustomImage"/>
+            <menu id="menuUnitedKingdom">
+              <button id="btnABOMasterData_UnitedKingdom" label="ABO Master Data" tag="ABO Master Data;UK;UnitedKingdom;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnCommunication_UnitedKingdom" label="ABO Communication" tag="ABO Communication;UK;UnitedKingdom;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnNewApplication_UnitedKingdom" label="New Application" tag="New Application;UK;UnitedKingdom;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnOrder_UnitedKingdom" label="Order" tag="Order;UK;UnitedKingdom;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnRenewal_UnitedKingdom" label="Renewal" tag="Renewal;UK;UnitedKingdom;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnResignation_UnitedKingdom" label="Resignation" tag="Resignation;UK;UnitedKingdom;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnReturn_UnitedKingdom" label="Return" tag="Return;UK;UnitedKingdom;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnTransactionList_UnitedKingdom" label="Transaction List" tag="Transaction List;UK;UnitedKingdom;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <!--finance buttons -->
+              <button id="btnSuppliersPOInvoices_UnitedKingdom" label="Suppliers PO Invoices / Credit Notes" tag="Suppliers PO Invoices / Credit Notes;UK;UnitedKingdom;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnSuppliersNonPOInvoices_UnitedKingdom" label="Suppliers Non PO Invoices / Credit Notes" tag="Suppliers Non PO Invoices / Credit Notes;UK;UnitedKingdom;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnEmployeeExpenses_UnitedKingdom" label="Employee Expenses" tag="Employee Expenses;UK;UnitedKingdom;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnIntercompanyInvoicesCreditNotes_UnitedKingdom" label="Intercompany Invoices / Credit Notes" tag="Intercompany Invoices / Credit Notes;UK;UnitedKingdom;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnSupplierPOInvoices_UnitedKingdom" label="Supplier PO Invoices" tag="Supplier PO Invoices;UK;UnitedKingdom;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnInventoryDocumentation_UnitedKingdom" label="Inventory Documentation" tag="Inventory Documentation;UK;UnitedKingdom;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnFixedAssets_UnitedKingdom" label="Fixed Assets" tag="Fixed Assets;UK;UnitedKingdom;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnPaymentRequests_UnitedKingdom" label="Payment Requests" tag="Payment Requests;UK;UnitedKingdom;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnEmployeePettyCashDocuments_UnitedKingdom" label="Employee petty cash documents" tag="Employee petty cash documents;UK;UnitedKingdom;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+            </menu>
+          </splitButton>
+
+          <splitButton id="splitButtonTurkey" tag="TR" size="large" getVisible="isCountryVisible" showLabel="true">
+            <button id="splitButtonTurkey_btn" label="Turkey" getImage="getCustomImage"/>
+            <menu id="menuTurkey">
+              <button id="btnABOMasterData_Turkey" label="ABO Master Data" tag="ABO Master Data;TR;Turkey;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnCommunication_Turkey" label="ABO Communication" tag="ABO Communication;TR;Turkey;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnNewApplication_Turkey" label="New Application" tag="New Application;TR;Turkey;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnOrder_Turkey" label="Order" tag="Order;TR;Turkey;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnRenewal_Turkey" label="Renewal" tag="Renewal;TR;Turkey;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnResignation_Turkey" label="Resignation" tag="Resignation;TR;Turkey;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnReturn_Turkey" label="Return" tag="Return;TR;Turkey;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnTransactionList_Turkey" label="Transaction List" tag="Transaction List;TR;Turkey;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <!--finance buttons -->
+              <button id="btnSuppliersPOInvoices_Turkey" label="Suppliers PO Invoices / Credit Notes" tag="Suppliers PO Invoices / Credit Notes;TR;Turkey;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnSuppliersNonPOInvoices_Turkey" label="Suppliers Non PO Invoices / Credit Notes" tag="Suppliers Non PO Invoices / Credit Notes;TR;Turkey;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnEmployeeExpenses_Turkey" label="Employee Expenses" tag="Employee Expenses;TR;Turkey;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnIntercompanyInvoicesCreditNotes_Turkey" label="Intercompany Invoices / Credit Notes" tag="Intercompany Invoices / Credit Notes;TR;Turkey;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnInventoryDocumentation_Turkey" label="Inventory Documentation" tag="Inventory Documentation;TR;Turkey;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnFixedAssets_Turkey" label="Fixed Assets" tag="Fixed Assets;TR;Turkey;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnPaymentRequests_Turkey" label="Payment Requests" tag="Payment Requests;TR;Turkey;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnEmployeePettyCashDocuments_Turkey" label="Employee petty cash documents" tag="Employee petty cash documents;TR;Turkey;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+            </menu>
+          </splitButton>
+
+          <splitButton id="splitButtonUkarine" tag="UA" size="large" getVisible="isCountryVisible" showLabel="true">
+            <button id="splitButtonUkraine_btn" label="Ukraine" getImage="getCustomImage"/>
+            <menu id="menuUkraine">
+              <button id="btnABOMasterData_Ukraine" label="ABO Master Data" tag="ABO Master Data;UA;Ukraine;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnCommunication_Ukraine" label="ABO Communication" tag="ABO Communication;UA;Ukraine;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnNewApplication_Ukraine" label="New Application" tag="New Application;UA;Ukraine;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnOrder_Ukraine" label="Order" tag="Order;UA;Ukraine;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnRenewal_Ukraine" label="Renewal" tag="Renewal;UA;Ukraine;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnResignation_Ukraine" label="Resignation" tag="Resignation;UA;Ukraine;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnReturn_Ukraine" label="Return" tag="Return;UA;Ukraine;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnTransactionList_Ukraine" label="Transaction List" tag="Transaction List;UA;Ukraine;Customer_Service" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <!--finance buttons -->
+              <button id="btnSuppliersPOInvoices_Ukraine" label="Suppliers PO Invoices / Credit Notes" tag="Suppliers PO Invoices / Credit Notes;UA;Ukraine;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnSuppliersNonPOInvoices_Ukraine" label="Suppliers Non PO Invoices / Credit Notes" tag="Suppliers Non PO Invoices / Credit Notes;UA;Ukraine;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnEmployeeExpenses_Ukraine" label="Employee Expenses" tag="Employee Expenses;UA;Ukraine;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnIntercompanyInvoicesCreditNotes_Ukraine" label="Intercompany Invoices / Credit Notes" tag="Intercompany Invoices / Credit Notes;UA;Ukraine;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnInventoryDocumentation_Ukraine" label="Inventory Documentation" tag="Inventory Documentation;UA;Ukraine;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnFixedAssets_Ukraine" label="Fixed Assets" tag="Fixed Assets;UA;Ukraine;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnPaymentRequests_Ukraine" label="Payment Requests" tag="Payment Requests;UA;Ukraine;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnEmployeePettyCashDocuments_Ukraine" label="Employee petty cash documents" tag="Employee petty cash documents;UA;Ukraine;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+            </menu>
+          </splitButton>
+
+          <splitButton id="splitButtonEurope" tag="EU" size="large" getVisible="isCountryVisible" showLabel="true">
+            <button id="splitButtonEurope_btn" label="Europe" getImage="getCustomImage"/>
+            <menu id="menuEurope">
+              <button id="btnSuppliersPOInvoices_Europe" label="Suppliers PO Invoices / Credit Notes" tag="Suppliers PO Invoices / Credit Notes;EU;Europe;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnSuppliersNonPOInvoices_Europe" label="Suppliers Non PO Invoices / Credit Notes" tag="Suppliers Non PO Invoices / Credit Notes;EU;Europe;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnEmployeeExpenses_Europe" label="Employee Expenses" tag="Employee Expenses;EU;Europe;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnIntercompanyInvoicesCreditNotes_Europe" label="Intercompany Invoices / Credit Notes" tag="Intercompany Invoices / Credit Notes;EU;Europe;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnSupplierPOInvoices_Europe" label="Supplier PO Invoices" tag="Supplier PO Invoices;EU;Europe;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnInventoryDocumentation_Europe" label="Inventory Documentation" tag="Inventory Documentation;EU;Europe;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnFixedAssets_Europe" label="Fixed Assets" tag="Fixed Assets;EU;Europe;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnPaymentRequests_Europe" label="Payment Requests" tag="Payment Requests;EU;Europe;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnEmployeePettyCashDocuments_Europe" label="Employee petty cash documents" tag="Employee petty cash documents;EU;Europe;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+            </menu>
+          </splitButton>
+
+          <splitButton id="splitButtonAmwayServices" tag = "AS" size="large" getVisible="isCountryVisible" showLabel="true">
+            <button id="splitButtonAmwayServices_btn" label="AmwayServices" getImage="getCustomImage"/>
+            <menu id="menuAmwayServices">
+              <button id="btnSuppliersPOInvoices_AmwayServices"				      label="Suppliers PO Invoices / Credit Notes" 		  tag="Suppliers PO Invoices / Credit Notes;AS;AmwayServices;Finance" 	  onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnSuppliersNonPOInvoices_AmwayServices"  	      label="Suppliers Non PO Invoices / Credit Notes" 	tag="Suppliers Non PO Invoices / Credit Notes;AS;AmwayServices;Finance" onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnEmployeeExpenses_AmwayServices" 				        label="Employee Expenses" 							          tag="Employee Expenses;AS;AmwayServices;Finance"						            onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnIntercompanyInvoicesCreditNotes_AmwayServices" label="Intercompany Invoices / Credit Notes" 		  tag="Intercompany Invoices / Credit Notes;AS;AmwayServices;Finance" 	  onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnSupplierPOInvoices_AmwayServices" 				      label="Supplier PO Invoices" 						          tag="Supplier PO Invoices;AS;AmwayServices;Finance" 					          onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnInventoryDocumentation_AmwayServices" 			    label="Inventory Documentation" 					        tag="Inventory Documentation;AS;AmwayServices;Finance"					        onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnFixedAssets_AmwayServices" 					          label="Fixed Assets" 								              tag="Fixed Assets;AS;AmwayServices;Finance" 							              onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnPaymentRequests_AmwayServices" 				        label="Payment Requests" 							            tag="Payment Requests;AS;AmwayServices;Finance" 						            onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+              <button id="btnEmployeePettyCashDocuments_AmwayServices" 		  label="Employee petty cash documents" 				    tag="Employee petty cash documents;AS;AmwayServices;Finance" 			      onAction="onButtonClicked" getVisible="isDoctypeVisible"/>
+            </menu>
+          </splitButton>  
+
+        </group>
+        <group id="test1" label="settings">
+          <button id="currentServer_btn" label="get current status: " onAction="getCurrentStatus"/>
+        </group>
+      </tab>
+    </tabs>
+  </ribbon>
+</customUI>

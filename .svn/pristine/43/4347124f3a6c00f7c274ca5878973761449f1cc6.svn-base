@@ -1,0 +1,421 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.IO;
+using System.IO.Compression;
+using System.Web.Services.Protocols;
+using System.Data.SqlClient;
+using easyDMSTool.Doc4SOAP;
+using Base64Tools;
+
+
+namespace easyDMSTool
+{
+    class FileConverter
+    {
+        private ToolBox.ToolboxService t = null;
+        private ToolBox.toolboxOptions o = null;
+        private Converter.ConverterService cc = null;
+        private Base64Encoder base64Encoder = null;
+        private string workDir;
+        private string instanceURL;
+        private bool filesOK = true;
+        private Boolean isSentToEasy = true;
+        private Boolean isConverted = true;
+        private int count = 0;
+
+        public Boolean Convert(string directory, string outputFile, string country, string docType, string url, string countryCode, string emailSender)
+        {
+            if (directory.EndsWith(@"\"))
+            {
+                workDir = directory;
+            }
+            else
+            {
+                workDir = directory + @"\";
+            }
+            this.instanceURL = "http://" + url + ":11001";
+            filesOK = processFiles();
+            if (filesOK)
+            {
+                convertFiles(emailSender);
+                if(isConverted)
+                {
+                    return moveOutput(outputFile, country, docType, countryCode, mergeFiles(),emailSender);  
+                }
+                else
+                {
+                    return false;
+                }
+                              
+            }
+            else
+            {
+                return false;
+            }           
+        }
+        private Boolean moveOutput(string outputFile, string country, string docType, string countryCode, string sourceFile, string emailSender)
+        {
+            string sessionId = null;
+            //string fileName = System.IO.Path.GetFileName(outputFile);
+            if (!System.IO.File.Exists(sourceFile))
+            {
+                    sourceFile = workDir + "Message_Body.pdf";
+                    System.Windows.Forms.MessageBox.Show("PLEASE CHECK DOC IN EASYDMS!\n{0}", emailSender);
+                //if(System.IO.File.Exists(workDir+"Message_Body.pdf"))
+                //{
+                //    sourceFile = workDir + "Message_Body.pdf";
+                //    System.Windows.Forms.MessageBox.Show("PLEASE CHECK DOC IN EASYDMS!\n{0}", emailSender);
+                //}
+                //else
+                //{
+                    
+                //}
+                
+            }
+
+            Boolean success = false;
+            
+            DOCUMENTSPortTypeClient myDoc = new DOCUMENTSPortTypeClient("DOCUMENTS", this.instanceURL);
+
+            FieldData[] fields = new FieldData[5];
+            fields[0] = new FieldData();
+            fields[0].name = "Doc_Type";
+            fields[0].value = docType;
+            fields[1] = new FieldData();
+            fields[1].name = "Country_Code";
+            fields[1].value = countryCode;
+            fields[2] = new FieldData();
+            fields[2].name = "Status";
+            fields[2].value = "new";
+            fields[3] = new FieldData();
+            fields[3].name = "Scan_User";
+            fields[3].value = "mailbox auto export";
+            fields[4] = new FieldData();
+            fields[4].name = "Information";
+            fields[4].value = emailSender;
+
+            DocUploadData[] addDocs = new DocUploadData[1];
+            addDocs[0] = new DocUploadData();
+            addDocs[0].name = "exported_email.pdf";
+            addDocs[0].register = "attachments";
+
+            do
+            {
+                try
+                {
+                    //if (!System.IO.File.Exists(sourceFile))
+                    //{
+                    //    if (System.IO.File.Exists(workDir + "Message_Body.pdf"))
+                    //    {
+                    //        System.IO.File.Copy(workDir + "Message_Body.pdf", "'" + outputFile + "'", true);
+                    //    }
+                    //    if (System.IO.File.Exists(workDir + "Document.pdf"))
+                    //    {
+                    //        System.IO.File.Copy(workDir + "Document.pdf", "'" + outputFile + "'", true);
+                    //    }
+                    //}
+                    //else
+                    //{
+                    //    //System.IO.File.Copy(sourceFile, "'" + outputFile + "'", true);
+                    //}
+                    myDoc.trustedLogin(easyDMSTool.Properties.Settings.Default.userIDDefault.TrimEnd(' ', '\n'), "72765", easyDMSTool.Properties.Settings.Default.userPasswordDefault.TrimEnd(' ', '\n'), ribbonEasyDMS.getUserID().TrimEnd(' ', '\n'), "", "en", out sessionId);
+                    addDocs[0].data = System.IO.File.ReadAllBytes(sourceFile);
+                    myDoc.createFile(ref sessionId, "Customer_Service", fields, addDocs);                
+                    success = true;
+                    isSentToEasy = true;
+
+                }
+                catch (System.ServiceModel.FaultException ex)
+                {
+                    System.Threading.Thread.Sleep(1500);
+                    isSentToEasy = false;
+                    ++count;
+                }
+                catch (SoapException ex) 
+                {
+                    System.Threading.Thread.Sleep(1500); 
+                    isSentToEasy = false;
+                    ++count;
+                }
+                catch (System.IO.DirectoryNotFoundException ex)
+                {
+                    System.Windows.Forms.MessageBox.Show("DirectoryNotFoundException Error creating document in Easy DMS! \n" + ex.Message);
+                    success = true;
+                    isSentToEasy = false;
+                }
+                catch (Exception ex)
+                {
+                   System.Windows.Forms.MessageBox.Show("Exception Error creating document in Easy DMS! \n" + ex.Message);
+                    ++count;
+                    if (count > 5)
+                        success = true;
+                    isSentToEasy = false;
+                }
+                finally
+                {
+                    if (sessionId != null && success == true)
+                    {
+                        myDoc.logout(ref sessionId);
+                        myDoc.Close();
+                        if (Directory.Exists(workDir))
+                            Directory.Delete(workDir, true);
+                    }                      
+                    if (count > 8)
+                        isSentToEasy = false;  
+                }
+
+            } while (!success || (count > 8) );
+
+            return isSentToEasy;
+        }
+        private void mergeFiles(string file1, string file2)
+        {          
+            t = new ToolBox.ToolboxService();
+            o = new ToolBox.toolboxOptions();
+            string outputFile = file1;
+            base64Encoder = new Base64Encoder(ReadByteArray(file2));
+            o.serviceOptions = "pdf.pdfOperation=7";
+            o.toolboxOptions1 = String.Format("pdf.merge.pdfFile={0}", new String(base64Encoder.GetEncoded()));
+            byte[] input = ReadByteArray(outputFile);
+            byte[] output = t.processDocument(o, input);
+            WriteByteArray(output, outputFile);
+        }
+        private string mergeFiles()
+        {
+            string fileToMerge = "";
+            string[] files = Directory.GetFiles(workDir, "*.pdf");
+            fileToMerge = files.Last();
+            if (Directory.GetFiles(workDir, "Message_Body.pdf").Length >= 1)
+            {
+                fileToMerge = Directory.GetFiles(workDir, "Message_Body.pdf")[0];
+                
+            }
+            foreach (string file in files)
+            {
+                if (file != fileToMerge)
+                {
+                    mergeFiles(fileToMerge, file);
+                }
+            }
+            return fileToMerge;
+        }
+        private void convertFile(string file)
+        {
+            string inExtension = System.IO.Path.GetExtension(file);
+            if (inExtension.ToLower() != ".pdf")
+            {
+                byte[] input = ReadByteArray(file);
+                try
+                {
+                    if (System.IO.Path.GetFileName(file) == "Message_Body.doc")
+                    {
+                        cc = new Converter.ConverterService();
+                        Converter.converterOptions options = new Converter.converterOptions();
+                        options.converterOptions1 = "pdf.archive=true&pdf.embedFonts=true&pdfa.level=2a&reportContentProblems=true";
+                        options.serviceOptions = "billing.applicationName=EasySender "+System.DirectoryServices.AccountManagement.UserPrincipal.Current.ToString();
+                        options.sourceExtension = inExtension;
+                        options.targetExtension = ".pdf";
+                        byte[] output = cc.convertDocument(options,input);
+                        //byte[] output = cc.convertDocumentSimple(inExtension, ".pdf", "pdf.embedFonts=true&reportContentProblems=true", input);
+                        //byte[] output = cc.convertDocumentSimple(inExtension, ".pdf", "", input);
+                        string outFile = workDir + System.IO.Path.GetFileNameWithoutExtension(file) + ".pdf";
+                        WriteByteArray(output, outFile);
+                    }
+                    else
+                    {
+                        cc = new Converter.ConverterService();
+                        byte[] output = cc.convertDocumentSimple(inExtension, ".pdf", "", input);
+                        string outFile = workDir + System.IO.Path.GetFileNameWithoutExtension(file) + ".pdf";
+                        WriteByteArray(output, outFile);
+                    }
+                }
+                catch (SoapException soapException)
+                {
+                    System.Windows.Forms.MessageBox.Show("PLEASE CHECK DOC IN EASYDMS!\nSoapException in convertFile method: " + soapException.Message + "\n in file: " + System.IO.Path.GetFileName(file));
+                }
+                catch (Exception ex)
+                {
+                    System.Windows.Forms.MessageBox.Show("PLEASE CHECK DOC IN EASYDMS!\nException in convertFile method: " +ex.Message + "\n in file: " + System.IO.Path.GetFileName(file));
+                }
+            }
+        }
+        private void convertFiles()
+        {
+            try
+            {
+                string[] files = Directory.GetFiles(workDir, "*");
+                foreach (string file in files)
+                {
+                    if ((System.IO.Path.GetExtension(file) != ".pdf") || (System.IO.Path.GetExtension(file) != ".exe") || (System.IO.Path.GetExtension(file) != ".txt"))
+                    {
+                        convertFile(file);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+        private void convertFiles(string emailSender)
+        {
+            try
+            {
+                string[] files = Directory.GetFiles(workDir, "*.txt");
+                foreach(string file in files)
+                {
+                        File.Move(file, Path.ChangeExtension(file, ".docx"));
+                }
+                files = Directory.GetFiles(workDir, "*");
+                foreach (string file in files)
+                { 
+                    if (((System.IO.Path.GetExtension(file) != ".pdf") || (System.IO.Path.GetExtension(file) != ".exe")) && (System.IO.Path.GetExtension(file) != ".txt"))
+                    {
+                        convertFile(file);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+        private void convertFile(string file, string emailSender)
+        {
+            string inExtension = System.IO.Path.GetExtension(file);
+            if (inExtension.ToLower() != ".pdf")
+            {
+                byte[] input = ReadByteArray(file);
+                try
+                {
+                    if (System.IO.Path.GetFileName(file) == "Message_Body.doc")
+                    {
+                        cc = new Converter.ConverterService();
+                        Converter.converterOptions options = new Converter.converterOptions();
+                        options.converterOptions1 = "pdf.archive=true&pdf.embedFonts=true&pdfa.level=2a&reportContentProblems=true";
+                        options.serviceOptions = "billing.applicationName=EasySender " + System.DirectoryServices.AccountManagement.UserPrincipal.Current.ToString();
+                        options.sourceExtension = inExtension;
+                        options.targetExtension = ".pdf";
+                        byte[] output = cc.convertDocument(options, input);
+                        //byte[] output = cc.convertDocumentSimple(inExtension, ".pdf", "pdf.embedFonts=true&reportContentProblems=true", input);
+                        //byte[] output = cc.convertDocumentSimple(inExtension, ".pdf", "", input);
+                        string outFile = workDir + System.IO.Path.GetFileNameWithoutExtension(file) + ".pdf";
+                        WriteByteArray(output, outFile);
+                        
+                    }
+                    else
+                    {
+                        cc = new Converter.ConverterService();
+                        byte[] output = cc.convertDocumentSimple(inExtension, ".pdf", "", input);
+                        string outFile = workDir + System.IO.Path.GetFileNameWithoutExtension(file) + ".pdf";
+                        WriteByteArray(output, outFile);
+                    }
+                }
+                catch (SoapException soapException)
+                {
+                    System.Windows.Forms.MessageBox.Show("PLEASE CHECK DOC IN EASYDMS!\nSoapException in convertFile method: " + soapException.Message + "\n in file: " + System.IO.Path.GetFileName(file) + "\nIN EMAIL from: "+emailSender);
+                    isConverted = false;
+                }
+                catch (Exception ex)
+                {
+                    System.Windows.Forms.MessageBox.Show("PLEASE CHECK DOC IN EASYDMS!\nException in convertFile method: " + ex.Message + "\n in file: " + System.IO.Path.GetFileName(file)+ "\nIN EMAIL from: "+emailSender);
+                    isConverted = false;
+                }
+            }
+            //Console.WriteLine("Converting file {0}.", System.IO.Path.GetFileName(file));
+
+            //string inExtension = System.IO.Path.GetExtension(file);
+            //if (inExtension.ToLower() != ".pdf")
+            //{
+            //    byte[] input = ReadByteArray(file);
+            //    try
+            //    {
+            //        if (System.IO.Path.GetFileName(file) == "Message_Body.msg")
+            //        {
+            //            cc = new Converter.ConverterService();
+            //            //byte[] output = cc.convertDocumentSimple(inExtension, ".pdf", "pdf.archive=true&pdf.embedFonts=true&pdfa.level=2a", input);
+            //            byte[] output = cc.convertDocumentSimple(inExtension, ".pdf", "", input);
+            //            string outFile = workDir + System.IO.Path.GetFileNameWithoutExtension(file) + ".pdf";
+            //            WriteByteArray(output, outFile);
+            //        }
+            //        else
+            //        {
+            //            cc = new Converter.ConverterService();
+            //            byte[] output = cc.convertDocumentSimple(inExtension, ".pdf", "", input);
+            //            string outFile = workDir + System.IO.Path.GetFileNameWithoutExtension(file) + ".pdf";
+            //            WriteByteArray(output, outFile);
+            //        }
+            //    }
+            //    catch (SoapException soapException)
+            //    {
+                    
+            //    }
+            //}
+        }
+        private bool processFiles()
+        {
+            bool output = true;
+            foreach (string file in Directory.GetFiles(workDir, "*"))
+            {
+                if ((System.IO.Path.GetExtension(file).ToLower() == ".zip"))
+                {
+                    try
+                    {
+                        ZipStorer zip = ZipStorer.Open(file, FileAccess.Read);
+                        List<ZipStorer.ZipFileEntry> dir = zip.ReadCentralDir();
+                        foreach (ZipStorer.ZipFileEntry entry in dir)
+                        {
+                            zip.ExtractFile(entry, workDir + entry.FilenameInZip);
+                        }
+                        zip.Close();
+                        System.IO.File.Delete(file);
+                    }
+                    catch (Exception)
+                    {
+                        output = false;
+                    }
+
+                }
+            }
+            foreach (string file in Directory.GetFiles(workDir, "*"))
+            {
+                if ((System.IO.Path.GetExtension(file).ToLower() == ".tif") || (System.IO.Path.GetExtension(file).ToLower() == ".tiff"))
+                {
+                    if (!GraphicsManipulation.ConvertTiffToJpeg(file))
+                        output = false;
+                    System.IO.File.Delete(file);
+                }
+            }
+
+            foreach (string file in Directory.GetFiles(workDir, "*"))
+            {
+                if (System.IO.Path.GetExtension(file).ToLower() == ".bmp")
+                {
+                    if (GraphicsManipulation.ConvertBmpToJpeg(file))
+                        output = false;
+                    System.IO.File.Delete(file);
+                }
+            }
+
+
+
+            foreach (string file in Directory.GetFiles(workDir, "*"))
+            {
+                if ((System.IO.Path.GetExtension(file).ToLower() == ".jpg") || (System.IO.Path.GetExtension(file).ToLower() == ".jpeg"))
+                {
+                    if (!GraphicsManipulation.ShrinkJPEG(file, 50L))
+                        output = false;
+                }
+            }
+            return output;
+        }
+        private void WriteByteArray(byte[] p, string fileName)
+        {
+            System.IO.File.WriteAllBytes(fileName, p);
+        }
+        private byte[] ReadByteArray(string p)
+        {
+            return System.IO.File.ReadAllBytes(p);
+        }
+    }
+}

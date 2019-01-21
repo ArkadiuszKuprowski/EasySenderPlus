@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://toolbox.webpdf.net/" targetNamespace="http://toolbox.webpdf.net/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="ToolboxException" type="tns:ToolboxException" />
+  <xs:element name="processDocument" type="tns:processDocument" />
+  <xs:element name="processDocumentResponse" type="tns:processDocumentResponse" />
+  <xs:element name="processDocumentSimple" type="tns:processDocumentSimple" />
+  <xs:element name="processDocumentSimpleResponse" type="tns:processDocumentSimpleResponse" />
+  <xs:element name="processDocumentURL" type="tns:processDocumentURL" />
+  <xs:element name="processDocumentURLResponse" type="tns:processDocumentURLResponse" />
+  <xs:complexType name="processDocument">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="options" type="tns:toolboxOptions" />
+      <xs:element xmlns:ns1="http://www.w3.org/2005/05/xmlmime" ns1:expectedContentTypes="application/octet-stream" minOccurs="0" name="fileContent" type="xs:base64Binary" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="toolboxOptions">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:options">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="toolboxOptions" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="options" abstract="true">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="serviceOptions" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="processDocumentResponse">
+    <xs:sequence>
+      <xs:element xmlns:ns2="http://www.w3.org/2005/05/xmlmime" ns2:expectedContentTypes="application/octet-stream" minOccurs="0" name="return" nillable="true" type="xs:base64Binary" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ToolboxException">
+    <xs:sequence>
+      <xs:element name="errorCode" type="xs:int" />
+      <xs:element minOccurs="0" name="message" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="processDocumentURL">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="options" type="tns:toolboxOptions" />
+      <xs:element minOccurs="0" name="fileURL" type="xs:anyURI" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="processDocumentURLResponse">
+    <xs:sequence>
+      <xs:element xmlns:ns3="http://www.w3.org/2005/05/xmlmime" ns3:expectedContentTypes="application/octet-stream" minOccurs="0" name="return" nillable="true" type="xs:base64Binary" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="processDocumentSimple">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="options" type="xs:string" />
+      <xs:element xmlns:ns4="http://www.w3.org/2005/05/xmlmime" ns4:expectedContentTypes="application/octet-stream" minOccurs="0" name="fileContent" type="xs:base64Binary" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="processDocumentSimpleResponse">
+    <xs:sequence>
+      <xs:element xmlns:ns5="http://www.w3.org/2005/05/xmlmime" ns5:expectedContentTypes="application/octet-stream" minOccurs="0" name="return" nillable="true" type="xs:base64Binary" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
