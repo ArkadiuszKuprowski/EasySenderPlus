@@ -116,7 +116,7 @@ namespace easyDMSTool
                     byte[] p = this.cc.convertDocumentSimple(extension, ".pdf", "pdf.archive=true&pdf.embedFonts=true&pdfa.level=2a&reportContentProblems=true", fileContent);
                     string fileName = this.workDir + Path.GetFileNameWithoutExtension(file) + ".pdf";
                     this.WriteByteArray(p, fileName);
-                    this.simplifyPdf(fileName);
+                   // this.simplifyPdf(fileName);
                 }
             }
             catch (SoapException exception)
@@ -139,10 +139,12 @@ namespace easyDMSTool
                     {
                         this.convertFile(str);
                     }
-                    else if (Path.GetExtension(str) == ".pdf")
-                    {
+                   /* disabling due to negative impact on performance, picture size and quality
+                    * else if (Path.GetExtension(str) == ".pdf")
+                   {
                         this.simplifyPdf(str);
                     }
+                    */
                 }
                 catch (Exception exception)
                 {
@@ -349,7 +351,8 @@ namespace easyDMSTool
             document.ExportAsFixedFormat(outputFileName, WdExportFormat.wdExportFormatPDF, false, WdExportOptimizeFor.wdExportOptimizeForPrint, WdExportRange.wdExportAllDocument, 1, 1, WdExportItem.wdExportDocumentContent, false, true, WdExportCreateBookmarks.wdExportCreateNoBookmarks, true, true, false, Missing.Value);
             document.Save();
             document.Close(Missing.Value, Missing.Value, Missing.Value);
-            this.simplifyPdf(outputFileName);
+            //disabled due to negative impact on performance, quality and size of picture + to enable editable pdf
+            //this.simplifyPdf(outputFileName); 
         }
 
         private void simplifyPdf(string file)
