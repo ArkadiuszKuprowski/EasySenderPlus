@@ -18,6 +18,8 @@ using Microsoft.Office.Interop.Excel;
 using easyDMSTool.Properties;
 using Application = Microsoft.Office.Interop.Outlook.Application;
 using Exception = System.Exception;
+using System.Xml;
+using System.Drawing;
 
 
 //using Microsoft.Exchange.WebServices.Data;
@@ -69,8 +71,8 @@ namespace easyDMSTool
         #region IRibbonExtensibility Members
 
         public string GetCustomUI(string ribbonID)
-        {           
-            return GetResourceText("easyDMSTool.ribbonEasyDMS.xml"); //TODO: unbind resource - define xml location from server name, not hardcoded one
+        {
+            return GetRemoteResourceText("\\\\EDMS\\EasySender\\config\\DocumentTypes.xml");
         }
 
         #endregion
@@ -84,9 +86,18 @@ namespace easyDMSTool
         }
         public System.Drawing.Bitmap getCustomImage(Office.IRibbonControl control)
         {
-            string name = control.Id.TrimEnd(new char[] { 'n', 't', 'b' }) + "Image";
-            return (System.Drawing.Bitmap)Resources.ResourceManager.GetObject(name);
+           string name = String.Concat("\\\\EDMS\\EasySender\\config\\flags\\", control.Id.TrimEnd(new char[] { '_','n', 't', 'b' }) + ".png");
+           //return (System.Drawing.Bitmap)Resources.ResourceManager.GetObject(name);
+           Bitmap pic = new Bitmap(name);
+           return pic;
         }
+
+        public Bitmap getRemoteImg(String fileName ){
+            String completeName = Path.Combine(@"C:\Users\Public\ES\", fileName);
+            Bitmap pic = new Bitmap(completeName);
+            return pic;
+        }
+
         public void getCurrentStatus(Office.IRibbonControl control)
         {
             System.Windows.Forms.MessageBox.Show("Server: " + ribbonEasyDMS.serverUrl + "\nUser ID: " + ribbonEasyDMS.userID);
@@ -114,43 +125,22 @@ namespace easyDMSTool
 
         #region Helpers
 
-        private static string GetResourceText(string resourceName)
+        private static string GetRemoteResourceText(string resourceName)
         {
-            string str;
-            Assembly executingAssembly = Assembly.GetExecutingAssembly();
-            string[] manifestResourceNames = executingAssembly.GetManifestResourceNames();
-            int index = 0;
-            while (true)
-            {
-                if (index >= manifestResourceNames.Length)
-                {
-                    return null;
-                }
-                if (string.Compare(resourceName, manifestResourceNames[index], StringComparison.OrdinalIgnoreCase) == 0)
-                {
-                    using (StreamReader reader = new StreamReader(executingAssembly.GetManifestResourceStream(manifestResourceNames[index])))
-                    {
-                        if (reader != null)
-                        {
-                            str = reader.ReadToEnd();
-                            break;
-                        }
-                    }
-                }
-                index++;
-            }
+            string str="";
+            StreamReader reader = new StreamReader(resourceName);
+            str = reader.ReadToEnd();
+            reader.Close();                              
             return str;
         }
 
-
-
-        public void initializeMembers()
+        public void initializeMembers() //TODO: clean up objects initialization
         {
             if (!Directory.Exists(@"C:\Users\Public\pdfWork"))
             {
                 Directory.CreateDirectory(@"C:\Users\Public\pdfWork");
             }
-            Settings.Default.userID = UserPrincipal.Current.ToString(); //TODO: clean up objects initialization
+            Settings.Default.userID = UserPrincipal.Current.ToString(); 
             currentUserGroupList = new List<string>();
             mapAD = mappingAD.Deserialize();
             groupAD = new List<string>();
@@ -352,7 +342,7 @@ namespace easyDMSTool
                 FileConverter fc = new FileConverter();
                 isSent = new FileConverter().Convert(folder, "", fileType, country, docType, serverUrl, countryCode, emailSender);
             };
-            worker.RunWorkerCompleted += (sender, e) => this.setDocumentType(objMail, docType, country, isSent, selectedAttachments, folder);
+            worker.RunWorkerCompleted += (sender, e) => this.setDocumentType(objMail, docType, country, isSent);
             worker.RunWorkerAsync();
         }
 
@@ -405,20 +395,6 @@ namespace easyDMSTool
             return path;
         }
 
-        public static void setUserPassword(string pwd)
-        {
-            userPassword = pwd;
-        }
-
-        public static void setUserID(string id)
-        {
-            userID = id;
-        }
-
-        public static void setServerUrl(string url)
-        {
-            serverUrl = url;
-        }
 
         public static string getUserID() => userID;
 
@@ -446,19 +422,31 @@ namespace easyDMSTool
             return exchangeUser?.PrimarySmtpAddress;
         }
 
-        private void setDocumentType(MailItem objMail, string itemType, string country, bool isSent, List<string> mAttachments, string folder)
+           
+        private void setDocumentType(MailItem objMail, string itemType, string country, bool isSent)
         {
-            this.setDocumentType(objMail, country);
-            if (isSent || (objMail == null))
+            try
             {
-                objMail.UserProperties["Document Type"].Value= itemType;
+                this.setDocumentType(objMail, country);
+                if (isSent || (objMail == null))
+                {
+                    objMail.UserProperties["Document Type"].Value = itemType;
+                }
+                else
+                {
+                    itemType = "NOT DELIVERED";
+                    objMail.UserProperties["Document Type"].Value = itemType;
+                }
+
+                objMail.Save();
             }
-            else
+            catch (Exception e)
             {
-                itemType = "NOT DELIVERED";
-                objMail.UserProperties["Document Type"].Value = itemType;
+                String caption = "OOPS";
+                String message = "Snap! \n\nWhy have you deleted the email right after sending it to EDMS? \nPlease check it in Easy. If something got lost - recover email. Re-send. Check Easy.\n\nAnd here goes error call stack (share it with SD):\n\n" + e.StackTrace;
+                DialogResult result;
+                result = MessageBox.Show(message, caption, MessageBoxButtons.OK, MessageBoxIcon.Hand);               
             }
-            objMail.Save();
         }
 
         private void setDocumentType(MailItem objMail, string country)
@@ -470,21 +458,21 @@ namespace easyDMSTool
             objMail.UserProperties["Country"].Value = country;
         }
 
-        private void setDocumentType(MailItem objMail, string itemType, string country, bool isSent)
+
+        public static void setUserPassword(string pwd)
         {
-            this.setDocumentType(objMail, country);
-            if (isSent || (objMail == null))
-            {
-                objMail.UserProperties["Document Type"].Value = itemType;
-            }
-            else
-            {
-                itemType = "NOT DELIVERED";
-                objMail.UserProperties["Document Type"].Value = itemType;
-            }
-            objMail.Save();
+            userPassword = pwd;
         }
 
+        public static void setUserID(string id)
+        {
+            userID = id;
+        }
+
+        public static void setServerUrl(string url)
+        {
+            serverUrl = url;
+        }
 
         #endregion
     }

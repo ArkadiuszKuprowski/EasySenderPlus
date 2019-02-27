@@ -33,7 +33,8 @@ namespace easyDMSTool
         static public List<mappingAD> Deserialize()
         {
             List<mappingAD> buttons;
-            System.IO.StreamReader reader = new System.IO.StreamReader("\\\\DEIS335\\SendToEasyDMS\\config\\AD_mapping.xml");
+            //TODO: take server from config
+            System.IO.StreamReader reader = new System.IO.StreamReader("\\\\EDMS\\EasySender\\config\\AD_mapping.xml");
             System.Xml.Serialization.XmlSerializer serializer = new System.Xml.Serialization.XmlSerializer(typeof(List<mappingAD>));
             buttons = (List<mappingAD>)serializer.Deserialize(reader);
             reader.Close();

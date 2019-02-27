@@ -3973,7 +3973,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<row><td>ISTheme</td><td>InstallShield Blue.theme</td></row>
 		<row><td>ISUSLock</td><td>{1B656E47-33F7-4735-AA65-E6D77EF28ADD}</td></row>
 		<row><td>ISUSSignature</td><td>{3D781D4E-7E07-4020-80BE-E76CE2901DCE}</td></row>
-		<row><td>ISVisitedViews</td><td>viewAssistant,viewProject,viewObjects,viewUI,viewSystemSearch,viewRelease,viewISToday,viewUpgradePaths,viewCustomActions,viewAppFiles,viewUpdateService,viewRegistry</td></row>
+		<row><td>ISVisitedViews</td><td>viewAssistant,viewProject,viewObjects,viewUI,viewSystemSearch,viewRelease,viewISToday,viewUpgradePaths,viewCustomActions,viewAppFiles,viewUpdateService,viewRegistry,viewLearnMore</td></row>
 		<row><td>Limited</td><td>1</td></row>
 		<row><td>LockPermissionMode</td><td>1</td></row>
 		<row><td>MsiExecCmdLineOptions</td><td/></row>
@@ -4353,7 +4353,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<row><td>PROGRAMFILETOLAUNCHATEND</td><td>[INSTALLDIR]easyDMSTool.Primary output</td><td/></row>
 		<row><td>ProductCode</td><td>{ADB42056-0E02-4E25-8F23-73C6E94CFAB5}</td><td/></row>
 		<row><td>ProductName</td><td>Easy Sender</td><td/></row>
-		<row><td>ProductVersion</td><td>2.5.0.4</td><td/></row>
+		<row><td>ProductVersion</td><td>2.5.1.0</td><td/></row>
 		<row><td>ProgressType0</td><td>install</td><td/></row>
 		<row><td>ProgressType1</td><td>Installing</td><td/></row>
 		<row><td>ProgressType2</td><td>installed</td><td/></row>

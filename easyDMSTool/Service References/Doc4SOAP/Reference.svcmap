@@ -18,11 +18,11 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://deis335:11001/?wsdl" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://edms:11001/?wsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
     <MetadataFile FileName="item.xsd" MetadataType="Schema" ID="921ab8bf-fab3-4bf3-b8a9-f1dca1096302" SourceId="1" SourceUrl="http://schemas.xmlsoap.org/soap/encoding/" />
-    <MetadataFile FileName="DOCUMENTS1.wsdl" MetadataType="Wsdl" ID="ac7630db-df15-4810-8e2a-97613439aaf6" SourceId="1" SourceUrl="http://deis335:11001/?wsdl" />
+    <MetadataFile FileName="DOCUMENTS1.wsdl" MetadataType="Wsdl" ID="ac7630db-df15-4810-8e2a-97613439aaf6" SourceId="1" SourceUrl="http://edms:11001/?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

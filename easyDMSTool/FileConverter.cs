@@ -234,8 +234,10 @@ namespace easyDMSTool
                         flag = true;
                         this.isSentToEasy = true;
                     }
-                    catch (FaultException)
+                    //TOD: handle login issue
+                    catch (FaultException fex)
                     {
+                        MessageBox.Show("Cought some exception \n" + fex.Message);
                         Thread.Sleep(500);
                         this.isSentToEasy = false;
                         this.count++;
