@@ -92,11 +92,11 @@ namespace easyDMSTool
         private void serverProd_rbtn_CheckedChanged(object sender, EventArgs e)
         {
 
-            easyDMSTool.Properties.Settings.Default.serverUrl = "deis335";
+            easyDMSTool.Properties.Settings.Default.serverUrl = "edms";
             easyDMSTool.Properties.Settings.Default.isCheckedServerProd_rbtn = true;
             easyDMSTool.Properties.Settings.Default.isCheckedServerTest_rbtn = false;
             easyDMSTool.Properties.Settings.Default.isCheckedServerOther_rbtn = false;
-            ribbonEasyDMS.setServerUrl("deis335");
+            ribbonEasyDMS.setServerUrl("emds");
             onDirty();
         }
         private void serverOther_rbtn_CheckedChanged(object sender, EventArgs e)
@@ -139,7 +139,7 @@ namespace easyDMSTool
         {
             if (userID_txtbox.Enabled)
             {
-                if (userID_txtbox.Text != "" )
+                if (userID_txtbox.Text != "")
                 {
                     easyDMSTool.Properties.Settings.Default.userID = userID_txtbox.Text;
                     ribbonEasyDMS.setUserID(easyDMSTool.Properties.Settings.Default.userID);

@@ -251,6 +251,7 @@
     <Compile Include="Settings.cs" />
     <Compile Include="TraceListener.cs" />
     <Compile Include="UrlValidator.cs" />
+    <Compile Include="WarpClient.cs" />
     <Compile Include="Web References\Converter\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -278,7 +279,9 @@
     <EmbeddedResource Include="SelectAttachments.resx">
       <DependentUpon>SelectAttachments.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="key.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

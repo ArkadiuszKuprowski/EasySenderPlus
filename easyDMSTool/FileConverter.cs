@@ -44,8 +44,52 @@ namespace easyDMSTool
                 return false;
             }
             this.convertFiles();
-            return (this.isConverted && this.moveOutput(outputFile, fileType, country, docType, countryCode, this.mergeFiles(), emailSender));
+            return isConverted;
         }
+
+        private void convertFiles()
+        {
+            foreach (string file in Directory.GetFiles(this.workDir, "*"))
+            {
+                if ((Path.GetExtension(file) != ".pdf") && (Path.GetExtension(file) != ".exe"))
+                {
+                    string extension = Path.GetExtension(file);
+                    byte[] fileContent = this.ReadByteArray(file);
+                    try
+                    {
+                        if ((extension.ToLower() == ".xls") | (extension.ToLower() == ".xlsx"))
+                        {
+                            this.convertExcel(file);
+                        }
+                        else if (extension == ".txt")
+                        {
+                            File.Move(file, Path.ChangeExtension(file, ".docx"));
+                        }
+                        else if (extension == ".rtf")
+                        {
+                            this.saveRFTasPDF(file);
+                        }
+                        else if ((extension != ".eml") && (extension != ".msg") && ((extension!="") | (extension != null)))
+                        {
+                            this.cc = new ConverterService();
+                            byte[] p = this.cc.convertDocumentSimple(extension, ".pdf", "pdf.archive=true&pdf.embedFonts=true&pdfa.level=2a&reportContentProblems=true", fileContent);
+                            string fileName = this.workDir + Path.GetFileNameWithoutExtension(file) + ".pdf";
+                            this.WriteByteArray(p, fileName);
+                        }
+                    }
+                    catch (SoapException exception)
+                    {
+                        MessageBox.Show("SOAP conversion service error!\nSoapException in convertFile method: " + exception.Message + "\n in file: " + Path.GetFileName(file));
+                    }
+                    catch (Exception exception)
+                    {
+                        MessageBox.Show("Conversion service error!\nException in convertFile method: " + exception.Message + "\n in file: " + Path.GetFileName(file));
+                    }
+                }
+            
+            }
+        }
+
 
         private void convertExcel(string fileName)
         {
@@ -92,96 +136,25 @@ namespace easyDMSTool
             }
         }
 
-        private void convertFile(string file)
-        {
-            string extension = Path.GetExtension(file);
-            byte[] fileContent = this.ReadByteArray(file);
-            try
-            {
-                if ((extension.ToLower() == ".xls") | (extension.ToLower() == ".xlsx"))
-                {
-                    this.convertExcel(file);
-                }
-                else if (extension == ".txt")
-                {
-                    File.Move(file, Path.ChangeExtension(file, ".docx"));
-                }
-                else if (extension == ".rtf")
-                {
-                    this.saveRFTasPDF(file);
-                }
-                else if ((extension != ".eml") && (extension != ".msg"))
-                {
-                    this.cc = new ConverterService();
-                    byte[] p = this.cc.convertDocumentSimple(extension, ".pdf", "pdf.archive=true&pdf.embedFonts=true&pdfa.level=2a&reportContentProblems=true", fileContent);
-                    string fileName = this.workDir + Path.GetFileNameWithoutExtension(file) + ".pdf";
-                    this.WriteByteArray(p, fileName);
-                   // this.simplifyPdf(fileName);
-                }
-            }
-            catch (SoapException exception)
-            {
-                MessageBox.Show("PLEASE CHECK DOC IN EASYDMS!\nSoapException in convertFile method: " + exception.Message + "\n in file: " + Path.GetFileName(file));
-            }
-            catch (Exception exception2)
-            {
-                MessageBox.Show("PLEASE CHECK DOC IN EASYDMS!\nException in convertFile method: " + exception2.Message + "\n in file: " + Path.GetFileName(file));
-            }
-        }
 
-        private void convertFiles()
-        {
-            foreach (string str in Directory.GetFiles(this.workDir, "*"))
-            {
-                try
-                {
-                    if ((Path.GetExtension(str) != ".pdf") && (Path.GetExtension(str) != ".exe"))
-                    {
-                        this.convertFile(str);
-                    }
-                   /* disabling due to negative impact on performance, picture size and quality
-                    * else if (Path.GetExtension(str) == ".pdf")
-                   {
-                        this.simplifyPdf(str);
-                    }
-                    */
-                }
-                catch (Exception exception)
-                {
-                    MessageBox.Show("PLEASE CHECK DOC IN EASYDMS!\nSoapException in convertFile method: " + exception.Message + "\n in file: " + Path.GetFileName(str));
-                }
-            }
-        }
-
-        private string mergeFiles()
+        public string mergeFiles()
         {
             string baseFile = "";
-            string[] files = Directory.GetFiles(this.workDir, "*Message_Body.pdf");
-            if (files.Length <= 0)
-            {
-                baseFile = Directory.GetFiles(this.workDir, "*.pdf").Last<string>();
-            }
-            else
-            {
-                baseFile = (Directory.GetFiles(this.workDir, "Message_Body.pdf").Length != 1) ? files.First<string>() : Directory.GetFiles(this.workDir, "Message_Body.pdf")[0];
-                this.mergeFiles(baseFile, files);
-            }
-            this.mergeFiles(baseFile, Directory.GetFiles(this.workDir, "*.pdf"));
-            return baseFile;
-        }
-
-        private void mergeFiles(string file1, string file2)
-        {
-            this.t = new ToolboxService();
-            this.o = new toolboxOptions();
-            string p = file1;
-            this.base64Encoder = new Base64Encoder(this.ReadByteArray(file2));
-            this.o.serviceOptions = "pdf.pdfOperation=7";
-            this.o.toolboxOptions1 = $"pdf.merge.pdfFile={new string(this.base64Encoder.GetEncoded())}";
-            byte[] fileContent = this.ReadByteArray(p);
-            byte[] buffer2 = this.t.processDocument(this.o, fileContent);
-            this.WriteByteArray(buffer2, p);
-        }
+            string[] files;
+            files = Directory.GetFiles(this.workDir, "Message_Body.pdf");
+                if (files.Length <= 0)
+                {
+                    baseFile = Directory.GetFiles(this.workDir, "*.pdf").Last<string>();
+                }
+                else
+                {
+                    baseFile = (Directory.GetFiles(this.workDir, "Message_Body.pdf").Length != 1) ? files.First<string>() : Directory.GetFiles(this.workDir, "Message_Body.pdf")[0];
+                    this.mergeFiles(baseFile, files);
+                }
+                this.mergeFiles(baseFile, Directory.GetFiles(this.workDir, "*.pdf"));
+                return baseFile;
+          
+        }    
 
         private void mergeFiles(string baseFile, string[] rest)
         {
@@ -194,6 +167,20 @@ namespace easyDMSTool
                 }
             }
         }
+
+        private void mergeFiles(string file1, string file2)      
+        {
+            this.t = new ToolboxService();
+            this.o = new toolboxOptions();
+            string p = file1;
+            this.base64Encoder = new Base64Encoder(this.ReadByteArray(file2));
+            this.o.serviceOptions = "pdf.pdfOperation=7";
+            this.o.toolboxOptions1 = $"pdf.merge.pdfFile={new string(this.base64Encoder.GetEncoded())}";
+            byte[] fileContent = this.ReadByteArray(p);
+            byte[] buffer2 = this.t.processDocument(this.o, fileContent);
+            this.WriteByteArray(buffer2, p);
+        }
+
 
         private bool moveOutput(string outputFile, string fileType, string country, string docType, string countryCode, string sourceFile, string emailSender)
         {
@@ -340,9 +327,7 @@ namespace easyDMSTool
             }
             return flag;
         }
-
-        private byte[] ReadByteArray(string p) =>
-            File.ReadAllBytes(p);
+          
 
         private void saveRFTasPDF(string fileName)
         {
@@ -353,35 +338,10 @@ namespace easyDMSTool
             document.ExportAsFixedFormat(outputFileName, WdExportFormat.wdExportFormatPDF, false, WdExportOptimizeFor.wdExportOptimizeForPrint, WdExportRange.wdExportAllDocument, 1, 1, WdExportItem.wdExportDocumentContent, false, true, WdExportCreateBookmarks.wdExportCreateNoBookmarks, true, true, false, Missing.Value);
             document.Save();
             document.Close(Missing.Value, Missing.Value, Missing.Value);
-            //disabled due to negative impact on performance, quality and size of picture + to enable editable pdf
-            //this.simplifyPdf(outputFileName); 
         }
 
-        private void simplifyPdf(string file)
-        {
-            try
-            {
-                this.t = new ToolboxService();
-                this.o = new toolboxOptions();
-                this.o.serviceOptions = "pdf.pdfOperation=8";
-                this.o.toolboxOptions1 = "pdf.image.formatName=tif&pdf.image.tiffMultiPage=true&pdf.image.pageNumber=1-50&pdf.image.tiffCompression=8&pdf.image.dpiResolution=200";
-                string fileName = this.workDir + Path.GetFileNameWithoutExtension(file) + ".tif";
-                byte[] p = this.t.processDocument(this.o, this.ReadByteArray(file));
-                this.WriteByteArray(p, fileName);
-                File.Delete(file);
-                this.cc = new ConverterService();
-                byte[] buffer2 = this.cc.convertDocumentSimple(".tif", ".pdf", "pageRange=1-50&pdf.compression=true&pdf.reduceResolution=true&pdf.maxResolution=200&reportContentProblems=true", this.ReadByteArray(fileName));
-                this.WriteByteArray(buffer2, this.workDir + Path.GetFileNameWithoutExtension(fileName) + ".pdf");
-            }
-            catch (SoapException exception)
-            {
-                MessageBox.Show("PLEASE CHECK DOC IN EASYDMS!\nSoapException in simplifyPdf method: " + exception.Message + "\n in file: " + Path.GetFileName(file));
-            }
-            catch (Exception exception2)
-            {
-                MessageBox.Show("PLEASE CHECK DOC IN EASYDMS!\nException in simplifyPdf method: " + exception2.Message + "\n in file: " + Path.GetFileName(file));
-            }
-        }
+        private byte[] ReadByteArray(string p) =>
+        File.ReadAllBytes(p);
 
         private void WriteByteArray(byte[] p, string fileName)
         {
