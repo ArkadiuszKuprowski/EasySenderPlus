@@ -31,7 +31,7 @@ namespace easyDMSTool
         public bool  sendDocument2EDMS(String docType, String cc, String information, String exportScheme, String currentUser, String fileName, long fileSize, String fileBase64) {
 
             String docString = xml2string(buildXML(docType, cc, information, exportScheme, currentUser, fileName, fileSize, fileBase64));
-            return postXMLData("http://deis044:4420/ccdocupload?queuestate=onHold", docString);            
+            return postXMLData("http://deis044:4420/ccdocupload", docString);            
         }
         
 

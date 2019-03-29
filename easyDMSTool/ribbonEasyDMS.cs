@@ -220,25 +220,15 @@ namespace easyDMSTool
                         {
                             string path = Path.Combine(@"C:\Users\Public\pdfWork\", item.Attachments[num].FileName);
                             item.Attachments[num].SaveAsFile(path);
-                            MailItem item2 = Globals.ThisAddIn.Application.Session.OpenSharedItem(path) as MailItem;
-                            list.Add(item2.Subject.Replace(";", "") + "_Message_Body");
-                            int num2 = 1;
-                            while (true)
+                            MailItem attachedEmail = Globals.ThisAddIn.Application.Session.OpenSharedItem(path) as MailItem;
+                            list.Add(attachedEmail.Subject.Replace(";", "") + "_Message_Body");
+
+                            //add attachment to list
+                            int attachmentsCounter = 0;
+                            foreach (System.Net.Mail.Attachment attachment in attachedEmail.Attachments)
                             {
-                                if (num2 > item2.Attachments.Count)
-                                {
-                                    try
-                                    {
-                                        File.Delete(path);
-                                    }
-                                    catch (SystemException exception1)
-                                    {
-                                        string message = exception1.Message;
-                                    }
-                                    break;
-                                }
-                                list.Add(item2.Subject + "_" + item2.Attachments[num2].FileName);
-                                num2++;
+                                attachmentsCounter++;
+                                list.Add(attachedEmail.Subject + "_" + attachedEmail.Attachments[attachmentsCounter].FileName);
                             }
                         }
                         num++;
@@ -253,7 +243,7 @@ namespace easyDMSTool
             string information = currentUser + ": e-mail from " + item.SenderName + " " + this.GetSenderSMTPAddress(item);
             try
             {
-                string docFileName = Directory.GetFiles(folder, "*.pdf")[0];
+                string docFileName = Directory.GetFiles(folder, "*Message_Body.pdf")[0];
                 long fileSize = new System.IO.FileInfo(docFileName).Length;
                 string fileString = new string(new Base64Encoder(File.ReadAllBytes(docFileName)).GetEncoded());
                 WarpClient wc = new WarpClient();
@@ -323,7 +313,7 @@ namespace easyDMSTool
             return true;
         }
 
-        private bool ExtractEmailBody(MailItem objMail, string folder, string name)
+        private string ExtractEmailBody(MailItem objMail, string folder, string name)
         {
             try
             {
@@ -331,12 +321,12 @@ namespace easyDMSTool
                 string path = Path.Combine(folder, name);
                 Directory.CreateDirectory(folder);
                 objMail.SaveAs(path, OlSaveAsType.olRTF);
-                return true;
+                return path;
             }
             catch (Exception exception1)
             {
                 MessageBox.Show("Sth happened while working on file " + folder + name + ". \n Error caught: " + exception1.Message);
-                return false;
+                return "";
             }
         }
         
@@ -345,16 +335,9 @@ namespace easyDMSTool
         {
             bool isConverted = false;
             FileConverter fc = new FileConverter();
-            BackgroundWorker worker = new BackgroundWorker();
-            worker.DoWork += (sender, e) =>  isConverted = fc.Convert(folder, "", fileType, country, docType, serverUrl, countryCode, "email from " + objMail.SenderName + " " + this.GetSenderSMTPAddress(objMail));    
-         
-            worker.RunWorkerCompleted += (sender, e) =>
-            {
-                fc.mergeFiles();
-                this.setDocumentType(objMail, docType, country, isConverted);
-            };
-            worker.RunWorkerAsync();
-          
+            isConverted = fc.Convert(folder, "", fileType, country, docType, serverUrl, countryCode, "email from " + objMail.SenderName + " " + this.GetSenderSMTPAddress(objMail));    
+            fc.mergeFiles();
+            this.setDocumentType(objMail, docType, country, isConverted);
         }
 
 
@@ -362,15 +345,9 @@ namespace easyDMSTool
         {
             FileConverter fc = new FileConverter();
             bool isConverted = false;
-            BackgroundWorker worker = new BackgroundWorker();
-            worker.DoWork += (sender, e) => isConverted = fc.Convert(folder, "", fileType, country, docType, serverUrl, countryCode, emailSender);
-            worker.RunWorkerCompleted += (sender, e) =>
-            {
-                fc.mergeFiles();
-                this.setDocumentType(objMail, docType, country, isConverted);
-            };
-            worker.RunWorkerAsync();
-           
+            isConverted = fc.Convert(folder, "", fileType, country, docType, serverUrl, countryCode, emailSender);
+            fc.mergeFiles();
+            this.setDocumentType(objMail, docType, country, isConverted);           
         }
 
         private string getOutputFolder(string country, string docType, MailItem objMail)
