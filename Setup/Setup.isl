@@ -342,7 +342,8 @@
 		<col def="S0">ISDotNetInstallerArgsRollback</col>
 		<row><td>ISX_DEFAULTCOMPONENT</td><td>{051EDB1B-38A1-4FDB-AC4E-2688ECA95302}</td><td>INSTALLDIR</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT1</td><td>{28FC4C29-DDF0-492E-86E4-CFAB1BB4F9A4}</td><td>INSTALLDIR</td><td>258</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>easyDMSTool.Primary_output</td><td>{7FFC8490-99E4-401A-B031-D6A5598BEAD6}</td><td>INSTALLDIR</td><td>2</td><td/><td>easydmstool.primary_output</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>ISX_DEFAULTCOMPONENT2</td><td>{12327342-2A1A-4171-A457-F10ECBC99125}</td><td>DATABASEDIR</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>easyDMSTool.Primary_output</td><td>{61101DD8-04B3-4396-9DF6-EBA95E3E8648}</td><td>INSTALLDIR</td><td>2</td><td/><td>easydmstool.primary_output</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 	</table>
 
 	<table name="Condition">
@@ -1053,8 +1054,10 @@
 	<table name="CreateFolder">
 		<col key="yes" def="s72">Directory_</col>
 		<col key="yes" def="s72">Component_</col>
+		<row><td>DATABASEDIR</td><td>ISX_DEFAULTCOMPONENT2</td></row>
 		<row><td>INSTALLDIR</td><td>ISX_DEFAULTCOMPONENT</td></row>
 		<row><td>INSTALLDIR</td><td>ISX_DEFAULTCOMPONENT1</td></row>
+		<row><td>INSTALLDIR</td><td>ISX_DEFAULTCOMPONENT2</td></row>
 		<row><td>INSTALLDIR</td><td>easyDMSTool.Primary_output</td></row>
 	</table>
 
@@ -1870,6 +1873,7 @@
 		<col key="yes" def="s72">Component_</col>
 		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT</td></row>
 		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT1</td></row>
+		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT2</td></row>
 		<row><td>AlwaysInstall</td><td>easyDMSTool.Primary_output</td></row>
 	</table>
 
@@ -1885,9 +1889,9 @@
 		<col def="S255">ISBuildSourcePath</col>
 		<col def="I4">ISAttributes</col>
 		<col def="S72">ISComponentSubFolder_</col>
-		<row><td>easydmstool.dll.manifest</td><td>ISX_DEFAULTCOMPONENT</td><td>EASYDM~1.MAN|easyDMSTool.dll.manifest</td><td>0</td><td/><td/><td/><td>1</td><td>\\deis335\SendToEasyDMS\EasySender_2.1\easyDMSTool\easyDMSTool\bin\Release\easyDMSTool.dll.manifest</td><td>1</td><td/></row>
+		<row><td>easydmstool.dll.manifest</td><td>ISX_DEFAULTCOMPONENT</td><td>EASYDM~1.MAN|easyDMSTool.dll.manifest</td><td>0</td><td/><td/><td/><td>1</td><td>E:\Easy Sender\EasySender-Recovered_2.4\EasySender-Recovered_2.4\easyDMSTool\bin\Release\easyDMSTool.dll.manifest</td><td>1</td><td/></row>
 		<row><td>easydmstool.primary_output</td><td>easyDMSTool.Primary_output</td><td>easyDMSTool.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;easyDMSTool&gt;|Built</td><td>3</td><td/></row>
-		<row><td>easydmstool.vsto</td><td>ISX_DEFAULTCOMPONENT</td><td>EASYDM~1.VST|easyDMSTool.vsto</td><td>0</td><td/><td/><td/><td>1</td><td>\\deis335\SendToEasyDMS\EasySender_2.1\easyDMSTool\easyDMSTool\bin\Release\easyDMSTool.vsto</td><td>1</td><td/></row>
+		<row><td>easydmstool.vsto</td><td>ISX_DEFAULTCOMPONENT</td><td>EASYDM~1.VST|easyDMSTool.vsto</td><td>0</td><td/><td/><td/><td>1</td><td>E:\Easy Sender\EasySender-Recovered_2.4\EasySender-Recovered_2.4\easyDMSTool\bin\Release\easyDMSTool.vsto</td><td>1</td><td/></row>
 	</table>
 
 	<table name="FileSFPCatalog">
@@ -2033,7 +2037,8 @@
 		<col def="S0">Miscellaneous</col>
 		<row><td>ISX_DEFAULTCOMPONENT</td><td/><td/><td>_1290AA75_1EF9_49E6_82C8_5909C6E5CBBA_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT1</td><td/><td/><td>_B732AD86_EA07_4364_BFD4_215AC4E71D57_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>easyDMSTool.Primary_output</td><td/><td/><td>_13890DD9_CA6E_476A_A445_4E4A5F4A9CC6_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>ISX_DEFAULTCOMPONENT2</td><td/><td/><td>_AC1EEBFF_D27B_45F0_B465_DE6C594AFFC7_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>easyDMSTool.Primary_output</td><td/><td/><td>_1553CFB1_DF60_4C4A_BC09_55169A85F50B_FILTER</td><td/><td/><td/><td/></row>
 	</table>
 
 	<table name="ISCustomActionReference">
@@ -3973,7 +3978,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<row><td>ISTheme</td><td>InstallShield Blue.theme</td></row>
 		<row><td>ISUSLock</td><td>{1B656E47-33F7-4735-AA65-E6D77EF28ADD}</td></row>
 		<row><td>ISUSSignature</td><td>{3D781D4E-7E07-4020-80BE-E76CE2901DCE}</td></row>
-		<row><td>ISVisitedViews</td><td>viewAssistant,viewProject,viewObjects,viewUI,viewSystemSearch,viewRelease,viewISToday,viewUpgradePaths,viewCustomActions,viewAppFiles,viewUpdateService,viewRegistry</td></row>
+		<row><td>ISVisitedViews</td><td>viewAssistant,viewProject,viewObjects,viewUI,viewSystemSearch,viewRelease,viewISToday,viewUpgradePaths,viewCustomActions,viewAppFiles,viewUpdateService,viewRegistry,viewLearnMore</td></row>
 		<row><td>Limited</td><td>1</td></row>
 		<row><td>LockPermissionMode</td><td>1</td></row>
 		<row><td>MsiExecCmdLineOptions</td><td/></row>
@@ -4353,7 +4358,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<row><td>PROGRAMFILETOLAUNCHATEND</td><td>[INSTALLDIR]easyDMSTool.Primary output</td><td/></row>
 		<row><td>ProductCode</td><td>{ADB42056-0E02-4E25-8F23-73C6E94CFAB5}</td><td/></row>
 		<row><td>ProductName</td><td>Easy Sender</td><td/></row>
-		<row><td>ProductVersion</td><td>2.5.0.4</td><td/></row>
+		<row><td>ProductVersion</td><td>2.6.0.0</td><td/></row>
 		<row><td>ProgressType0</td><td>install</td><td/></row>
 		<row><td>ProgressType1</td><td>Installing</td><td/></row>
 		<row><td>ProgressType2</td><td>installed</td><td/></row>

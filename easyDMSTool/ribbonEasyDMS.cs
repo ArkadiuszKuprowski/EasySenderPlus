@@ -18,6 +18,9 @@ using Microsoft.Office.Interop.Excel;
 using easyDMSTool.Properties;
 using Application = Microsoft.Office.Interop.Outlook.Application;
 using Exception = System.Exception;
+using System.Xml;
+using System.Drawing;
+using Base64Tools;
 
 
 //using Microsoft.Exchange.WebServices.Data;
@@ -69,8 +72,8 @@ namespace easyDMSTool
         #region IRibbonExtensibility Members
 
         public string GetCustomUI(string ribbonID)
-        {           
-            return GetResourceText("easyDMSTool.ribbonEasyDMS.xml"); //TODO: unbind resource - define xml location from server name, not hardcoded one
+        {
+            return GetRemoteResourceText("\\\\EDMS\\EasySender\\config\\DocumentTypes.xml");
         }
 
         #endregion
@@ -84,9 +87,11 @@ namespace easyDMSTool
         }
         public System.Drawing.Bitmap getCustomImage(Office.IRibbonControl control)
         {
-            string name = control.Id.TrimEnd(new char[] { 'n', 't', 'b' }) + "Image";
-            return (System.Drawing.Bitmap)Resources.ResourceManager.GetObject(name);
+           string name = String.Concat("\\\\EDMS\\EasySender\\config\\flags\\", control.Id.TrimEnd(new char[] { '_','n', 't', 'b' }) + ".png");
+           Bitmap pic = new Bitmap(name);
+           return pic;
         }
+
         public void getCurrentStatus(Office.IRibbonControl control)
         {
             System.Windows.Forms.MessageBox.Show("Server: " + ribbonEasyDMS.serverUrl + "\nUser ID: " + ribbonEasyDMS.userID);
@@ -107,42 +112,21 @@ namespace easyDMSTool
         public void onButtonClicked(Office.IRibbonControl control)
         {
             string[] strArray = control.Tag.Split(new char[] { ';' });
-            this.ExtractEmail(strArray[2], strArray[3], strArray[0], strArray[1], control.Id);
+            this.ExtractEmail(strArray[2], strArray[3], strArray[0], strArray[1], strArray[4], control.Id);
         }
 
         #endregion
 
         #region Helpers
 
-        private static string GetResourceText(string resourceName)
+        private static string GetRemoteResourceText(string resourceName)
         {
-            string str;
-            Assembly executingAssembly = Assembly.GetExecutingAssembly();
-            string[] manifestResourceNames = executingAssembly.GetManifestResourceNames();
-            int index = 0;
-            while (true)
-            {
-                if (index >= manifestResourceNames.Length)
-                {
-                    return null;
-                }
-                if (string.Compare(resourceName, manifestResourceNames[index], StringComparison.OrdinalIgnoreCase) == 0)
-                {
-                    using (StreamReader reader = new StreamReader(executingAssembly.GetManifestResourceStream(manifestResourceNames[index])))
-                    {
-                        if (reader != null)
-                        {
-                            str = reader.ReadToEnd();
-                            break;
-                        }
-                    }
-                }
-                index++;
-            }
+            string str="";
+            StreamReader reader = new StreamReader(resourceName);
+            str = reader.ReadToEnd();
+            reader.Close();                              
             return str;
         }
-
-
 
         public void initializeMembers()
         {
@@ -150,7 +134,7 @@ namespace easyDMSTool
             {
                 Directory.CreateDirectory(@"C:\Users\Public\pdfWork");
             }
-            Settings.Default.userID = UserPrincipal.Current.ToString(); //TODO: clean up objects initialization
+            Settings.Default.userID = UserPrincipal.Current.ToString(); 
             currentUserGroupList = new List<string>();
             mapAD = mappingAD.Deserialize();
             groupAD = new List<string>();
@@ -172,14 +156,15 @@ namespace easyDMSTool
         }
 
 
-        private void ExtractEmail(string country, string fileType, string docType, string countryCode, string emailType)
+        private void ExtractEmail(string country, string fileType, string docType, string countryCode, string exportScheme, string emailType)
         {
             Application application = Globals.ThisAddIn.Application;
+            string userID = UserPrincipal.Current.ToString();
             if (application.ActiveExplorer().Selection.Count > 0)
             {
                 foreach (MailItem item in application.ActiveExplorer().Selection)
                 {
-                    string folder = this.GetOutputFolder(country, docType, item);
+                    string folder = this.getOutputFolder(country, docType, item);
                     if (item.Attachments.Count <= 0)
                     {
                         if (MessageBox.Show("Do you really want to send this e-mail to EDMS?", "Sending e-mail without attachments.", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
@@ -188,6 +173,7 @@ namespace easyDMSTool
                         }
                         this.ExtractEmailBody(item, folder, "Message_Body.rtf");
                         this.ConvertFiles(folder, country, fileType, docType, countryCode, item);
+                        this.sendDoc2EDMS(docType, countryCode, exportScheme, userID, "exported email.pdf", folder, item);
                         continue;
                     }
                     List<string> list = new List<string>();
@@ -203,17 +189,21 @@ namespace easyDMSTool
                                 {
                                     this.ExtractEmailBody(item, folder, "Message_Body.rtf");
                                     this.ConvertFiles(folder, country, fileType, docType, countryCode, item);
+                                    this.sendDoc2EDMS(docType, countryCode, exportScheme, userID, "exported email.pdf", folder, item);
                                 }
                                 else if ((attachments.selectedAttachments.Capacity > 0) && !attachments.withMailBody)
                                 {
                                     this.ExtractEmailAttachments(application, item, folder, attachments.selectedAttachments);
                                     this.ConvertFiles(folder, country, fileType, docType, countryCode, item, attachments.selectedAttachments, "e-mail from " + item.SenderName + " " + this.GetSenderSMTPAddress(item));
+                                    this.sendDoc2EDMS(docType, countryCode, exportScheme, userID, "exported email.pdf", folder, item);
+                                    
                                 }
                                 else if ((attachments.selectedAttachments.Capacity > 0) && attachments.withMailBody)
                                 {
                                     this.ExtractEmailBody(item, folder, "Message_Body.rtf");
                                     this.ExtractEmailAttachments(application, item, folder, attachments.selectedAttachments);
                                     this.ConvertFiles(folder, country, fileType, docType, countryCode, item, attachments.selectedAttachments, "e-mail from " + item.SenderName + " " + this.GetSenderSMTPAddress(item));
+                                    this.sendDoc2EDMS(docType, countryCode, exportScheme, userID, "exported email.pdf", folder, item);
                                 }
                                 else if ((attachments.selectedAttachments.Capacity == 0) && !attachments.withMailBody)
                                 {
@@ -230,31 +220,41 @@ namespace easyDMSTool
                         {
                             string path = Path.Combine(@"C:\Users\Public\pdfWork\", item.Attachments[num].FileName);
                             item.Attachments[num].SaveAsFile(path);
-                            MailItem item2 = Globals.ThisAddIn.Application.Session.OpenSharedItem(path) as MailItem;
-                            list.Add(item2.Subject.Replace(";", "") + "_Message_Body");
-                            int num2 = 1;
-                            while (true)
+                            MailItem attachedEmail = Globals.ThisAddIn.Application.Session.OpenSharedItem(path) as MailItem;
+                            list.Add(attachedEmail.Subject.Replace(";", "") + "_Message_Body");
+
+                            //add attachment to list
+                            int attachmentsCounter = 0;
+                            foreach (System.Net.Mail.Attachment attachment in attachedEmail.Attachments)
                             {
-                                if (num2 > item2.Attachments.Count)
-                                {
-                                    try
-                                    {
-                                        File.Delete(path);
-                                    }
-                                    catch (SystemException exception1)
-                                    {
-                                        string message = exception1.Message;
-                                    }
-                                    break;
-                                }
-                                list.Add(item2.Subject + "_" + item2.Attachments[num2].FileName);
-                                num2++;
+                                attachmentsCounter++;
+                                list.Add(attachedEmail.Subject + "_" + attachedEmail.Attachments[attachmentsCounter].FileName);
                             }
                         }
                         num++;
                     }
                 }
             }
+        }
+
+        private void sendDoc2EDMS(string docType, string countryCode, string exportScheme, string currentUser, string attachmentName, string folder, MailItem item)
+        {
+            string fileName = "exported_email.pdf";
+            string information = currentUser + ": e-mail from " + item.SenderName + " " + this.GetSenderSMTPAddress(item);
+            try
+            {
+                string docFileName = Directory.GetFiles(folder, "*Message_Body.pdf")[0];
+                long fileSize = new System.IO.FileInfo(docFileName).Length;
+                string fileString = new string(new Base64Encoder(File.ReadAllBytes(docFileName)).GetEncoded());
+                WarpClient wc = new WarpClient();
+                wc.sendDocument2EDMS(docType, countryCode, information, exportScheme, currentUser, attachmentName, fileSize, fileString);
+            }
+            catch(Exception ex) {
+                MessageBox.Show("Sth happened while working on file " + folder +". \n Error caught: " + ex.Message);
+                
+            }           
+
+                  
         }
 
         private bool ExtractEmailAttachments(Application application, MailItem objMail, string folder, List<string> attachments)
@@ -313,7 +313,7 @@ namespace easyDMSTool
             return true;
         }
 
-        private bool ExtractEmailBody(MailItem objMail, string folder, string name)
+        private string ExtractEmailBody(MailItem objMail, string folder, string name)
         {
             try
             {
@@ -321,81 +321,36 @@ namespace easyDMSTool
                 string path = Path.Combine(folder, name);
                 Directory.CreateDirectory(folder);
                 objMail.SaveAs(path, OlSaveAsType.olRTF);
-                return true;
+                return path;
             }
             catch (Exception exception1)
             {
                 MessageBox.Show("Sth happened while working on file " + folder + name + ". \n Error caught: " + exception1.Message);
-                return false;
+                return "";
             }
         }
+        
 
         private void ConvertFiles(string folder, string country, string fileType, string docType, string countryCode, MailItem objMail)
         {
-            BackgroundWorker worker = new BackgroundWorker();
-            bool isSent = false;
-            worker.DoWork += (sender, e) =>
-            {
-                FileConverter fc = new FileConverter();
-                isSent = new FileConverter().Convert(folder, "", fileType, country, docType, serverUrl, countryCode, "email from " + objMail.SenderName + " " + this.GetSenderSMTPAddress(objMail));
-            };
-            worker.RunWorkerCompleted += (sender, e) => this.setDocumentType(objMail, docType, country, isSent);
-            worker.RunWorkerAsync();
+            bool isConverted = false;
+            FileConverter fc = new FileConverter();
+            isConverted = fc.Convert(folder, "", fileType, country, docType, serverUrl, countryCode, "email from " + objMail.SenderName + " " + this.GetSenderSMTPAddress(objMail));    
+            fc.mergeFiles();
+            this.setDocumentType(objMail, docType, country, isConverted);
         }
 
 
         private void ConvertFiles(string folder, string country, string fileType, string docType, string countryCode, MailItem objMail, List<string> selectedAttachments, string emailSender)
         {
-            BackgroundWorker worker = new BackgroundWorker();
-            bool isSent = false;
-            worker.DoWork += (sender, e) => {
-                FileConverter fc = new FileConverter();
-                isSent = new FileConverter().Convert(folder, "", fileType, country, docType, serverUrl, countryCode, emailSender);
-            };
-            worker.RunWorkerCompleted += (sender, e) => this.setDocumentType(objMail, docType, country, isSent, selectedAttachments, folder);
-            worker.RunWorkerAsync();
+            FileConverter fc = new FileConverter();
+            bool isConverted = false;
+            isConverted = fc.Convert(folder, "", fileType, country, docType, serverUrl, countryCode, emailSender);
+            fc.mergeFiles();
+            this.setDocumentType(objMail, docType, country, isConverted);           
         }
 
-
-        private void detectDuplicateAttachments(MailItem objMail)
-        {
-            Attachments attachments = objMail.Attachments;
-            int count = attachments.Count;
-            for (int i = 1; i < count; i++)
-            {
-                string path = Path.Combine(@"C:\Users\Public\pdfWork\", i + "_" + objMail.Attachments[i].FileName);
-                attachments[i].SaveAsFile(path);
-                attachments.Add(path, Missing.Value, Missing.Value, Missing.Value);
-                File.Delete(path);
-            }
-            for (int j = 1; j < count; j++)
-            {
-                attachments[1].Delete();
-            }
-        }
-
-        private void detectDuplicateAttachments(MailItem objMail, List<string> names)
-        {
-            Attachments attachments = objMail.Attachments;
-            int count = attachments.Count;
-            for (int i = 1; i < count; i++)
-            {
-                if (names.Contains(attachments[i].DisplayName))
-                {
-                    string path = Path.Combine(@"C:\Users\Public\pdfWork\", i + "_" + objMail.Attachments[i].FileName);
-                    attachments[i].SaveAsFile(path);
-                    attachments.Add(path, Missing.Value, Missing.Value, Missing.Value);
-                    File.Delete(path);
-                }
-            }
-            for (int j = 1; j < count; j++)
-            {
-                attachments[1].Delete();
-            }
-        }
-
-
-        private string GetOutputFolder(string country, string docType, MailItem objMail)
+        private string getOutputFolder(string country, string docType, MailItem objMail)
         {
             string path = Path.Combine(Path.Combine(Path.Combine(@"C:\Users\Public\pdfWork", country), docType.Replace("/", "-")), objMail.GetHashCode().ToString() + "_" + DateTime.Now.ToString(this.dateFormat));
             if (Directory.Exists(path))
@@ -403,21 +358,6 @@ namespace easyDMSTool
                 path = path + "_" + DateTime.Now.ToString(this.dateFormat);
             }
             return path;
-        }
-
-        public static void setUserPassword(string pwd)
-        {
-            userPassword = pwd;
-        }
-
-        public static void setUserID(string id)
-        {
-            userID = id;
-        }
-
-        public static void setServerUrl(string url)
-        {
-            serverUrl = url;
         }
 
         public static string getUserID() => userID;
@@ -446,22 +386,35 @@ namespace easyDMSTool
             return exchangeUser?.PrimarySmtpAddress;
         }
 
-        private void setDocumentType(MailItem objMail, string itemType, string country, bool isSent, List<string> mAttachments, string folder)
+           
+        private void setDocumentType (MailItem objMail, string itemType, string country, bool isSent)
         {
-            this.setDocumentType(objMail, country);
-            if (isSent || (objMail == null))
+            //handle deleted emails
+            try
             {
-                objMail.UserProperties["Document Type"].Value= itemType;
+                this.setEmailType(objMail, country);
+                if (isSent || (objMail == null))
+                {
+                    objMail.UserProperties["Document Type"].Value = itemType;
+                }
+                else
+                {
+                    itemType = "NOT DELIVERED";
+                    objMail.UserProperties["Document Type"].Value = itemType;
+                }
+
+                objMail.Save();
             }
-            else
+            catch (Exception e)
             {
-                itemType = "NOT DELIVERED";
-                objMail.UserProperties["Document Type"].Value = itemType;
+                String caption = "OOPS";
+                String message = "Snap! \n\nWhy have you deleted the email right after sending it to EDMS? \nPlease check it in Easy. If something got lost - recover email. Re-send. Check Easy.\n\nAnd here goes error call stack (share it with SD):\n\n" + e.StackTrace;
+                DialogResult result;
+                result = MessageBox.Show(message, caption, MessageBoxButtons.OK, MessageBoxIcon.Hand);               
             }
-            objMail.Save();
         }
 
-        private void setDocumentType(MailItem objMail, string country)
+        private void setEmailType(MailItem objMail, string country)
         {
             objMail.UserProperties.Add("TransferredBy", OlUserPropertyType.olText, true, OlUserPropertyType.olText);
             objMail.UserProperties.Add("Document Type", OlUserPropertyType.olText, true, OlUserPropertyType.olText);
@@ -469,22 +422,21 @@ namespace easyDMSTool
             objMail.UserProperties["TransferredBy"].Value = WindowsIdentity.GetCurrent().Name;
             objMail.UserProperties["Country"].Value = country;
         }
-
-        private void setDocumentType(MailItem objMail, string itemType, string country, bool isSent)
+        public static void setUserPassword(string pwd)
         {
-            this.setDocumentType(objMail, country);
-            if (isSent || (objMail == null))
-            {
-                objMail.UserProperties["Document Type"].Value = itemType;
-            }
-            else
-            {
-                itemType = "NOT DELIVERED";
-                objMail.UserProperties["Document Type"].Value = itemType;
-            }
-            objMail.Save();
+            userPassword = pwd;
         }
 
+        public static void setUserID(string id)
+        {
+            userID = id;
+        }
+
+
+        public static void setServerUrl(string url)
+        {
+            serverUrl = url;
+        }
 
         #endregion
     }

@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "easyDMSTool", "easyDMSTool\easyDMSTool.csproj", "{DFC79976-53A4-46A5-B799-E74E6C0B5AAB}"
 EndProject
 Project("{6141683F-8A12-4E36-9623-2EB02B2C2303}") = "Setup", "Setup\Setup.isproj", "{5151730C-CA2E-4BF4-BA34-52785AC27892}"
+	ProjectSection(ProjectDependencies) = postProject
+		{DFC79976-53A4-46A5-B799-E74E6C0B5AAB} = {DFC79976-53A4-46A5-B799-E74E6C0B5AAB}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(Performance) = preSolution

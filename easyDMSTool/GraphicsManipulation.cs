@@ -88,10 +88,7 @@ namespace easyDMSTool
             return (Image)b;
         }
 
-        
 
-
-        //public static string[] ConvertTiffToJpeg(string fileName)
         public static bool ConvertTiffToJpeg(string fileName)
         {
 
